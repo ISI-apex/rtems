@@ -68,7 +68,7 @@ typedef struct MMU_Stream {
 } MMU_Stream_t;
 
 struct MMU_Config {
-  volatile uint32_t *base;
+  uintptr_t base;
   MMU_Context_t contexts[MMU_500_MAX_CONTEXTS];
   MMU_Stream_t streams[MMU_500_MAX_STREAMS];
 };
@@ -99,7 +99,7 @@ struct MMU_Config {
  *
  * \retval      RTEMS_SUCCESS   The operation was successful.
  */
-rtems_status_code mmu_init(MMU_Config_t *mmu_config, volatile uint32_t *base);
+rtems_status_code mmu_init(MMU_Config_t *mmu_config, uintptr_t base);
 
 /*!
  * Uninitializes the MMU controller.

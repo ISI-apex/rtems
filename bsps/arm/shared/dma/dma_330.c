@@ -35,7 +35,7 @@ extern "C"
 #endif /* __cplusplus */
 
 /* TODO(kmoore) Does not currently support multiple DMA engines */
-rtems_status_code dma_init(DMA_Config_t *dma_cfg, volatile uint32_t *base)
+rtems_status_code dma_init(DMA_Config_t *dma_cfg, uintptr_t base)
 {
   rtems_status_code status = alt_dma_init(dma_cfg);
   if (status != RTEMS_SUCCESSFUL) {
