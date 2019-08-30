@@ -1,4 +1,4 @@
-#define DEBUG 0
+#define DEBUG 1
 
 #include <stdint.h>
 #include <stdio.h>
@@ -102,7 +102,7 @@ static void exec_stage_cmd(struct HPSC_WDT_Config *wdt, enum stage_cmd scmd, uns
   exec_cmd(wdt, &stage_cmd_codes[stage][scmd]);
 }
 
-static void wdt_init(struct HPSC_WDT_Config *wdt, const char *name, volatile uint32_t *base,
+static void wdt_init(struct HPSC_WDT_Config *wdt, const char *name, uintptr_t base,
                      rtems_vector_number vec)
 {
   assert(wdt);
@@ -127,7 +127,7 @@ static unsigned log2_of_pow2(unsigned long v)
     return b;
 }
 
-void wdt_init_monitor(struct HPSC_WDT_Config *wdt, const char *name, volatile uint32_t *base,
+void wdt_init_monitor(struct HPSC_WDT_Config *wdt, const char *name, uintptr_t base,
                       rtems_vector_number vec, uint32_t clk_freq_hz, unsigned max_div)
 {
   wdt_init(wdt, name, base, vec);
@@ -137,7 +137,7 @@ void wdt_init_monitor(struct HPSC_WDT_Config *wdt, const char *name, volatile ui
   wdt->counter_width = (64 - log2_of_pow2(wdt->max_div) - 1);
 }
 
-void wdt_init_target(struct HPSC_WDT_Config *wdt, const char *name, volatile uint32_t *base,
+void wdt_init_target(struct HPSC_WDT_Config *wdt, const char *name, uintptr_t base,
                      rtems_vector_number vec)
 {
   wdt_init(wdt, name, base, vec);

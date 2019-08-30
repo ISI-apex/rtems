@@ -340,7 +340,7 @@ static void dump_page_table(MMU_Context_t *context, uint64_t *page_table, unsign
 }
 #endif /* MMU_500_DEBUG */
 
-rtems_status_code mmu_init(MMU_Config_t *mmu_config, volatile uint32_t *base)
+rtems_status_code mmu_init(MMU_Config_t *mmu_config, uintptr_t base)
 {
   assert(mmu_config);
   memset(mmu_config, 0, sizeof(MMU_Config_t));

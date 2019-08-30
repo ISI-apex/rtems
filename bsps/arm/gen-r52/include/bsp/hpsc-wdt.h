@@ -76,7 +76,7 @@ struct HPSC_WDT_Config {
  * \param       max_div
  *              The watchdog timer maximum clock divider.
  */
-void wdt_init_monitor(struct HPSC_WDT_Config *wdt_config, const char *name, volatile uint32_t *base, rtems_vector_number vec, uint32_t clk_freq_hz, unsigned max_div);
+void wdt_init_monitor(struct HPSC_WDT_Config *wdt_config, const char *name, uintptr_t base, rtems_vector_number vec, uint32_t clk_freq_hz, unsigned max_div);
 
 /*!
  * Configure the watchdog monitor.
@@ -127,7 +127,7 @@ void wdt_disable(struct HPSC_WDT_Config *wdt_config);
  * \param       vec
  *              The IRQ vector number for this watchdog timer.
  */
-void wdt_init_target(struct HPSC_WDT_Config *wdt_config, const char *name, volatile uint32_t *base, rtems_vector_number vec);
+void wdt_init_target(struct HPSC_WDT_Config *wdt_config, const char *name, uintptr_t base, rtems_vector_number vec);
 
 /*!
  * Uninitialize the watchdog timer.

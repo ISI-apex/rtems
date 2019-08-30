@@ -77,7 +77,7 @@ typedef struct DMA_Channel {
  * \retval      RTEMS_SUCCESS   The operation was successful.
  * \retval      RTEMS_IO_ERROR  The operation failed.
  */
-rtems_status_code dma_init(DMA_Config_t *dma_cfg, volatile uint32_t *base);
+rtems_status_code dma_init(DMA_Config_t *dma_cfg, uintptr_t base);
 
 /*!
  * Uninitializes the DMA controller.

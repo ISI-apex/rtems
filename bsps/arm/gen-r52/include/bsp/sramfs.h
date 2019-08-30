@@ -53,7 +53,7 @@ typedef struct {
  *
  * \retval      RTEMS_SUCCESSFUL     The configuration completed successfully.
  */
-rtems_status_code sramfs_init(SRAMFS_Config_t *sramfs_config, volatile void *base, DMA_Config_t *dma_config);
+rtems_status_code sramfs_init(SRAMFS_Config_t *sramfs_config, uintptr_t base, DMA_Config_t *dma_config);
 
 /*!
  * Uninitialize the SMC-353.

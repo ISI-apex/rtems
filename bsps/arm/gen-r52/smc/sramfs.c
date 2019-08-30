@@ -218,7 +218,7 @@ rtems_status_code sramfs_load(SRAMFS_Config_t *sramfs_config, const char *fname,
   return sramfs_load_internal(sramfs_config, fname, true, addr);
 }
 
-rtems_status_code sramfs_init(SRAMFS_Config_t *sramfs_config, volatile void *base, DMA_Config_t *dma)
+rtems_status_code sramfs_init(SRAMFS_Config_t *sramfs_config, uintptr_t base, DMA_Config_t *dma)
 {
   sramfs_config->global_table = (volatile SRAMFS_Global_Table_t *)base;
   sramfs_config->dma_config = dma;
