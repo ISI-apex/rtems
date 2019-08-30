@@ -1,9 +1,7 @@
-#define DEBUG 1
-
-#include <stdint.h>
+#include <assert.h>
+#include <inttypes.h>
 #include <stdio.h>
 #include <string.h>
-#include <assert.h>
 
 #include <bsp.h>
 #include <bsp/hpsc-wdt.h>
@@ -15,7 +13,6 @@
 # define HPSC_WDT_DEBUG_PRINTF(...)
 #endif
 
-/* re-configurable by a macro in Qemu model (requires Qemu rebuild) */
 #define MAX_STAGES 2
 
 struct WDT_Stage_Base {
@@ -90,13 +87,14 @@ static void exec_cmd(struct HPSC_WDT_Config *wdt, const struct cmd_code *code)
 
 static void exec_global_cmd(struct HPSC_WDT_Config *wdt, enum cmd cmd)
 {
-  HPSC_WDT_DEBUG_PRINTF("WDT %s: exec cmd: %u\r\n", wdt->name, cmd);
+  HPSC_WDT_DEBUG_PRINTF("WDT: %s: exec cmd: %u\n", wdt->name, cmd);
   assert(cmd < NUM_CMDS);
   exec_cmd(wdt, &cmd_codes[cmd]);
 }
 static void exec_stage_cmd(struct HPSC_WDT_Config *wdt, enum stage_cmd scmd, unsigned stage)
 {
-  HPSC_WDT_DEBUG_PRINTF("WDT %s: stage %u: exec stage cmd: %u\r\n", wdt->name, stage, scmd);
+  HPSC_WDT_DEBUG_PRINTF("WDT: %s: stage %u: exec stage cmd: %u\n",
+                        wdt->name, stage, scmd);
   assert(stage < MAX_STAGES);
   assert(scmd < NUM_SCMDS);
   exec_cmd(wdt, &stage_cmd_codes[stage][scmd]);
@@ -106,8 +104,7 @@ static void wdt_init(struct HPSC_WDT_Config *wdt, const char *name, uintptr_t ba
                      rtems_vector_number vec)
 {
   assert(wdt);
-  HPSC_WDT_DEBUG_PRINTF("WDT %s: init base %p\r\n", name, base);
-
+  HPSC_WDT_DEBUG_PRINTF("WDT: %s: init base %"PRIXPTR"\n", name, base);
   wdt->base = (volatile struct WDT_Base *)base;
   wdt->name = name;
   wdt->monitor = false;
@@ -148,23 +145,20 @@ rtems_status_code wdt_configure(struct HPSC_WDT_Config *wdt, unsigned freq,
 {
   assert(wdt);
   assert(wdt->monitor);
-  /* not strict requirement, but for sanity */
-  assert(!wdt_is_enabled(wdt));
   if (num_stages > MAX_STAGES) {
-    HPSC_WDT_DEBUG_PRINTF("ERROR: WDT: more stages than supported: %u >= %u\r\n",
-           num_stages, MAX_STAGES);
+    HPSC_WDT_DEBUG_PRINTF("ERROR: WDT: more stages than supported: %u >= %u\n",
+                          num_stages, MAX_STAGES);
     return RTEMS_INVALID_NUMBER;
   }
   if (!(freq <= wdt->clk_freq_hz && wdt->clk_freq_hz % freq == 0)) {
-    HPSC_WDT_DEBUG_PRINTF("ERROR: WDT: freq is larger than or not a divisor of clk freq: %u > %u\r\n",
-           freq, wdt->clk_freq_hz);
+    HPSC_WDT_DEBUG_PRINTF("ERROR: WDT: freq is larger than or not a divisor of clk freq: %u > %u\n",
+                          freq, wdt->clk_freq_hz);
     return RTEMS_INVALID_NUMBER;
   }
   for (unsigned stage = 0; stage < num_stages; ++stage) {
     if (timeouts[stage] & (~0ULL << wdt->counter_width)) {
-      HPSC_WDT_DEBUG_PRINTF("ERROR: WDT: timeout for stage %u exceeds counter width (%u bits): %08x%08x\r\n",
-             stage, wdt->counter_width,
-            (uint32_t)(timeouts[stage] >> 32), (uint32_t)(timeouts[stage] & 0xffffffff));
+      HPSC_WDT_DEBUG_PRINTF("ERROR: WDT: timeout for stage %u exceeds counter width (%u bits): 0x%016"PRIx64"\n",
+                            stage, wdt->counter_width, timeouts[stage]);
       return RTEMS_INVALID_NUMBER;
     }
   }
@@ -173,12 +167,12 @@ rtems_status_code wdt_configure(struct HPSC_WDT_Config *wdt, unsigned freq,
   assert(wdt->clk_freq_hz % freq == 0);
   unsigned div = wdt->clk_freq_hz / freq;
   if (div > wdt->max_div) {
-    HPSC_WDT_DEBUG_PRINTF("ERROR: WDT: divider too large: %u > %u\r\n",
-           div, wdt->max_div);
+    HPSC_WDT_DEBUG_PRINTF("ERROR: WDT: divider too large: %u > %u\n",
+                          div, wdt->max_div);
     return RTEMS_INVALID_NUMBER;
   }
 
-  HPSC_WDT_DEBUG_PRINTF("WDT %s: set divider to %u\r\n", wdt->name, div);
+  HPSC_WDT_DEBUG_PRINTF("WDT: %s: set divider to %u\n", wdt->name, div);
   wdt->base->CONFIG = HPSC_WDT_CONFIG_TICKDIV(div);
 
   for (unsigned stage = 0; stage < num_stages; ++stage) {
@@ -195,7 +189,7 @@ rtems_status_code wdt_configure(struct HPSC_WDT_Config *wdt, unsigned freq,
 void wdt_uninit(struct HPSC_WDT_Config *wdt)
 {
   assert(wdt);
-  HPSC_WDT_DEBUG_PRINTF("WDT %s: destroy\r\n", wdt->name);
+  HPSC_WDT_DEBUG_PRINTF("WDT: %s: destroy\n", wdt->name);
   if (wdt->monitor) {
     assert(!wdt_is_enabled(wdt));
   }
@@ -207,8 +201,7 @@ uint64_t wdt_count(struct HPSC_WDT_Config *wdt, unsigned stage)
   assert(wdt);
   exec_stage_cmd(wdt, SCMD_CAPTURE, stage);
   uint64_t count = wdt->base->stages[stage].COUNT;
-  HPSC_WDT_DEBUG_PRINTF("WDT %s: count -> 0x%08x%08x\r\n", wdt->name,
-         (uint32_t)(count >> 32), (uint32_t)(count & 0xffffffff));
+  HPSC_WDT_DEBUG_PRINTF("WDT: %s: count -> 0x%016"PRIx64"\n", wdt->name, count);
   return count;
 }
 
@@ -217,8 +210,8 @@ uint64_t wdt_timeout(struct HPSC_WDT_Config *wdt, unsigned stage)
   assert(wdt);
   /* NOTE: not going to be the right value if it wasn't not loaded via cmd */
   uint64_t terminal = wdt->base->stages[stage].TERMINAL;
-  HPSC_WDT_DEBUG_PRINTF("WDT %s: terminal -> 0x%08x%08x\r\n", wdt->name,
-         (uint32_t)(terminal >> 32), (uint32_t)(terminal & 0xffffffff));
+  HPSC_WDT_DEBUG_PRINTF("WDT: %s: terminal -> 0x%016"PRIx64"\n",
+                        wdt->name, terminal);
   return terminal;
 }
 
@@ -234,28 +227,28 @@ void wdt_timeout_clear(struct HPSC_WDT_Config *wdt, unsigned stage)
 bool wdt_is_enabled(struct HPSC_WDT_Config *wdt)
 {
   bool enabled = wdt->base->CONFIG & HPSC_WDT_CONFIG_ENABLE;
-  HPSC_WDT_DEBUG_PRINTF("WDT %s: is enabled -> %u\r\n", wdt->name, enabled);
+  HPSC_WDT_DEBUG_PRINTF("WDT: %s: is enabled -> %u\n", wdt->name, enabled);
   return enabled;
 }
 
 rtems_status_code wdt_handler_install(struct HPSC_WDT_Config *wdt, rtems_interrupt_handler cb, void *cb_arg)
 {
   assert(wdt);
-  HPSC_WDT_DEBUG_PRINTF("WDT %s: Install ISR\r\n", wdt->name);
+  HPSC_WDT_DEBUG_PRINTF("WDT: %s: Install ISR\n", wdt->name);
   return rtems_interrupt_handler_install(wdt->vec, wdt->name, RTEMS_INTERRUPT_UNIQUE, cb, cb_arg);
 }
 
 void wdt_enable(struct HPSC_WDT_Config *wdt)
 {
   assert(wdt);
-  HPSC_WDT_DEBUG_PRINTF("WDT %s: Enable\r\n", wdt->name);
+  HPSC_WDT_DEBUG_PRINTF("WDT: %s: Enable\n", wdt->name);
   wdt->base->CONFIG |= HPSC_WDT_CONFIG_ENABLE;
 }
 
 rtems_status_code wdt_handler_remove(struct HPSC_WDT_Config *wdt, rtems_interrupt_handler cb, void *cb_arg)
 {
   assert(wdt);
-  HPSC_WDT_DEBUG_PRINTF("WDT %s: Remove ISR\r\n", wdt->name);
+  HPSC_WDT_DEBUG_PRINTF("WDT: %s: Remove ISR\n", wdt->name);
   return rtems_interrupt_handler_remove(wdt->vec, cb, cb_arg);
 }
 
@@ -263,14 +256,14 @@ void wdt_disable(struct HPSC_WDT_Config *wdt)
 {
   assert(wdt);
   assert(wdt->monitor);
-  HPSC_WDT_DEBUG_PRINTF("WDT %s: Disable\r\n", wdt->name);
+  HPSC_WDT_DEBUG_PRINTF("WDT: %s: Disable\n", wdt->name);
   exec_global_cmd(wdt, CMD_DISABLE);
 }
 
 void wdt_kick(struct HPSC_WDT_Config *wdt)
 {
   assert(wdt);
-  HPSC_WDT_DEBUG_PRINTF("WDT %s: kick\r\n", wdt->name);
+  HPSC_WDT_DEBUG_PRINTF("WDT: %s: kick\n", wdt->name);
   /* In Concept A variant, there is only a clear for stage 0.  In Concept B
    * variant, there's a clear for each stage, but it is suffient to clear the
    * first stage, because that action has to stop the timers for downstream
