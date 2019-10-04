@@ -26,4 +26,10 @@ static inline void mutex_unlock(struct mutex *m)
 	(void) m;
 }
 
+static inline int mutex_is_locked(struct mutex *m)
+{
+	(void) m;
+	return 1;
+}
+
 #endif

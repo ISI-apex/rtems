@@ -1053,6 +1053,7 @@ static void rtems_jffs2_fsunmount(rtems_filesystem_mount_table_entry_t *mt_entry
 {
 	rtems_jffs2_fs_info *fs_info = mt_entry->fs_info;
 	struct _inode *root_i = mt_entry->mt_fs_root->location.node_access;
+	struct jffs2_sb_info *c = JFFS2_SB_INFO(&fs_info->sb);
 
 	icache_evict(root_i, NULL);
 	assert(root_i->i_cache_next == NULL);
@@ -1063,6 +1064,8 @@ static void rtems_jffs2_fsunmount(rtems_filesystem_mount_table_entry_t *mt_entry
 	free(root_i);
 
 	rtems_jffs2_free_fs_info(fs_info, true);
+	rtems_timer_delete(c->wbuf_dwork.id);
+	jffs2_nand_flash_cleanup(c);
 }
 
 static int rtems_jffs2_rename(
@@ -1264,12 +1267,21 @@ int rtems_jffs2_initialize(
 		sb->s_flash_control = fc;
 		sb->s_compressor_control = jffs2_mount_data->compressor_control;
 
+		c->mtd = &c->mtd_struct;
+		c->mtd->oobavail = jffs2_flash_get_oob_size(c);
+		c->mtd->oobsize = c->mtd->oobavail;
+		c->mtd->size = fc->flash_size;
+		c->mtd->erasesize = fc->block_size;
+		c->mtd->writesize = fc->write_size;
 		c->inocache_hashsize = inocache_hashsize;
 		c->inocache_list = &fs_info->inode_cache[0];
 		c->sector_size = fc->block_size;
 		c->flash_size = fc->flash_size;
 		c->cleanmarker_size = sizeof(struct jffs2_unknown_node);
+		err = jffs2_nand_flash_setup(c);
+	}
 
+	if (err == 0) {
 		err = jffs2_do_mount_fs(c);
 	}
 

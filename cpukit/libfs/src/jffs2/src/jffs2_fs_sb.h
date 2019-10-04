@@ -22,10 +22,13 @@
 #include <linux/wait.h>
 #include <linux/list.h>
 #include <linux/rwsem.h>
+#include <linux/mtd/mtd.h>
 
 #define JFFS2_SB_FLAG_RO 1
 #define JFFS2_SB_FLAG_SCANNING 2 /* Flash scanning is in progress */
 #define JFFS2_SB_FLAG_BUILDING 4 /* File system building is in progress */
+
+#define CONFIG_JFFS2_FS_WRITEBUFFER
 
 struct jffs2_inodirty;
 
@@ -46,7 +49,9 @@ struct jffs2_mount_opts {
    Nee jffs_control
 */
 struct jffs2_sb_info {
+	/* Set to pointer to mtd_struct on init */
 	struct mtd_info *mtd;
+	struct mtd_info mtd_struct;
 
 	uint32_t highest_ino;
 	uint32_t check_ino;		/* *NEXT* inode to be checked */

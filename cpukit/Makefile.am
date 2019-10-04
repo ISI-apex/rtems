@@ -1911,6 +1911,7 @@ libjffs2_a_SOURCES += libfs/src/jffs2/src/nodemgmt.c
 libjffs2_a_SOURCES += libfs/src/jffs2/src/read.c
 libjffs2_a_SOURCES += libfs/src/jffs2/src/readinode.c
 libjffs2_a_SOURCES += libfs/src/jffs2/src/scan.c
+libjffs2_a_SOURCES += libfs/src/jffs2/src/wbuf.c
 libjffs2_a_SOURCES += libfs/src/jffs2/src/write.c
 libjffs2_a_CFLAGS =
 libjffs2_a_CFLAGS += -Wno-pointer-sign

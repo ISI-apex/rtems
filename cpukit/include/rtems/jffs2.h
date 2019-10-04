@@ -217,6 +217,99 @@ typedef int (*rtems_jffs2_flash_erase)(
 );
 
 /**
+ * @brief Flash bad block check operation.
+ *
+ * This operation checks whether a block is bad.
+ *
+ * @param[in, out] self The flash control.
+ * @param[in] offset The offset in bytes of the block to check.
+ * @param[out] The result of the bad block check.
+ *
+ * @retval 0 Successful operation.
+ * @retval -EIO An error occurred.  Please note that the value is negative.
+ * @retval other All other values are reserved and must not be used.
+ */
+typedef int (*rtems_jffs2_flash_block_is_bad)(
+  rtems_jffs2_flash_control *self,
+  uint32_t offset,
+  bool *bad
+);
+
+/**
+ * @brief Flash bad block mark operation.
+ *
+ * This operation marks a block bad.
+ *
+ * @param[in, out] self The flash control.
+ * @param[in] offset The offset in bytes of the block to mark bad.
+ *
+ * @retval 0 Successful operation.
+ * @retval -EIO An error occurred.  Please note that the value is negative.
+ * @retval other All other values are reserved and must not be used.
+ */
+typedef int (*rtems_jffs2_flash_block_mark_bad)(
+  rtems_jffs2_flash_control *self,
+  uint32_t offset
+);
+
+/**
+ * @brief Flash oob write.
+ *
+ * This operation writes the out-of-band/spare bytes for the block matching
+ * the given offset in bytes.
+ *
+ * @param[in, out] self The flash control.
+ * @param[in] offset The offset to erase from the flash begin in bytes.
+ * @param[in] pointer to the buffer which will be written to the oob/spare bytes.
+ * @param[in] length of the buffer which will be written to the oob/spare bytes.
+ *
+ * @retval 0 Successful operation.
+ * @retval -EIO An error occurred.  Please note that the value is negative.
+ * @retval other All other values are reserved and must not be used.
+ */
+typedef int (*rtems_jffs2_flash_oob_write)(
+  rtems_jffs2_flash_control *self,
+  uint32_t offset,
+  uint8_t *oobbuf,
+  uint32_t obblen
+);
+
+/**
+ * @brief Flash oob read.
+ *
+ * This operation reads the out-of-band/spare bytes for the block matching
+ * the given offset in bytes.
+ *
+ * @param[in, out] self The flash control.
+ * @param[in] offset The offset to erase from the flash begin in bytes.
+ * @param[out] pointer to the buffer which will have the oob/spare bytes data written to it.
+ * @param[in] length of the buffer which will hold the oob/spare bytes.
+ *
+ * @retval 0 Successful operation.
+ * @retval -EIO An error occurred.  Please note that the value is negative.
+ * @retval other All other values are reserved and must not be used.
+ */
+typedef int (*rtems_jffs2_flash_oob_read)(
+  rtems_jffs2_flash_control *self,
+  uint32_t offset,
+  uint8_t *oobbuf,
+  uint32_t obblen
+);
+
+/**
+ * @brief Flash get oob size.
+ *
+ * This operation gets the size of the out-of-band/spare bytes for each page.
+ *
+ * @param[in, out] self The flash control.
+ *
+ * @retval The size of the OOB/spare area available to each page
+ */
+typedef uint32_t (*rtems_jffs2_flash_get_oob_size)(
+  rtems_jffs2_flash_control *self
+);
+
+/**
  * @brief Flash destroy operation.
  *
  * The flash destroy operation is called during unmount of the file system
@@ -261,6 +354,13 @@ struct rtems_jffs2_flash_control {
   uint32_t flash_size;
 
   /**
+   * @brief The size in bytes of the minimum write size for the flash device.
+   *
+   * It must be an integral divisor into the block size.
+   */
+  uint32_t write_size;
+
+  /**
    * @brief Read from flash operation.
    */
   rtems_jffs2_flash_read read;
@@ -274,6 +374,31 @@ struct rtems_jffs2_flash_control {
    * @brief Flash erase operation.
    */
   rtems_jffs2_flash_erase erase;
+
+  /**
+   * @brief Flash bad block check operation.
+   */
+  rtems_jffs2_flash_block_is_bad block_is_bad;
+
+  /**
+   * @brief Flash bad block mark operation.
+   */
+  rtems_jffs2_flash_block_mark_bad block_mark_bad;
+
+  /**
+   * @brief Flash oob bytes write operation.
+   */
+  rtems_jffs2_flash_oob_write oob_write;
+
+  /**
+   * @brief Flash oob bytes read operation.
+   */
+  rtems_jffs2_flash_oob_read oob_read;
+
+  /**
+   * @brief Flash get oob bytes per page operation.
+   */
+  rtems_jffs2_flash_get_oob_size get_oob_size;
 
   /**
    * @brief Flash destroy operation.
