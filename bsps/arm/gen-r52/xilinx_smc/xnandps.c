@@ -572,7 +572,7 @@ int XNandPs_Read(XNandPs *InstancePtr, u64 Offset, u32 Length, void *DestPtr,
 
 	Xil_AssertNonvoid(InstancePtr != NULL);
 	Xil_AssertNonvoid(DestPtr != NULL);
-	Xil_AssertNonvoid((Offset + Length) < InstancePtr->Geometry.DeviceSize);
+	Xil_AssertNonvoid((Offset + Length) <= InstancePtr->Geometry.DeviceSize);
 	Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
 	Xil_AssertNonvoid(Length != 0);
 
@@ -922,7 +922,7 @@ int XNandPs_Write(XNandPs *InstancePtr, u64 Offset, u32 Length, void *SrcPtr,
 
 	Xil_AssertNonvoid(InstancePtr != NULL);
 	Xil_AssertNonvoid(SrcPtr != NULL);
-	Xil_AssertNonvoid((Offset + Length) < InstancePtr->Geometry.DeviceSize);
+	Xil_AssertNonvoid((Offset + Length) <= InstancePtr->Geometry.DeviceSize);
 	Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
 	Xil_AssertNonvoid(Length != 0);
 
