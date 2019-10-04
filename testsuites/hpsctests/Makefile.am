@@ -139,4 +139,14 @@ smc_nand_block_CPPFLAGS = $(AM_CPPFLAGS) $(TEST_FLAGS_smc_nand_block) \
 	$(support_includes)
 endif
 
+if TEST_smc_nand_jffs2
+hpsctests += smc_nand_jffs2
+hpsc_screens += smc_nand_jffs2/smc_nand_jffs2.scn
+hpsc_docs += smc_nand_jffs2/smc_nand_jffs2.doc
+smc_nand_jffs2_SOURCES = smc_nand_jffs2/init.c smc_nand_jffs2/system.h
+smc_nand_jffs2_LDADD = $(LDADD) $(RTEMS_ROOT)cpukit/libjffs2.a
+smc_nand_jffs2_CPPFLAGS = $(AM_CPPFLAGS) $(TEST_FLAGS_smc_nand_jffs2) \
+	$(support_includes)
+endif
+
 noinst_PROGRAMS = $(hpsctests)

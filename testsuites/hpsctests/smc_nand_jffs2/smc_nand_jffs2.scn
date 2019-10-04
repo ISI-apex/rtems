@@ -1,0 +1,10 @@
+*** BEGIN OF TEST HPSC SMC-353 NAND JFFS2 Write ***
+*** TEST VERSION: 5.0.0.88b71f4c7f9814286be16012376e8fee287e1203-modified
+*** TEST STATE: EXPECTED-PASS
+*** TEST BUILD: RTEMS_POSIX_API
+*** TEST TOOLS: 9.0.0 20181112 (RTEMS 5, RSB 384ff19173c98b782f89197582318981184aa615-modified, Newlib 2ab57ad59bc35dafffa69cd4da5e228971de069f)
+<4>JFFS2: Newly-erased block contained word 0xd57fffff at offset 0x0ffe01fc
+<4>JFFS2: Newly-erased block contained word 0xd57fffff at offset 0x0ffe01fc
+<4>JFFS2: marking eraseblock at 0ffe01fc as bad
+
+*** END OF TEST HPSC SMC-353 NAND JFFS2 Write ***

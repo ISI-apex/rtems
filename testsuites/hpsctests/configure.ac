@@ -39,6 +39,7 @@ RTEMS_TEST_CHECK([smc_sram_load])
 RTEMS_TEST_CHECK([smc_sram_load_dma])
 RTEMS_TEST_CHECK([smc_nand_write])
 RTEMS_TEST_CHECK([smc_nand_block])
+RTEMS_TEST_CHECK([smc_nand_jffs2])
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
