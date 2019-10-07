@@ -327,3 +327,35 @@ void arm_gic_trigger_sgi(
                  | ICC_SGIR_CPU_TARGET_LIST(1);
   WRITE64_SR(ICC_SGI1, value);
 }
+
+rtems_status_code arm_gic_irq_set_trigger(
+  rtems_vector_number vector,
+  gic_trigger_mode condition
+)
+{
+  volatile gic_dist *dist = ARM_GIC_DIST;
+  volatile gic_sgi_ppi *sgi_ppi = ARM_GIC_SGI_PPI;
+  uint32_t bit = 2 * (vector % 16) + 1;
+  uint32_t mask = 1 << bit;
+  uint32_t bit_value = condition << bit;
+  volatile uint32_t *reg;
+
+  if (!bsp_interrupt_is_valid_vector(vector)) {
+    return RTEMS_INVALID_ID;
+  }
+
+  if (vector < 16) {
+    reg = &(sgi_ppi->icspicfgr0);
+  } else if (vector < 32) {
+    reg = &(sgi_ppi->icspicfgr1);
+  } else {
+    reg = &(dist->icdicfr[vector / 16]);
+  }
+
+  uint32_t value = *reg;
+  value &= ~mask;
+  value |= bit_value;
+  *reg = value;
+
+  return RTEMS_SUCCESSFUL;
+}

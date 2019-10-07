@@ -117,6 +117,11 @@ static inline uint32_t arm_gic_irq_processor_count(void)
 
 void arm_gic_irq_initialize_secondary_cpu(void);
 
+rtems_status_code arm_gic_irq_set_trigger(
+  rtems_vector_number vector,
+  gic_trigger_mode condition
+);
+
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */

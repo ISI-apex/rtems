@@ -278,3 +278,19 @@ void arm_gic_trigger_sgi(
 #endif
     | GIC_DIST_ICDSGIR_SGIINTID(vector);
 }
+
+rtems_status_code arm_gic_irq_set_trigger(
+  rtems_vector_number vector,
+  gic_trigger_mode condition
+)
+{
+  volatile gic_dist *dist = ARM_GIC_DIST;
+
+  if (!bsp_interrupt_is_valid_vector(vector)) {
+    return RTEMS_INVALID_ID;
+  }
+
+  gic_id_set_trigger_mode(dist, vector, condition);
+
+  return RTEMS_SUCCESSFUL;
+}
