@@ -162,8 +162,8 @@ rtems_task Init(
   XNandPs_Config nand_config =
   {
     0,       /**< Device ID of device */
-    (uint32_t)SMC_BASE,  /**< SMC Base address */
-    (uint32_t)TRCH_NAND_BASE,        /**< NAND flash Base address */
+    (uint32_t)SMC_LSIO_NAND_CSR_BASE,  /**< SMC Base address */
+    (uint32_t)SMC_LSIO_NAND_BASE0,        /**< NAND flash Base address */
     8      /**< Flash data width */
   };
 
