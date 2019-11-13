@@ -92,6 +92,14 @@ librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/gen-r52/wdt/hpsc-wdt.c
 # SRAM FS Driver
 librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/gen-r52/smc/sramfs.c
 
+# I2C
+librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/gen-r52/i2c/i2cdrv.c
+librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/gen-r52/i2c/i2cdrv-config.c
+librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/shared/i2c/alt_i2c.c
+#librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/shared/i2c/alt_clock_manager.c
+#librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/shared/i2c/alt_reset_manager.c
+
+
 ###############################################################################
 #                  Special Rules                                              #
 ###############################################################################

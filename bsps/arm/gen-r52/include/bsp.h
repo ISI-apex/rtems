@@ -46,6 +46,7 @@ extern "C" {
 #endif /* __cplusplus */
 
 void arm_generic_timer_get_config(uint32_t *frequency, uint32_t *irq);
+rtems_status_code bsp_register_i2c(void);
 
 #define BSP_ARM_GIC_DIST_BASE ( RTPS_GIC_BASE + 0x00000000 )
 #define BSP_ARM_GIC_REDIST_BASE ( RTPS_GIC_BASE + 0x00040000 )
@@ -66,6 +67,22 @@ void arm_generic_timer_get_config(uint32_t *frequency, uint32_t *irq);
 #define MMU_500_QEMU 1
 #define MMU_500_MAX_CONTEXTS 8
 #define MMU_500_MAX_STREAMS 8
+
+/* 
+ * ******** Stubs for RTPS interrupt controller inputs **************
+ *
+ * These should be defined in hpsc-irqs.dtsh
+ */
+
+#define RTPS_IRQ__I2C                            60
+#define RTPS_IRQ__LSIO_I2C_0                     61
+#define RTPS_IRQ__LSIO_I2C_1                     62
+
+#define LSIO_I2C0_BASE         0x26008000
+#define LSIO_I2C0_ECC_CSR_BASE 0x26009000
+#define LSIO_I2C1_BASE         0x2600a000
+#define LSIO_I2C1_ECC_CSR_BASE 0x2600b000
+
 
 #ifdef __cplusplus
 }

@@ -42,7 +42,7 @@ RTEMS_BSPOPTS_HELP([BSP_FDT_BLOB_COPY_TO_READ_ONLY_LOAD_AREA],[copy the FDT blob
 RTEMS_BSPOPTS_SET([BSP_ARM_A9MPCORE_PERIPHCLK],[*],[100000000U])
 RTEMS_BSPOPTS_HELP([BSP_ARM_A9MPCORE_PERIPHCLK],[ARM Cortex-A9 MPCore PERIPHCLK clock frequency in Hz])
 
-RTEMS_BSPOPTS_SET([CLOCK_DRIVER_USE_FAST_IDLE],[*qemu],[1])
+RTEMS_BSPOPTS_SET([CLOCK_DRIVER_USE_FAST_IDLE],[*qemu],[0])
 RTEMS_BSPOPTS_HELP([CLOCK_DRIVER_USE_FAST_IDLE],
 [This sets a mode where the time runs as fast as possible when a clock ISR
 occurs while the IDLE thread is executing.  This can significantly reduce
@@ -63,7 +63,7 @@ RTEMS_BSPOPTS_HELP([GEN_R52_UART_BAUD],[baud for UARTs])
 RTEMS_BSPOPTS_SET([BSP_USE_UART_INTERRUPTS],[*],[1])
 RTEMS_BSPOPTS_HELP([BSP_USE_UART_INTERRUPTS],[enable usage of interrupts for the UART modules])
 
-RTEMS_BSPOPTS_SET([GEN_R52_NO_I2C],[*],[1])
+RTEMS_BSPOPTS_SET([GEN_R52_NO_I2C],[*],[2])
 RTEMS_BSPOPTS_HELP([GEN_R52_NO_I2C],
 [Number of configured I2C buses. Note that each bus has to be configured in an
 apropriate i2cdrv_config array.])
@@ -71,6 +71,12 @@ apropriate i2cdrv_config array.])
 RTEMS_BSPOPTS_SET([GEN_R52_I2C0_SPEED],[*],[100000])
 RTEMS_BSPOPTS_HELP([GEN_R52_I2C0_SPEED],[speed for I2C0 in HZ])
 
+RTEMS_BSPOPTS_SET([GEN_R52_I2C1_SPEED],[*],[100000])
+RTEMS_BSPOPTS_HELP([GEN_R52_I2C1_SPEED],[speed for I2C1 in HZ])
+
+RTEMS_BSPOPTS_SET([GEN_R52_NO_SPI],[*],[3])
+RTEMS_BSPOPTS_HELP([GEN_R52_NO_SPI],
+[Number of configured SPI buses.])
 
 RTEMS_BSP_CLEANUP_OPTIONS
 

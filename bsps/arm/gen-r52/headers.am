@@ -29,10 +29,10 @@ include_bsp_HEADERS += ../../../../../../bsps/arm/gen-r52/include/bsp/mpu.h
 include_bsp_HEADERS += ../../../../../../bsps/arm/gen-r52/include/bsp/xnandps_jffs2.h
 include_bsp_HEADERS += ../../../../../../bsps/include/bsp/dma.h
 include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/dma_330.h
-include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/alt_adapter.h
-include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/alt_dma.h
-include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/alt_dma_common.h
-include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/alt_dma_program.h
+include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/altera/alt_adapter.h
+include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/altera/alt_dma.h
+include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/altera/alt_dma_common.h
+include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/altera/alt_dma_program.h
 include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/mmu_500.h
 include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/smc_353.h
 
