@@ -38,7 +38,7 @@
 #include <stdio.h>
 #endif
 #include <bsp.h>
-#include <bsp/alt_dma.h>
+#include <bsp/altera/alt_dma.h>
 #if 0
 #include <bsp/socal/socal.h>
 #include <bsp/socal/hps.h>

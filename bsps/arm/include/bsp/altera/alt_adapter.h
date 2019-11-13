@@ -28,6 +28,8 @@
 #ifndef LIBBSP_ARM_GEN_R52_BSP_ALT_ADAPTER_H
 #define LIBBSP_ARM_GEN_R52_BSP_ALT_ADAPTER_H
 
+#include <rtems.h>
+
 #define ALT_STATUS_CODE rtems_status_code
 
 /*! Definitions of status codes returned by the HWLIB. */
@@ -86,6 +88,14 @@
  *  \param bits - Bits to clear in destination word
  */
 #define     alt_clrbits_word(dest, bits)        (alt_write_word(dest, alt_read_word(dest) & ~(bits)))
+
+/*! Replace selected bits in the 32 bit word at the destination address in device memory.
+ *  \param  dest - Destination pointer address
+ *  \param  msk  - Bits to replace in destination word
+ *  \param  src  - Source bits to write to cleared bits in destination word
+ */
+#define     alt_replbits_word(dest, msk, src)   (alt_write_word(dest,(alt_read_word(dest) & ~(msk)) | ((src) & (msk))))
+
 
 #define ALT_DMA_PERIPH_PROVISION_16550_SUPPORT 0
 #define ALT_DMA_PERIPH_PROVISION_QSPI_SUPPORT 0

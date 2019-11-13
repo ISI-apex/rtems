@@ -27,7 +27,7 @@
 
 #include <bsp.h>
 #include <bsp/dma.h>
-#include <bsp/alt_dma.h>
+#include <bsp/altera/alt_dma.h>
 
 #ifdef __cplusplus
 extern "C"

@@ -40,7 +40,7 @@
 #if 0
 #include "hwlib.h"
 #endif
-#include <bsp/alt_adapter.h>
+#include <bsp/altera/alt_adapter.h>
 #include "alt_dma_common.h"
 #include "alt_dma_program.h"
 
