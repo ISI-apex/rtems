@@ -54,8 +54,8 @@ static void _ARMV7M_Clock_initialize(void)
   tc = &_ARMV7M_TC;
 
   systick->csr = ARMV7M_SYSTICK_CSR_ENABLE
-    | ARMV7M_SYSTICK_CSR_TICKINT
-    | ARMV7M_SYSTICK_CSR_CLKSOURCE;
+    | ARMV7M_SYSTICK_CSR_TICKINT;
+//    | ARMV7M_SYSTICK_CSR_CLKSOURCE;
 
   tc->base.tc_get_timecount = _ARMV7M_TC_get_timecount;
   tc->base.tc_counter_mask = 0xffffffff;
@@ -79,7 +79,7 @@ static void _ARMV7M_Clock_initialize_early(void)
 
   systick->rvr = interval;
   systick->cvr = 0;
-  systick->csr = ARMV7M_SYSTICK_CSR_ENABLE | ARMV7M_SYSTICK_CSR_CLKSOURCE;
+  //systick->csr = ARMV7M_SYSTICK_CSR_ENABLE | ARMV7M_SYSTICK_CSR_CLKSOURCE;
 }
 
 RTEMS_SYSINIT_ITEM(
