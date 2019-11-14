@@ -344,7 +344,7 @@ _start:
 bsp_start_vector_table_begin:
 
 	.word	_ISR_Stack_area_end
-	.word	_start /* Reset */
+	.word	_reset /* Reset */
 	.word	_ARMV7M_Exception_default /* NMI */
 	.word	_ARMV7M_Exception_default /* Hard Fault */
 	.word	_ARMV7M_Exception_default /* MPU Fault */
@@ -365,9 +365,10 @@ bsp_start_vector_table_begin:
 
 bsp_start_vector_table_end:
 
+_start:
 	.thumb_func
 
-_start:
+_reset:
 
 #ifdef BSP_START_NEEDS_REGISTER_INITIALIZATION
 	bl bsp_start_init_registers_core
