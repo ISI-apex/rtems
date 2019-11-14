@@ -1,0 +1,3 @@
+Overview
+--------
+This BSP describes support for the Cortex-M4 CPU acting as the system controller for the HPSC chiplet.

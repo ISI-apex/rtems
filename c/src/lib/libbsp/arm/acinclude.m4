@@ -14,6 +14,8 @@ AC_DEFUN([RTEMS_CHECK_BSPDIR],
     AC_CONFIG_SUBDIRS([csb337]);;
   edb7312 )
     AC_CONFIG_SUBDIRS([edb7312]);;
+  hpsc-trch )
+    AC_CONFIG_SUBDIRS([hpsc-trch]);;
   gdbarmsim )
     AC_CONFIG_SUBDIRS([gdbarmsim]);;
   gumstix )
