@@ -37,6 +37,32 @@
 #include <bsp/fdt.h>
 #include <libfdt.h>
 
+static int gcounter = 2;
+static void cusleep(int i)
+{
+  gcounter = 2;
+  while (i > 0) {
+    i--;
+    gcounter*=gcounter;
+  }
+}
+
+static void cmsleep(int i)
+{
+  while (i > 0) {
+    cusleep(1000000);
+    i--;
+  }
+}
+
+static void csleep(int i)
+{
+  while (i > 0) {
+    cmsleep(250);
+    i--;
+  }
+}
+
 #include <libchip/ns16550.h>
 extern ns16550_context hpsc_trch_uart_context_0;
 void set_uart_params(void)
@@ -117,6 +143,7 @@ void set_uart_params(void)
 
 BSP_START_TEXT_SECTION void bsp_start_hook_0( void )
 {
+  csleep(5);
   set_uart_params();
 }
 
