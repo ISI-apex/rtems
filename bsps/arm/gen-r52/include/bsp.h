@@ -47,6 +47,7 @@ extern "C" {
 
 void arm_generic_timer_get_config(uint32_t *frequency, uint32_t *irq);
 rtems_status_code bsp_register_i2c(void);
+rtems_status_code bsp_register_spi(void);
 
 #define BSP_ARM_GIC_DIST_BASE ( RTPS_GIC_BASE + 0x00000000 )
 #define BSP_ARM_GIC_REDIST_BASE ( RTPS_GIC_BASE + 0x00040000 )
@@ -77,11 +78,21 @@ rtems_status_code bsp_register_i2c(void);
 #define RTPS_IRQ__I2C                            60
 #define RTPS_IRQ__LSIO_I2C_0                     61
 #define RTPS_IRQ__LSIO_I2C_1                     62
+#define RTPS_IRQ__SPI                            63
+#define RTPS_IRQ__LSIO_SPI_0                     64
+#define RTPS_IRQ__LSIO_SPI_1                     65
 
 #define LSIO_I2C0_BASE         0x26008000
 #define LSIO_I2C0_ECC_CSR_BASE 0x26009000
 #define LSIO_I2C1_BASE         0x2600a000
 #define LSIO_I2C1_ECC_CSR_BASE 0x2600b000
+
+#define LSIO_SPI0_BASE         0x2600c000
+#define LSIO_SPI0_ECC_CSR_BASE 0x2600d000
+#define LSIO_SPI1_BASE         0x2600e000
+#define LSIO_SPI1_ECC_CSR_BASE 0x2600f000
+#define RTPS_SPI0_BASE         0x3420c000
+
 
 
 #ifdef __cplusplus
