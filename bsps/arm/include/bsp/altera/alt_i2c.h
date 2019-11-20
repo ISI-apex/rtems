@@ -41,12 +41,17 @@
 #ifndef __ALT_I2C_H__
 #define __ALT_I2C_H__
 
+#if 0
 #include "hwlib.h"
 #include "alt_clock_manager.h"
+#endif
+#include <bsp/altera/alt_adapter.h>
 #include "socal/alt_i2c.h"
+#if 0
 #include "socal/alt_rstmgr.h"
 #include "socal/hps.h"
 #include "socal/socal.h"
+#endif
 
 #ifdef __cplusplus
 extern "C"
@@ -95,6 +100,220 @@ extern "C"
 
 /******************************************************************************/
 /*!
+ * This type definition is an opaque type definition for clock frequency values
+ * in Hz.
+ */
+typedef uint32_t    alt_freq_t;
+
+
+/******************************************************************************/
+
+/*
+ * Component Instance : i2c0
+ *
+ * Instance i2c0 of component ALT_I2C.
+ *
+ *
+ */
+
+#define ALT_HPS_ADDR        0
+/*
+ * Address Space : ALT_HPS
+ *
+ */
+/* The address of the ALT_I2C_CON register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_CON_ADDR  ALT_I2C_CON_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_TAR register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_TAR_ADDR  ALT_I2C_TAR_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_SAR register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_SAR_ADDR  ALT_I2C_SAR_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_DATA_CMD register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_DATA_CMD_ADDR  ALT_I2C_DATA_CMD_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_SS_SCL_HCNT register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_SS_SCL_HCNT_ADDR  ALT_I2C_SS_SCL_HCNT_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_SS_SCL_LCNT register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_SS_SCL_LCNT_ADDR  ALT_I2C_SS_SCL_LCNT_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_FS_SCL_HCNT register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_FS_SCL_HCNT_ADDR  ALT_I2C_FS_SCL_HCNT_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_FS_SCL_LCNT register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_FS_SCL_LCNT_ADDR  ALT_I2C_FS_SCL_LCNT_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_INTR_STAT register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_INTR_STAT_ADDR  ALT_I2C_INTR_STAT_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_INTR_MSK register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_INTR_MSK_ADDR  ALT_I2C_INTR_MSK_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_RAW_INTR_STAT register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_RAW_INTR_STAT_ADDR  ALT_I2C_RAW_INTR_STAT_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_RX_TL register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_RX_TL_ADDR  ALT_I2C_RX_TL_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_TX_TL register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_TX_TL_ADDR  ALT_I2C_TX_TL_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_CLR_INTR register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_CLR_INTR_ADDR  ALT_I2C_CLR_INTR_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_CLR_RX_UNDER register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_CLR_RX_UNDER_ADDR  ALT_I2C_CLR_RX_UNDER_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_CLR_RX_OVER register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_CLR_RX_OVER_ADDR  ALT_I2C_CLR_RX_OVER_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_CLR_TX_OVER register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_CLR_TX_OVER_ADDR  ALT_I2C_CLR_TX_OVER_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_CLR_RD_REQ register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_CLR_RD_REQ_ADDR  ALT_I2C_CLR_RD_REQ_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_CLR_TX_ABRT register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_CLR_TX_ABRT_ADDR  ALT_I2C_CLR_TX_ABRT_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_CLR_RX_DONE register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_CLR_RX_DONE_ADDR  ALT_I2C_CLR_RX_DONE_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_CLR_ACTIVITY register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_CLR_ACTIVITY_ADDR  ALT_I2C_CLR_ACTIVITY_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_CLR_STOP_DET register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_CLR_STOP_DET_ADDR  ALT_I2C_CLR_STOP_DET_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_CLR_START_DET register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_CLR_START_DET_ADDR  ALT_I2C_CLR_START_DET_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_CLR_GEN_CALL register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_CLR_GEN_CALL_ADDR  ALT_I2C_CLR_GEN_CALL_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_EN register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_EN_ADDR  ALT_I2C_EN_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_STAT register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_STAT_ADDR  ALT_I2C_STAT_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_TXFLR register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_TXFLR_ADDR  ALT_I2C_TXFLR_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_RXFLR register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_RXFLR_ADDR  ALT_I2C_RXFLR_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_SDA_HOLD register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_SDA_HOLD_ADDR  ALT_I2C_SDA_HOLD_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_TX_ABRT_SRC register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_TX_ABRT_SRC_ADDR  ALT_I2C_TX_ABRT_SRC_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_SLV_DATA_NACK_ONLY register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_SLV_DATA_NACK_ONLY_ADDR  ALT_I2C_SLV_DATA_NACK_ONLY_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_DMA_CR register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_DMA_CR_ADDR  ALT_I2C_DMA_CR_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_DMA_TDLR register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_DMA_TDLR_ADDR  ALT_I2C_DMA_TDLR_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_DMA_RDLR register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_DMA_RDLR_ADDR  ALT_I2C_DMA_RDLR_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_SDA_SETUP register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_SDA_SETUP_ADDR  ALT_I2C_SDA_SETUP_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_ACK_GENERAL_CALL register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_ACK_GENERAL_CALL_ADDR  ALT_I2C_ACK_GENERAL_CALL_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_EN_STAT register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_EN_STAT_ADDR  ALT_I2C_EN_STAT_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_FS_SPKLEN register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_FS_SPKLEN_ADDR  ALT_I2C_FS_SPKLEN_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_COMP_PARAM_1 register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_COMP_PARAM_1_ADDR  ALT_I2C_COMP_PARAM_1_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_COMP_VER register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_COMP_VER_ADDR  ALT_I2C_COMP_VER_ADDR(ALT_I2C0_ADDR)
+/* The address of the ALT_I2C_COMP_TYPE register for the ALT_I2C0 instance. */
+#define ALT_I2C0_IC_COMP_TYPE_ADDR  ALT_I2C_COMP_TYPE_ADDR(ALT_I2C0_ADDR)
+/* The base address byte offset for the start of the ALT_I2C0 component. */
+#define ALT_I2C0_OFST        0x26008000
+/* The start address of the ALT_I2C0 component. */
+#define ALT_I2C0_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_I2C0_OFST))
+/* The lower bound address range of the ALT_I2C0 component. */
+#define ALT_I2C0_LB_ADDR     ALT_I2C0_ADDR
+/* The upper bound address range of the ALT_I2C0 component. */
+#define ALT_I2C0_UB_ADDR     ALT_CAST(void *, ((ALT_CAST(char *, ALT_I2C0_ADDR) + 0x100) - 1))
+
+
+/*
+ * Component Instance : i2c1
+ *
+ * Instance i2c1 of component ALT_I2C.
+ *
+ *
+ */
+/* The address of the ALT_I2C_CON register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_CON_ADDR  ALT_I2C_CON_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_TAR register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_TAR_ADDR  ALT_I2C_TAR_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_SAR register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_SAR_ADDR  ALT_I2C_SAR_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_DATA_CMD register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_DATA_CMD_ADDR  ALT_I2C_DATA_CMD_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_SS_SCL_HCNT register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_SS_SCL_HCNT_ADDR  ALT_I2C_SS_SCL_HCNT_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_SS_SCL_LCNT register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_SS_SCL_LCNT_ADDR  ALT_I2C_SS_SCL_LCNT_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_FS_SCL_HCNT register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_FS_SCL_HCNT_ADDR  ALT_I2C_FS_SCL_HCNT_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_FS_SCL_LCNT register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_FS_SCL_LCNT_ADDR  ALT_I2C_FS_SCL_LCNT_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_INTR_STAT register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_INTR_STAT_ADDR  ALT_I2C_INTR_STAT_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_INTR_MSK register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_INTR_MSK_ADDR  ALT_I2C_INTR_MSK_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_RAW_INTR_STAT register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_RAW_INTR_STAT_ADDR  ALT_I2C_RAW_INTR_STAT_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_RX_TL register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_RX_TL_ADDR  ALT_I2C_RX_TL_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_TX_TL register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_TX_TL_ADDR  ALT_I2C_TX_TL_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_CLR_INTR register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_CLR_INTR_ADDR  ALT_I2C_CLR_INTR_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_CLR_RX_UNDER register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_CLR_RX_UNDER_ADDR  ALT_I2C_CLR_RX_UNDER_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_CLR_RX_OVER register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_CLR_RX_OVER_ADDR  ALT_I2C_CLR_RX_OVER_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_CLR_TX_OVER register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_CLR_TX_OVER_ADDR  ALT_I2C_CLR_TX_OVER_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_CLR_RD_REQ register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_CLR_RD_REQ_ADDR  ALT_I2C_CLR_RD_REQ_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_CLR_TX_ABRT register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_CLR_TX_ABRT_ADDR  ALT_I2C_CLR_TX_ABRT_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_CLR_RX_DONE register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_CLR_RX_DONE_ADDR  ALT_I2C_CLR_RX_DONE_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_CLR_ACTIVITY register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_CLR_ACTIVITY_ADDR  ALT_I2C_CLR_ACTIVITY_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_CLR_STOP_DET register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_CLR_STOP_DET_ADDR  ALT_I2C_CLR_STOP_DET_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_CLR_START_DET register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_CLR_START_DET_ADDR  ALT_I2C_CLR_START_DET_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_CLR_GEN_CALL register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_CLR_GEN_CALL_ADDR  ALT_I2C_CLR_GEN_CALL_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_EN register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_EN_ADDR  ALT_I2C_EN_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_STAT register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_STAT_ADDR  ALT_I2C_STAT_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_TXFLR register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_TXFLR_ADDR  ALT_I2C_TXFLR_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_RXFLR register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_RXFLR_ADDR  ALT_I2C_RXFLR_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_SDA_HOLD register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_SDA_HOLD_ADDR  ALT_I2C_SDA_HOLD_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_TX_ABRT_SRC register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_TX_ABRT_SRC_ADDR  ALT_I2C_TX_ABRT_SRC_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_SLV_DATA_NACK_ONLY register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_SLV_DATA_NACK_ONLY_ADDR  ALT_I2C_SLV_DATA_NACK_ONLY_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_DMA_CR register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_DMA_CR_ADDR  ALT_I2C_DMA_CR_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_DMA_TDLR register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_DMA_TDLR_ADDR  ALT_I2C_DMA_TDLR_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_DMA_RDLR register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_DMA_RDLR_ADDR  ALT_I2C_DMA_RDLR_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_SDA_SETUP register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_SDA_SETUP_ADDR  ALT_I2C_SDA_SETUP_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_ACK_GENERAL_CALL register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_ACK_GENERAL_CALL_ADDR  ALT_I2C_ACK_GENERAL_CALL_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_EN_STAT register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_EN_STAT_ADDR  ALT_I2C_EN_STAT_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_FS_SPKLEN register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_FS_SPKLEN_ADDR  ALT_I2C_FS_SPKLEN_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_COMP_PARAM_1 register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_COMP_PARAM_1_ADDR  ALT_I2C_COMP_PARAM_1_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_COMP_VER register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_COMP_VER_ADDR  ALT_I2C_COMP_VER_ADDR(ALT_I2C1_ADDR)
+/* The address of the ALT_I2C_COMP_TYPE register for the ALT_I2C1 instance. */
+#define ALT_I2C1_IC_COMP_TYPE_ADDR  ALT_I2C_COMP_TYPE_ADDR(ALT_I2C1_ADDR)
+/* The base address byte offset for the start of the ALT_I2C1 component. */
+#define ALT_I2C1_OFST        0x2600a000
+/* The start address of the ALT_I2C1 component. */
+#define ALT_I2C1_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_I2C1_OFST))
+/* The lower bound address range of the ALT_I2C1 component. */
+#define ALT_I2C1_LB_ADDR     ALT_I2C1_ADDR
+/* The upper bound address range of the ALT_I2C1 component. */
+#define ALT_I2C1_UB_ADDR     ALT_CAST(void *, ((ALT_CAST(char *, ALT_I2C1_ADDR) + 0x100) - 1))
+
+
+
+/*!
  * This type definition enumerates the operational state of I2C by
  * transfer operation.
  */
@@ -135,8 +354,10 @@ typedef enum ALT_I2C_CTLR_e
 {
     ALT_I2C_I2C0        = (int)ALT_I2C0_OFST,  /*!< I2C0 instance. */
     ALT_I2C_I2C1        = (int)ALT_I2C1_OFST,  /*!< I2C1 instance. */
+#if 0
     ALT_I2C_I2C2        = (int)ALT_I2C2_OFST,  /*!< I2C2 instance. */
     ALT_I2C_I2C3        = (int)ALT_I2C3_OFST,  /*!< I2C3 instance. */
+#endif
 } ALT_I2C_CTLR_t;
 
 /*!

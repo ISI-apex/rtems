@@ -34,8 +34,11 @@
  * 
  ******************************************************************************/
 
+#include <bsp/altera/alt_i2c.h>
+#if 0
 #include <bsp/alt_i2c.h>
 #include <bsp/alt_reset_manager.h>
+#endif
 #include <stdio.h>
 
 /////
@@ -51,8 +54,10 @@
 
 /////
 
+#if 0
 // Timeout for reset manager
 #define ALT_I2C_RESET_TMO_INIT      8192
+#endif
 // Timeout for disable device
 #define ALT_I2C_MAX_T_POLL_COUNT    8192
 // Timeout for waiting interrupt
@@ -88,10 +93,15 @@ static ALT_STATUS_CODE alt_i2c_is_enabled_helper(ALT_I2C_DEV_t * i2c_dev);
 //
 static ALT_STATUS_CODE alt_i2c_checking(ALT_I2C_DEV_t * i2c_dev)
 {
+#if 0
     if (   (i2c_dev->location != (void *)ALT_I2C_I2C0)
         && (i2c_dev->location != (void *)ALT_I2C_I2C1)
         && (i2c_dev->location != (void *)ALT_I2C_I2C2)
         && (i2c_dev->location != (void *)ALT_I2C_I2C3))
+#else
+    if (   (i2c_dev->location != (void *)ALT_I2C_I2C0)
+        && (i2c_dev->location != (void *)ALT_I2C_I2C1))
+#endif
     {
         // Incorrect device
         return ALT_E_FALSE;
@@ -101,6 +111,7 @@ static ALT_STATUS_CODE alt_i2c_checking(ALT_I2C_DEV_t * i2c_dev)
     return ALT_E_TRUE;
 }
 
+#if 0
 static ALT_STATUS_CODE alt_i2c_rstmgr_set(ALT_I2C_DEV_t * i2c_dev)
 {
     uint32_t rst_mask = ALT_RSTMGR_PERMODRST_I2C0_SET_MSK;
@@ -168,6 +179,7 @@ static ALT_STATUS_CODE alt_i2c_rstmgr_strobe(ALT_I2C_DEV_t * i2c_dev)
 
     return ALT_E_SUCCESS;
 }
+#endif
 
 //
 // Initialize the specified I2C controller instance for use and return a device
@@ -184,19 +196,25 @@ ALT_STATUS_CODE alt_i2c_init(const ALT_I2C_CTLR_t i2c,
         return ALT_E_BAD_ARG;
     }
 
+#if 0
     if (alt_clk_is_enabled(ALT_CLK_L4_SP) != ALT_E_TRUE)
     {
         return ALT_E_BAD_CLK;
     }
 
     /////
+#endif
 
     ALT_STATUS_CODE status = ALT_E_SUCCESS;
 
+#if 0
     if (status == ALT_E_SUCCESS)
     {
         status = alt_clk_freq_get(ALT_CLK_L4_SP, &i2c_dev->clock_freq);
     }
+#endif    
+
+    /* TODO(Richard): Implement a valid clock frequency here */
 
     // Reset i2c module
     if (status == ALT_E_SUCCESS)
@@ -231,8 +249,11 @@ ALT_STATUS_CODE alt_i2c_reset(ALT_I2C_DEV_t * i2c_dev)
         }
     }
     
+#if 0
     // Reset i2c module by reset manager
     alt_i2c_rstmgr_strobe(i2c_dev);
+#endif
+    /* TODO (Richard):We may need to reset the I2C IP here */
 
     // Set optimal parameters for all i2c devices on the bus
     ALT_I2C_MASTER_CONFIG_t cfg;
@@ -283,11 +304,13 @@ ALT_STATUS_CODE alt_i2c_uninit(ALT_I2C_DEV_t * i2c_dev)
         status = alt_i2c_disable(i2c_dev);
     }
 
+#if 0
     // Reset i2c module by reset manager
     if (status == ALT_E_SUCCESS)
     {
         status = alt_i2c_rstmgr_set(i2c_dev);
     }
+#endif
 
     return status;
 }
