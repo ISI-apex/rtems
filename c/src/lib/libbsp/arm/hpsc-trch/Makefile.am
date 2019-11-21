@@ -65,6 +65,8 @@ librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/hpsc-trch/console/console-co
 # Clock
 librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/shared/clock/clock-armv7m.c
 
+# GPIO
+librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/shared/gpio/alt_generalpurpose_io.c
 
 ###############################################################################
 #                  Special Rules                                              #
