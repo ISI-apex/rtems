@@ -38,11 +38,15 @@
 #include    <stdlib.h>
 #include    <stdbool.h>
 
+#if 0
 #include    <bsp/socal/hps.h>
 #include    <bsp/socal/socal.h>
+#endif
 #include    <bsp/socal/alt_gpio.h>
+#if 0
 #include    <bsp/socal/alt_rstmgr.h>
 #include    <bsp/hwlib.h>
+#endif
 #include    <bsp/alt_generalpurpose_io.h>
 
 
@@ -67,10 +71,14 @@ ALT_STATUS_CODE alt_gpio_init(void)
 {
 		// put GPIO modules into system manager reset if not already there
 	alt_gpio_uninit();
+#if 0
 		// release GPIO modules from system reset (w/ two-instruction delay)
 	alt_replbits_word(ALT_RSTMGR_PERMODRST_ADDR, ALT_RSTMGR_PERMODRST_GPIO0_SET_MSK |
 			ALT_RSTMGR_PERMODRST_GPIO1_SET_MSK |
 			ALT_RSTMGR_PERMODRST_GPIO2_SET_MSK, 0);
+#endif
+
+  /* TODO (Richard): Maybe release GPIO from reset */
 	return ALT_E_SUCCESS;
 }
 
@@ -81,11 +89,15 @@ ALT_STATUS_CODE alt_gpio_init(void)
 
 ALT_STATUS_CODE alt_gpio_uninit(void)
 {
+#if 0
 	// put all GPIO modules into system manager reset
 	alt_replbits_word(ALT_RSTMGR_PERMODRST_ADDR, ALT_RSTMGR_PERMODRST_GPIO0_SET_MSK |
 			ALT_RSTMGR_PERMODRST_GPIO1_SET_MSK |
 			ALT_RSTMGR_PERMODRST_GPIO2_SET_MSK,
 			ALT_GPIO_BITMASK);
+#endif
+
+  /* TODO (Richard): Maybe reset GPIO */
 	return ALT_E_SUCCESS;
 }
 
@@ -103,7 +115,9 @@ ALT_STATUS_CODE alt_gpio_port_datadir_set(ALT_GPIO_PORT_t gpio_pid,
     if ((mask & ~ALT_GPIO_BITMASK) || (config & ~ALT_GPIO_BITMASK))  { return ALT_E_ERROR; }
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_SWPORTA_DDR_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_SWPORTA_DDR_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_SWPORTA_DDR_ADDR; }
+#endif
     else { return ALT_E_BAD_ARG; }
 
     alt_replbits_word(addr, mask, config);
@@ -123,7 +137,9 @@ uint32_t alt_gpio_port_datadir_get(ALT_GPIO_PORT_t gpio_pid,
 
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_SWPORTA_DDR_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_SWPORTA_DDR_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_SWPORTA_DDR_ADDR; }
+#endif
     else { return 0; }
 
     return alt_read_word(addr) & mask;
@@ -144,7 +160,9 @@ ALT_STATUS_CODE alt_gpio_port_data_write(ALT_GPIO_PORT_t gpio_pid,
     if ((mask & ~ALT_GPIO_BITMASK) || (val & ~ALT_GPIO_BITMASK))  { return ALT_E_ERROR; }
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_SWPORTA_DR_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_SWPORTA_DR_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_SWPORTA_DR_ADDR; }
+#endif
     else { return ALT_E_BAD_ARG; }
 
     alt_replbits_word(addr, mask, val);
@@ -168,7 +186,9 @@ uint32_t alt_gpio_port_data_read(ALT_GPIO_PORT_t gpio_pid, uint32_t mask)
 
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_EXT_PORTA_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_EXT_PORTA_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_EXT_PORTA_ADDR; }
+#endif
     else { return 0; }
 
     return alt_read_word(addr) & mask;
@@ -189,7 +209,9 @@ ALT_STATUS_CODE alt_gpio_port_int_type_set(ALT_GPIO_PORT_t gpio_pid,
     if ((mask & ~ALT_GPIO_BITMASK) || (config & ~ALT_GPIO_BITMASK))  { return ALT_E_ERROR; }
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INTTYPE_LEVEL_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INTTYPE_LEVEL_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INTTYPE_LEVEL_ADDR; }
+#endif
     else { return ALT_E_BAD_ARG; }
 
     alt_replbits_word(addr, mask, config);
@@ -209,7 +231,9 @@ uint32_t alt_gpio_port_int_type_get(ALT_GPIO_PORT_t gpio_pid,
 
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INTTYPE_LEVEL_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INTTYPE_LEVEL_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INTTYPE_LEVEL_ADDR; }
+#endif
     else { return 0; }
 
     return alt_read_word(addr) & mask;
@@ -230,7 +254,9 @@ ALT_STATUS_CODE alt_gpio_port_int_pol_set(ALT_GPIO_PORT_t gpio_pid,
     if ((mask & ~ALT_GPIO_BITMASK) || (config & ~ALT_GPIO_BITMASK))  { return ALT_E_ERROR; }
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INT_POL_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INT_POL_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INT_POL_ADDR; }
+#endif
     else { return ALT_E_BAD_ARG; }
 
     alt_replbits_word(addr, mask, config);
@@ -252,7 +278,9 @@ uint32_t alt_gpio_port_int_pol_get(ALT_GPIO_PORT_t gpio_pid,
 
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INT_POL_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INT_POL_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INT_POL_ADDR; }
+#endif
     else { return 0; }
 
     return alt_read_word(addr) & mask;
@@ -273,7 +301,9 @@ ALT_STATUS_CODE alt_gpio_port_debounce_set(ALT_GPIO_PORT_t gpio_pid,
     if ((mask & ~ALT_GPIO_BITMASK) || (config & ~ALT_GPIO_BITMASK))  { return ALT_E_ERROR; }
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_DEBOUNCE_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_DEBOUNCE_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_DEBOUNCE_ADDR; }
+#endif
     else { return ALT_E_BAD_ARG; }
 
     alt_replbits_word(addr, mask, config);
@@ -294,7 +324,9 @@ uint32_t alt_gpio_port_debounce_get(ALT_GPIO_PORT_t gpio_pid,
 
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_DEBOUNCE_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_DEBOUNCE_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_DEBOUNCE_ADDR; }
+#endif
     else { return 0; }
 
     return alt_read_word(addr) & mask;
@@ -315,7 +347,9 @@ ALT_STATUS_CODE alt_gpio_port_sync_set(ALT_GPIO_PORT_t gpio_pid, uint32_t config
     config = (config != 0) ? 1 : 0;
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_LS_SYNC_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_LS_SYNC_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_LS_SYNC_ADDR; }
+#endif
     else { return ALT_E_BAD_ARG; }
 
     alt_write_word(addr, config);
@@ -336,7 +370,9 @@ ALT_STATUS_CODE alt_gpio_port_sync_get(ALT_GPIO_PORT_t gpio_pid)
 
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_LS_SYNC_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_LS_SYNC_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_LS_SYNC_ADDR; }
+#endif
     else { return ALT_E_BAD_ARG; }         // error
 
     return (alt_read_word(addr) != 0) ? ALT_E_TRUE : ALT_E_FALSE;
@@ -404,7 +440,9 @@ ALT_STATUS_CODE alt_gpio_port_int_enable(ALT_GPIO_PORT_t gpio_pid, uint32_t conf
     if (config & ~ALT_GPIO_BITMASK)      { return ALT_E_ERROR; }
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INTEN_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INTEN_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INTEN_ADDR; }
+#endif
     else { return ALT_E_BAD_ARG; }
 
     alt_replbits_word(addr, config, UINT32_MAX);
@@ -423,7 +461,9 @@ ALT_STATUS_CODE alt_gpio_port_int_disable(ALT_GPIO_PORT_t gpio_pid, uint32_t con
     if (config & ~ALT_GPIO_BITMASK)      { return ALT_E_ERROR; }
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INTEN_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INTEN_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INTEN_ADDR; }
+#endif
     else { return ALT_E_BAD_ARG; }
 
     alt_replbits_word(addr, config, 0);
@@ -442,7 +482,9 @@ uint32_t alt_gpio_port_int_enable_get(ALT_GPIO_PORT_t gpio_pid)
 
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INTEN_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INTEN_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INTEN_ADDR; }
+#endif
     else { return 0; }
 
     return alt_read_word(addr);
@@ -463,7 +505,9 @@ ALT_STATUS_CODE alt_gpio_port_int_mask_set(ALT_GPIO_PORT_t gpio_pid,
     if ((mask & ~ALT_GPIO_BITMASK) || (val & ~ALT_GPIO_BITMASK))  { return ALT_E_ERROR; }
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INTMSK_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INTMSK_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INTMSK_ADDR; }
+#endif
     else { return ALT_E_BAD_ARG; }         // argument error
 
     alt_replbits_word(addr, mask, val);
@@ -481,7 +525,9 @@ uint32_t alt_gpio_port_int_mask_get(ALT_GPIO_PORT_t gpio_pid)
 
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INTMSK_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INTMSK_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INTMSK_ADDR; }
+#endif
     else { return 0; }         // error
 
     return alt_read_word(addr);
@@ -499,7 +545,9 @@ uint32_t alt_gpio_port_int_status_get(ALT_GPIO_PORT_t gpio_pid)
 
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INTSTAT_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INTSTAT_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INTSTAT_ADDR; }
+#endif
     else { return 0; }         // error
 
     return alt_read_word(addr);
@@ -519,7 +567,9 @@ ALT_STATUS_CODE alt_gpio_port_int_status_clear(ALT_GPIO_PORT_t gpio_pid,
     if (clrmask & ~ALT_GPIO_BITMASK)      { return ALT_E_ERROR; }
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INTSTAT_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INTSTAT_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INTSTAT_ADDR; }
+#endif
     else { return ALT_E_BAD_ARG; }         // argument error
 
     alt_write_word(addr, clrmask);
@@ -537,7 +587,9 @@ uint32_t alt_gpio_port_idcode_get(ALT_GPIO_PORT_t gpio_pid)
 
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_ID_CODE_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_ID_CODE_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_ID_CODE_ADDR; }
+#endif
     else { return 0; }
 
     return alt_read_word(addr);
@@ -554,7 +606,9 @@ uint32_t alt_gpio_port_ver_get(ALT_GPIO_PORT_t gpio_pid)
 
     if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_VER_ID_CODE_ADDR; }
     else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_VER_ID_CODE_ADDR; }
+#if 0
     else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_VER_ID_CODE_ADDR; }
+#endif
     else { return 0; }
 
     return alt_read_word(addr);

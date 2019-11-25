@@ -44,6 +44,162 @@ extern "C"
 {
 #endif  /* __cplusplus */
 
+#include <bsp/hwinfo.h>
+#define ALT_HPS_ADDR        0
+
+/*
+ * Component Instance : gpio0
+ *
+ * Instance gpio0 of component ALT_GPIO.
+ *
+ *
+ */
+/* The address of the ALT_GPIO_SWPORTA_DR register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_SWPORTA_DR_ADDR  ALT_GPIO_SWPORTA_DR_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_SWPORTA_DDR register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_SWPORTA_DDR_ADDR  ALT_GPIO_SWPORTA_DDR_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_INTEN register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_INTEN_ADDR  ALT_GPIO_INTEN_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_INTMSK register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_INTMSK_ADDR  ALT_GPIO_INTMSK_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_INTTYPE_LEVEL register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_INTTYPE_LEVEL_ADDR  ALT_GPIO_INTTYPE_LEVEL_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_INT_POL register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_INT_POL_ADDR  ALT_GPIO_INT_POL_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_INTSTAT register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_INTSTAT_ADDR  ALT_GPIO_INTSTAT_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_RAW_INTSTAT register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_RAW_INTSTAT_ADDR  ALT_GPIO_RAW_INTSTAT_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_DEBOUNCE register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_DEBOUNCE_ADDR  ALT_GPIO_DEBOUNCE_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_PORTA_EOI register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_PORTA_EOI_ADDR  ALT_GPIO_PORTA_EOI_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_EXT_PORTA register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_EXT_PORTA_ADDR  ALT_GPIO_EXT_PORTA_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_LS_SYNC register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_LS_SYNC_ADDR  ALT_GPIO_LS_SYNC_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_ID_CODE register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_ID_CODE_ADDR  ALT_GPIO_ID_CODE_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_VER_ID_CODE register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_VER_ID_CODE_ADDR  ALT_GPIO_VER_ID_CODE_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_CFG_REG2 register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_CFG_REG2_ADDR  ALT_GPIO_CFG_REG2_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_CFG_REG1 register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_CFG_REG1_ADDR  ALT_GPIO_CFG_REG1_ADDR(ALT_GPIO0_ADDR)
+/* The base address byte offset for the start of the ALT_GPIO0 component. */
+#if 0
+#define ALT_GPIO0_OFST        0xff708000
+#define ALT_GPIO0_OFST        0x26006000
+#endif
+#define ALT_GPIO0_OFST        LSIO_GPIO0_BASE
+/* The start address of the ALT_GPIO0 component. */
+#define ALT_GPIO0_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_GPIO0_OFST))
+/* The lower bound address range of the ALT_GPIO0 component. */
+#define ALT_GPIO0_LB_ADDR     ALT_GPIO0_ADDR
+/* The upper bound address range of the ALT_GPIO0 component. */
+#define ALT_GPIO0_UB_ADDR     ALT_CAST(void *, ((ALT_CAST(char *, ALT_GPIO0_ADDR) + 0x80) - 1))
+
+
+/*
+ * Component Instance : gpio1
+ *
+ * Instance gpio1 of component ALT_GPIO.
+ *
+ *
+ */
+/* The address of the ALT_GPIO_SWPORTA_DR register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_SWPORTA_DR_ADDR  ALT_GPIO_SWPORTA_DR_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_SWPORTA_DDR register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_SWPORTA_DDR_ADDR  ALT_GPIO_SWPORTA_DDR_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_INTEN register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_INTEN_ADDR  ALT_GPIO_INTEN_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_INTMSK register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_INTMSK_ADDR  ALT_GPIO_INTMSK_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_INTTYPE_LEVEL register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_INTTYPE_LEVEL_ADDR  ALT_GPIO_INTTYPE_LEVEL_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_INT_POL register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_INT_POL_ADDR  ALT_GPIO_INT_POL_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_INTSTAT register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_INTSTAT_ADDR  ALT_GPIO_INTSTAT_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_RAW_INTSTAT register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_RAW_INTSTAT_ADDR  ALT_GPIO_RAW_INTSTAT_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_DEBOUNCE register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_DEBOUNCE_ADDR  ALT_GPIO_DEBOUNCE_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_PORTA_EOI register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_PORTA_EOI_ADDR  ALT_GPIO_PORTA_EOI_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_EXT_PORTA register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_EXT_PORTA_ADDR  ALT_GPIO_EXT_PORTA_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_LS_SYNC register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_LS_SYNC_ADDR  ALT_GPIO_LS_SYNC_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_ID_CODE register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_ID_CODE_ADDR  ALT_GPIO_ID_CODE_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_VER_ID_CODE register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_VER_ID_CODE_ADDR  ALT_GPIO_VER_ID_CODE_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_CFG_REG2 register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_CFG_REG2_ADDR  ALT_GPIO_CFG_REG2_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_CFG_REG1 register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_CFG_REG1_ADDR  ALT_GPIO_CFG_REG1_ADDR(ALT_GPIO1_ADDR)
+/* The base address byte offset for the start of the ALT_GPIO1 component. */
+#if 0
+#define ALT_GPIO1_OFST        0xff709000
+#define ALT_GPIO1_OFST        0x26007000
+#endif
+#define ALT_GPIO1_OFST        LSIO_GPIO1_BASE
+/* The start address of the ALT_GPIO1 component. */
+#define ALT_GPIO1_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_GPIO1_OFST))
+/* The lower bound address range of the ALT_GPIO1 component. */
+#define ALT_GPIO1_LB_ADDR     ALT_GPIO1_ADDR
+/* The upper bound address range of the ALT_GPIO1 component. */
+#define ALT_GPIO1_UB_ADDR     ALT_CAST(void *, ((ALT_CAST(char *, ALT_GPIO1_ADDR) + 0x80) - 1))
+#if 0
+/*
+ * Component Instance : gpio2
+ *
+ * Instance gpio2 of component ALT_GPIO.
+ *
+ *
+ */
+/* The address of the ALT_GPIO_SWPORTA_DR register for the ALT_GPIO2 instance. */
+#define ALT_GPIO2_SWPORTA_DR_ADDR  ALT_GPIO_SWPORTA_DR_ADDR(ALT_GPIO2_ADDR)
+/* The address of the ALT_GPIO_SWPORTA_DDR register for the ALT_GPIO2 instance. */
+#define ALT_GPIO2_SWPORTA_DDR_ADDR  ALT_GPIO_SWPORTA_DDR_ADDR(ALT_GPIO2_ADDR)
+/* The address of the ALT_GPIO_INTEN register for the ALT_GPIO2 instance. */
+#define ALT_GPIO2_INTEN_ADDR  ALT_GPIO_INTEN_ADDR(ALT_GPIO2_ADDR)
+/* The address of the ALT_GPIO_INTMSK register for the ALT_GPIO2 instance. */
+#define ALT_GPIO2_INTMSK_ADDR  ALT_GPIO_INTMSK_ADDR(ALT_GPIO2_ADDR)
+/* The address of the ALT_GPIO_INTTYPE_LEVEL register for the ALT_GPIO2 instance. */
+#define ALT_GPIO2_INTTYPE_LEVEL_ADDR  ALT_GPIO_INTTYPE_LEVEL_ADDR(ALT_GPIO2_ADDR)
+/* The address of the ALT_GPIO_INT_POL register for the ALT_GPIO2 instance. */
+#define ALT_GPIO2_INT_POL_ADDR  ALT_GPIO_INT_POL_ADDR(ALT_GPIO2_ADDR)
+/* The address of the ALT_GPIO_INTSTAT register for the ALT_GPIO2 instance. */
+#define ALT_GPIO2_INTSTAT_ADDR  ALT_GPIO_INTSTAT_ADDR(ALT_GPIO2_ADDR)
+/* The address of the ALT_GPIO_RAW_INTSTAT register for the ALT_GPIO2 instance. */
+#define ALT_GPIO2_RAW_INTSTAT_ADDR  ALT_GPIO_RAW_INTSTAT_ADDR(ALT_GPIO2_ADDR)
+/* The address of the ALT_GPIO_DEBOUNCE register for the ALT_GPIO2 instance. */
+#define ALT_GPIO2_DEBOUNCE_ADDR  ALT_GPIO_DEBOUNCE_ADDR(ALT_GPIO2_ADDR)
+/* The address of the ALT_GPIO_PORTA_EOI register for the ALT_GPIO2 instance. */
+#define ALT_GPIO2_PORTA_EOI_ADDR  ALT_GPIO_PORTA_EOI_ADDR(ALT_GPIO2_ADDR)
+/* The address of the ALT_GPIO_EXT_PORTA register for the ALT_GPIO2 instance. */
+#define ALT_GPIO2_EXT_PORTA_ADDR  ALT_GPIO_EXT_PORTA_ADDR(ALT_GPIO2_ADDR)
+/* The address of the ALT_GPIO_LS_SYNC register for the ALT_GPIO2 instance. */
+#define ALT_GPIO2_LS_SYNC_ADDR  ALT_GPIO_LS_SYNC_ADDR(ALT_GPIO2_ADDR)
+/* The address of the ALT_GPIO_ID_CODE register for the ALT_GPIO2 instance. */
+#define ALT_GPIO2_ID_CODE_ADDR  ALT_GPIO_ID_CODE_ADDR(ALT_GPIO2_ADDR)
+/* The address of the ALT_GPIO_VER_ID_CODE register for the ALT_GPIO2 instance. */
+#define ALT_GPIO2_VER_ID_CODE_ADDR  ALT_GPIO_VER_ID_CODE_ADDR(ALT_GPIO2_ADDR)
+/* The address of the ALT_GPIO_CFG_REG2 register for the ALT_GPIO2 instance. */
+#define ALT_GPIO2_CFG_REG2_ADDR  ALT_GPIO_CFG_REG2_ADDR(ALT_GPIO2_ADDR)
+/* The address of the ALT_GPIO_CFG_REG1 register for the ALT_GPIO2 instance. */
+#define ALT_GPIO2_CFG_REG1_ADDR  ALT_GPIO_CFG_REG1_ADDR(ALT_GPIO2_ADDR)
+/* The base address byte offset for the start of the ALT_GPIO2 component. */
+#define ALT_GPIO2_OFST        0xff70a000
+/* The start address of the ALT_GPIO2 component. */
+#define ALT_GPIO2_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_GPIO2_OFST))
+/* The lower bound address range of the ALT_GPIO2 component. */
+#define ALT_GPIO2_LB_ADDR     ALT_GPIO2_ADDR
+/* The upper bound address range of the ALT_GPIO2 component. */
+#define ALT_GPIO2_UB_ADDR     ALT_CAST(void *, ((ALT_CAST(char *, ALT_GPIO2_ADDR) + 0x80) - 1))
+#endif
 /*
  * Component : GPIO Module - ALT_GPIO
  * GPIO Module

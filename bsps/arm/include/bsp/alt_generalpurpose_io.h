@@ -42,7 +42,10 @@
 #define __ALT_GPIO_H__
 
 #include <stdint.h>
+#if 0
 #include "hwlib.h"
+#endif
+#include <bsp/alt_adapter.h>
 
 #ifdef __cplusplus
 extern "C" {
