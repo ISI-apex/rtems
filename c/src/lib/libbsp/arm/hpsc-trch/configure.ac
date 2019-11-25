@@ -60,6 +60,17 @@ RTEMS_BSPOPTS_HELP([HPSC_TRCH_UART_BAUD],[baud for UARTs])
 RTEMS_BSPOPTS_SET([BSP_USE_UART_INTERRUPTS],[*],[1])
 RTEMS_BSPOPTS_HELP([BSP_USE_UART_INTERRUPTS],[enable usage of interrupts for the UART modules])
 
+RTEMS_BSPOPTS_SET([TRCH_NO_I2C],[*],[2])
+RTEMS_BSPOPTS_HELP([TRCH_NO_I2C],
+[Number of configured I2C buses. Note that each bus has to be configured in an
+apropriate i2cdrv_config array.])
+
+RTEMS_BSPOPTS_SET([TRCH_I2C0_SPEED],[*],[100000])
+RTEMS_BSPOPTS_HELP([TRCH_I2C0_SPEED],[speed for I2C0 in HZ])
+
+RTEMS_BSPOPTS_SET([TRCH_I2C1_SPEED],[*],[100000])
+RTEMS_BSPOPTS_HELP([TRCH_I2C1_SPEED],[speed for I2C1 in HZ])
+
 RTEMS_BSP_CLEANUP_OPTIONS
 
 AC_MSG_CHECKING(whether dtc supports --align)

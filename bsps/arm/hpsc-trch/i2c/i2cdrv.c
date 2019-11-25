@@ -29,7 +29,7 @@ typedef struct {
   rtems_id mutex;
 } i2cdrv_entry;
 
-i2cdrv_entry i2cdrv_table[GEN_R52_NO_I2C];
+i2cdrv_entry i2cdrv_table[TRCH_NO_I2C];
 
 static ALT_I2C_DEV_t *get_device(i2cdrv_entry *e)
 {
@@ -81,7 +81,7 @@ rtems_device_driver i2cdrv_initialize(
 {
   rtems_status_code sc = RTEMS_SUCCESSFUL;
 
-  for ( size_t i = 0; i < GEN_R52_NO_I2C; ++i ) {
+  for ( size_t i = 0; i < TRCH_NO_I2C; ++i ) {
     i2cdrv_entry *e = &i2cdrv_table[i];
     const i2cdrv_configuration *cfg = &i2cdrv_config[i];
 

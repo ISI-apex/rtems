@@ -21,15 +21,15 @@
 #include <bsp.h>
 #include "i2cdrv-config.h"
 
-const i2cdrv_configuration i2cdrv_config[GEN_R52_NO_I2C] = {
+const i2cdrv_configuration i2cdrv_config[TRCH_NO_I2C] = {
   {
     .controller = ALT_I2C_I2C0,
     .device_name = "/dev/i2c0",
-    .speed = GEN_R52_I2C0_SPEED
+    .speed = TRCH_I2C0_SPEED
   },
   {
     .controller = ALT_I2C_I2C1,
     .device_name = "/dev/i2c1",
-    .speed = GEN_R52_I2C1_SPEED
+    .speed = TRCH_I2C1_SPEED
   }
 };

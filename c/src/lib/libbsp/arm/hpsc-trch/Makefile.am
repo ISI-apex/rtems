@@ -68,6 +68,11 @@ librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/shared/clock/clock-armv7m.c
 # GPIO
 librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/shared/gpio/alt_generalpurpose_io.c
 
+# I2C
+librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/hpsc-trch/i2c/i2cdrv.c
+librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/hpsc-trch/i2c/i2cdrv-config.c
+librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/shared/i2c/alt_i2c.c
+
 ###############################################################################
 #                  Special Rules                                              #
 ###############################################################################
