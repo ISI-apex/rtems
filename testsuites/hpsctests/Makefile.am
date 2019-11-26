@@ -158,4 +158,13 @@ gpio_init_CPPFLAGS = $(AM_CPPFLAGS) $(TEST_FLAGS_gpio_init) \
   $(support_includes)
 endif
 
+if TEST_i2c_basic
+hpsctests += i2c_basic
+hpsc_screens += i2c_basic/i2c_basic.scn
+hpsc_docs += i2c_basic/i2c_basic.doc
+i2c_basic_SOURCES = i2c_basic/init.c
+i2c_basic_CPPFLAGS = $(AM_CPPFLAGS) $(TEST_FLAGS_i2c_basic) \
+	$(support_includes)
+endif
+
 noinst_PROGRAMS = $(hpsctests)
