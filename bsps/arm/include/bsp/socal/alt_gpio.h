@@ -45,6 +45,7 @@ extern "C"
 #endif  /* __cplusplus */
 
 #include <bsp/hwinfo.h>
+#include <bspopts.h>
 #define ALT_HPS_ADDR        0
 
 /*
@@ -86,6 +87,28 @@ extern "C"
 #define ALT_GPIO0_CFG_REG2_ADDR  ALT_GPIO_CFG_REG2_ADDR(ALT_GPIO0_ADDR)
 /* The address of the ALT_GPIO_CFG_REG1 register for the ALT_GPIO0 instance. */
 #define ALT_GPIO0_CFG_REG1_ADDR  ALT_GPIO_CFG_REG1_ADDR(ALT_GPIO0_ADDR)
+
+/* The address of the ALT_GPIO_SWPORTB_DR register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_SWPORTB_DR_ADDR  ALT_GPIO_SWPORTA_DR_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_SWPORTB_DDR register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_SWPORTB_DDR_ADDR  ALT_GPIO_SWPORTA_DDR_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_EXT_PORTB register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_EXT_PORTB_ADDR  ALT_GPIO_EXT_PORTA_ADDR(ALT_GPIO0_ADDR)
+
+/* The address of the ALT_GPIO_SWPORTB_DR register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_SWPORTC_DR_ADDR  ALT_GPIO_SWPORTA_DR_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_SWPORTC_DDR register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_SWPORTC_DDR_ADDR  ALT_GPIO_SWPORTA_DDR_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_EXT_PORTC register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_EXT_PORTC_ADDR  ALT_GPIO_EXT_PORTA_ADDR(ALT_GPIO0_ADDR)
+
+/* The address of the ALT_GPIO_SWPORTD_DR register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_SWPORTD_DR_ADDR  ALT_GPIO_SWPORTA_DR_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_SWPORTD_DDR register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_SWPORTD_DDR_ADDR  ALT_GPIO_SWPORTA_DDR_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_EXT_PORTD register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_EXT_PORTD_ADDR  ALT_GPIO_EXT_PORTA_ADDR(ALT_GPIO0_ADDR)
+
 /* The base address byte offset for the start of the ALT_GPIO0 component. */
 #if 0
 #define ALT_GPIO0_OFST        0xff708000
@@ -139,6 +162,28 @@ extern "C"
 #define ALT_GPIO1_CFG_REG2_ADDR  ALT_GPIO_CFG_REG2_ADDR(ALT_GPIO1_ADDR)
 /* The address of the ALT_GPIO_CFG_REG1 register for the ALT_GPIO1 instance. */
 #define ALT_GPIO1_CFG_REG1_ADDR  ALT_GPIO_CFG_REG1_ADDR(ALT_GPIO1_ADDR)
+
+/* The address of the ALT_GPIO_SWPORTB_DR register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_SWPORTB_DR_ADDR  ALT_GPIO_SWPORTA_DR_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_SWPORTB_DDR register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_SWPORTB_DDR_ADDR  ALT_GPIO_SWPORTA_DDR_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_EXT_PORTB register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_EXT_PORTB_ADDR  ALT_GPIO_EXT_PORTA_ADDR(ALT_GPIO1_ADDR)
+
+/* The address of the ALT_GPIO_SWPORTB_DR register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_SWPORTC_DR_ADDR  ALT_GPIO_SWPORTA_DR_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_SWPORTC_DDR register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_SWPORTC_DDR_ADDR  ALT_GPIO_SWPORTA_DDR_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_EXT_PORTC register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_EXT_PORTC_ADDR  ALT_GPIO_EXT_PORTA_ADDR(ALT_GPIO1_ADDR)
+
+/* The address of the ALT_GPIO_SWPORTD_DR register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_SWPORTD_DR_ADDR  ALT_GPIO_SWPORTA_DR_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_SWPORTD_DDR register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_SWPORTD_DDR_ADDR  ALT_GPIO_SWPORTA_DDR_ADDR(ALT_GPIO1_ADDR)
+/* The address of the ALT_GPIO_EXT_PORTD register for the ALT_GPIO1 instance. */
+#define ALT_GPIO1_EXT_PORTD_ADDR  ALT_GPIO_EXT_PORTA_ADDR(ALT_GPIO1_ADDR)
+
 /* The base address byte offset for the start of the ALT_GPIO1 component. */
 #if 0
 #define ALT_GPIO1_OFST        0xff709000
@@ -218,9 +263,8 @@ extern "C"
  * 
  *  Bits    | Access | Reset | Description
  * :--------|:-------|:------|:------------
- *  [28:0]  | RW     | 0x0   | Port A Data
- *  [31:29] | ???    | 0x0   | *UNDEFINED*
- * 
+ *  [31:0]  | RW     | 0x0   | Port A Data
+  *
  */
 /*
  * Field : Port A Data - gpio_swporta_dr
@@ -235,6 +279,7 @@ extern "C"
  * Field Access Macros:
  * 
  */
+#if 0
 /* The Least Significant Bit (LSB) position of the ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR register field. */
 #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_LSB        0
 /* The Most Significant Bit (MSB) position of the ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR register field. */
@@ -251,7 +296,40 @@ extern "C"
 #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_GET(value) (((value) & 0x1fffffff) >> 0)
 /* Produces a ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR register field value suitable for setting the register. */
 #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_SET(value) (((value) << 0) & 0x1fffffff)
-
+#endif
+/* The Least Significant Bit (LSB) position of the ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR register field. */
+#define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_LSB        0
+/* The Most Significant Bit (MSB) position of the ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR register field. */
+#define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_MSB        (GPIO0_PWIDTH_A-1)
+/* The width in bits of the ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR register field. */
+#define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_WIDTH      GPIO0_PWIDTH_A
+#if GPIO0_PWIDTH_A == 8
+  /* The mask used to set the ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR register field value. */
+  #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_SET_MSK    0xff
+  /* The mask used to clear the ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR register field value. */
+  #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_CLR_MSK    0x00
+  /* Extracts the ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR field value from a register. */
+  #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_GET(value) (((value) & 0xff) >> 0)
+  /* Produces a ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR register field value suitable for setting the register. */
+  #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_SET(value) (((value) << 0) & 0xff)
+#elif GPIO0_PWIDTH_A == 16
+  #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_SET_MSK    0xffff
+  #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_CLR_MSK    0x0000
+  #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_GET(value) (((value) & 0xffff) >> 0)
+  #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_SET(value) (((value) << 0) & 0xffff)
+#elif GPIO0_PWIDTH_A == 32
+  #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_SET_MSK    0xffffffff
+  #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_CLR_MSK    0x00000000
+  #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_SET(value) (((value) << 0) & 0xffffffff)
+#else
+  #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_SET_MSK    0xffffffff
+  #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_CLR_MSK    0x00000000
+  #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_SET(value) (((value) << 0) & 0xffffffff)
+#endif
+/* The reset value of the ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR register field. */
+#define ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR_RESET      0x0
 #ifndef __ASSEMBLY__
 /*
  * WARNING: The C register and register group struct declarations are provided for
@@ -263,10 +341,17 @@ extern "C"
  * 
  * The struct declaration for register ALT_GPIO_SWPORTA_DR.
  */
+#if 0
 struct ALT_GPIO_SWPORTA_DR_s
 {
-    uint32_t  gpio_swporta_dr : 29;  /* Port A Data */
-    uint32_t                  :  3;  /* *UNDEFINED* */
+  uint32_t  gpio_swporta_dr : 29;  /* Port A Data */
+  uint32_t                  :  3;  /* *UNDEFINED* */
+};
+#endif
+struct ALT_GPIO_SWPORTA_DR_s
+{
+  uint32_t gpio_swporta_dr : GPIO0_PWIDTH_A;      /* Port A Data */
+  uint32_t                 : (32-GPIO0_PWIDTH_A); /* Reserved - read as zero */
 };
 
 /* The typedef declaration for register ALT_GPIO_SWPORTA_DR. */
@@ -278,6 +363,7 @@ typedef volatile struct ALT_GPIO_SWPORTA_DR_s  ALT_GPIO_SWPORTA_DR_t;
 /* The address of the ALT_GPIO_SWPORTA_DR register. */
 #define ALT_GPIO_SWPORTA_DR_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_SWPORTA_DR_OFST))
 
+#if 0
 /*
  * Register : Port A Data Direction Register - gpio_swporta_ddr
  * 
@@ -293,6 +379,24 @@ typedef volatile struct ALT_GPIO_SWPORTA_DR_s  ALT_GPIO_SWPORTA_DR_t;
  *  [28:0]  | RW     | 0x0   | Port A Data Direction Field
  *  [31:29] | ???    | 0x0   | *UNDEFINED*                
  * 
+ */
+#endif
+/*
+ * Register : Port A Data Direction Register - gpio_swporta_ddr
+ *
+ * This register establishes the direction of each corresponding GPIO Data Field
+ * Bit.
+ *
+ * Check the GPIO chapter in the handbook for details on how GPIO2 is implemented.
+ *
+ * Register Layout - dependent on port width x where x=GPIO_PWIDTH_A
+ *
+ *  Bits    | Access | Reset | Description
+ * :--------|:-------|:------|:----------------------------
+ *  [x:0]   | RW     | z     | Port A Data Direction Field
+ *  [31:y]  | ???    | 0x0   | *Reserved - read as zero*
+ *
+ * z = GPIO_DFLT_DIR_D==1 ? 1:0
  */
 /*
  * Field : Port A Data Direction Field - gpio_swporta_ddr
@@ -325,6 +429,7 @@ typedef volatile struct ALT_GPIO_SWPORTA_DR_s  ALT_GPIO_SWPORTA_DR_t;
  */
 #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_E_OUT 0x1
 
+#if 0
 /* The Least Significant Bit (LSB) position of the ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR register field. */
 #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_LSB        0
 /* The Most Significant Bit (MSB) position of the ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR register field. */
@@ -341,6 +446,40 @@ typedef volatile struct ALT_GPIO_SWPORTA_DR_s  ALT_GPIO_SWPORTA_DR_t;
 #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_GET(value) (((value) & 0x1fffffff) >> 0)
 /* Produces a ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR register field value suitable for setting the register. */
 #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_SET(value) (((value) << 0) & 0x1fffffff)
+#endif
+/* The Least Significant Bit (LSB) position of the ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR register field. */
+#define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_LSB        0
+/* The Most Significant Bit (MSB) position of the ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR register field. */
+#define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_MSB        (GPIO0_PWIDTH_A-1)
+/* The width in bits of the ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR register field. */
+#define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_WIDTH      GPIO0_PWIDTH_A
+#if GPIO0_PWIDTH_A == 8
+  /* The mask used to set the ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR register field value. */
+  #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_SET_MSK    0xff
+  /* The mask used to clear the ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR register field value. */
+  #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_CLR_MSK    0x00
+  /* Extracts the ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR field value from a register. */
+  #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_GET(value) (((value) & 0xff) >> 0)
+  /* Produces a ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR register field value suitable for setting the register. */
+  #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_SET(value) (((value) << 0) & 0xff)
+#elif GPIO0_PWIDTH_A == 16
+  #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_SET_MSK    0xffff
+  #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_CLR_MSK    0x0000
+  #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_GET(value) (((value) & 0xffff) >> 0)
+  #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_SET(value) (((value) << 0) & 0xffff)
+#elif GPIO0_PWIDTH_A == 32
+  #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_SET_MSK    0xffffffff
+  #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_CLR_MSK    0x00000000
+  #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_SET(value) (((value) << 0) & 0xffffffff)
+#else
+  #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_SET_MSK    0xffffffff
+  #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_CLR_MSK    0x00000000
+  #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_SET(value) (((value) << 0) & 0xffffffff)
+#endif
+/* The reset value of the ALT_GPIO_SWPORTA_DR_GPIO_SWPORTA_DR register field. */
+#define ALT_GPIO_SWPORTA_DDR_GPIO_SWPORTA_DDR_RESET      0x0
 
 #ifndef __ASSEMBLY__
 /*
@@ -353,10 +492,16 @@ typedef volatile struct ALT_GPIO_SWPORTA_DR_s  ALT_GPIO_SWPORTA_DR_t;
  * 
  * The struct declaration for register ALT_GPIO_SWPORTA_DDR.
  */
+#if 0
 struct ALT_GPIO_SWPORTA_DDR_s
 {
     uint32_t  gpio_swporta_ddr : 29;  /* Port A Data Direction Field */
     uint32_t                   :  3;  /* *UNDEFINED* */
+};
+#endif
+struct ALT_GPIO_SWPORTA_DDR_s
+{
+    uint32_t  gpio_swporta_ddr : 32;  /* Port A Data Direction Field */
 };
 
 /* The typedef declaration for register ALT_GPIO_SWPORTA_DDR. */
@@ -368,6 +513,7 @@ typedef volatile struct ALT_GPIO_SWPORTA_DDR_s  ALT_GPIO_SWPORTA_DDR_t;
 /* The address of the ALT_GPIO_SWPORTA_DDR register. */
 #define ALT_GPIO_SWPORTA_DDR_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_SWPORTA_DDR_OFST))
 
+#if 0
 /*
  * Register : Interrupt Enable Register - gpio_inten
  * 
@@ -381,6 +527,21 @@ typedef volatile struct ALT_GPIO_SWPORTA_DDR_s  ALT_GPIO_SWPORTA_DDR_t;
  *  [28:0]  | RW     | 0x0   | Interrupt Enable Field
  *  [31:29] | ???    | 0x0   | *UNDEFINED*           
  * 
+ */
+#endif
+/*
+ * Register : Interrupt Enable Register - gpio_inten
+ *
+ * The Interrupt enable register allows interrupts for each bit of the Port A data
+ * register.
+ *
+ * Register Layout - dependent on port width x where x=GPIO_PWIDTH_A
+ *
+ *  Bits    | Access | Reset | Description
+ * :--------|:-------|:------|:-----------------------
+ *  [x:0]   | RW     | 0x0   | Interrupt Enable Field
+ *  [31:y]  | R      | 0x0   | *Reserved - read as zero*
+ *
  */
 /*
  * Field : Interrupt Enable Field - gpio_inten
@@ -411,7 +572,7 @@ typedef volatile struct ALT_GPIO_SWPORTA_DDR_s  ALT_GPIO_SWPORTA_DDR_t;
  * Enable Interrupt on Port A
  */
 #define ALT_GPIO_INTEN_GPIO_INTEN_E_EN  0x1
-
+#if 0
 /* The Least Significant Bit (LSB) position of the ALT_GPIO_INTEN_GPIO_INTEN register field. */
 #define ALT_GPIO_INTEN_GPIO_INTEN_LSB        0
 /* The Most Significant Bit (MSB) position of the ALT_GPIO_INTEN_GPIO_INTEN register field. */
@@ -428,7 +589,46 @@ typedef volatile struct ALT_GPIO_SWPORTA_DDR_s  ALT_GPIO_SWPORTA_DDR_t;
 #define ALT_GPIO_INTEN_GPIO_INTEN_GET(value) (((value) & 0x1fffffff) >> 0)
 /* Produces a ALT_GPIO_INTEN_GPIO_INTEN register field value suitable for setting the register. */
 #define ALT_GPIO_INTEN_GPIO_INTEN_SET(value) (((value) << 0) & 0x1fffffff)
-
+#endif
+/* The Least Significant Bit (LSB) position of the ALT_GPIO_INTEN_GPIO_INTEN register field. */
+#define ALT_GPIO_INTEN_GPIO_INTEN_LSB        0
+#if GPIO0_PWIDTH_A == 8
+/* The Most Significant Bit (MSB) position of the ALT_GPIO_INTEN_GPIO_INTEN register field. */
+#define ALT_GPIO_INTEN_GPIO_INTEN_MSB        (GPIO0_PWIDTH_A-1)
+/* The width in bits of the ALT_GPIO_INTEN_GPIO_INTEN register field. */
+#define ALT_GPIO_INTEN_GPIO_INTEN_WIDTH      GPIO0_PWIDTH_A
+/* The mask used to set the ALT_GPIO_INTEN_GPIO_INTEN register field value. */
+#define ALT_GPIO_INTEN_GPIO_INTEN_SET_MSK    0xff
+/* The mask used to clear the ALT_GPIO_INTEN_GPIO_INTEN register field value. */
+#define ALT_GPIO_INTEN_GPIO_INTEN_CLR_MSK    0x00
+/* Extracts the ALT_GPIO_INTEN_GPIO_INTEN field value from a register. */
+#define ALT_GPIO_INTEN_GPIO_INTEN_GET(value) (((value) & 0xff) >> 0)
+/* Produces a ALT_GPIO_INTEN_GPIO_INTEN register field value suitable for setting the register. */
+#define ALT_GPIO_INTEN_GPIO_INTEN_SET(value) (((value) << 0) & 0xff)
+#elif GPIO0_PWIDTH_A == 16
+#define ALT_GPIO_INTEN_GPIO_INTEN_MSB        (GPIO0_PWIDTH_A-1)
+#define ALT_GPIO_INTEN_GPIO_INTEN_WIDTH      GPIO0_PWIDTH_A
+#define ALT_GPIO_INTEN_GPIO_INTEN_SET_MSK    0xffff
+#define ALT_GPIO_INTEN_GPIO_INTEN_CLR_MSK    0x0000
+#define ALT_GPIO_INTEN_GPIO_INTEN_GET(value) (((value) & 0xffff) >> 0)
+#define ALT_GPIO_INTEN_GPIO_INTEN_SET(value) (((value) << 0) & 0xffff)
+#elif GPIO0_PWIDTH_A == 32
+#define ALT_GPIO_INTEN_GPIO_INTEN_MSB        (GPIO0_PWIDTH_A-1)
+#define ALT_GPIO_INTEN_GPIO_INTEN_WIDTH      GPIO0_PWIDTH_A
+#define ALT_GPIO_INTEN_GPIO_INTEN_SET_MSK    0xffffffff
+#define ALT_GPIO_INTEN_GPIO_INTEN_CLR_MSK    0x00000000
+#define ALT_GPIO_INTEN_GPIO_INTEN_GET(value) (((value) & 0xffffffff) >> 0)
+#define ALT_GPIO_INTEN_GPIO_INTEN_SET(value) (((value) << 0) & 0xffffffff)
+#else
+#define ALT_GPIO_INTEN_GPIO_INTEN_MSB        (GPIO0_PWIDTH_A-1)
+#define ALT_GPIO_INTEN_GPIO_INTEN_WIDTH      GPIO0_PWIDTH_A
+#define ALT_GPIO_INTEN_GPIO_INTEN_SET_MSK    0xffffffff
+#define ALT_GPIO_INTEN_GPIO_INTEN_CLR_MSK    0x00000000
+#define ALT_GPIO_INTEN_GPIO_INTEN_GET(value) (((value) & 0xffffffff) >> 0)
+#define ALT_GPIO_INTEN_GPIO_INTEN_SET(value) (((value) << 0) & 0xffffffff)
+#endif
+/* The reset value of the ALT_GPIO_INTEN_GPIO_INTEN register field. */
+#define ALT_GPIO_INTEN_GPIO_INTEN_RESET      0x0
 #ifndef __ASSEMBLY__
 /*
  * WARNING: The C register and register group struct declarations are provided for
@@ -440,10 +640,17 @@ typedef volatile struct ALT_GPIO_SWPORTA_DDR_s  ALT_GPIO_SWPORTA_DDR_t;
  * 
  * The struct declaration for register ALT_GPIO_INTEN.
  */
+#if 0
 struct ALT_GPIO_INTEN_s
 {
     uint32_t  gpio_inten : 29;  /* Interrupt Enable Field */
     uint32_t             :  3;  /* *UNDEFINED* */
+};
+#endif
+struct ALT_GPIO_INTEN_s
+{
+  uint32_t gpio_inten : GPIO0_PWIDTH_A;      /* Interrupt Enable Field */
+  uint32_t            : (32-GPIO0_PWIDTH_A); /* Reserved - read as zero */
 };
 
 /* The typedef declaration for register ALT_GPIO_INTEN. */
@@ -454,7 +661,7 @@ typedef volatile struct ALT_GPIO_INTEN_s  ALT_GPIO_INTEN_t;
 #define ALT_GPIO_INTEN_OFST        0x30
 /* The address of the ALT_GPIO_INTEN register. */
 #define ALT_GPIO_INTEN_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_INTEN_OFST))
-
+#if 0
 /*
  * Register : Interrupt Mask Register - gpio_intmask
  * 
@@ -467,6 +674,20 @@ typedef volatile struct ALT_GPIO_INTEN_s  ALT_GPIO_INTEN_t;
  *  [28:0]  | RW     | 0x0   | Interrupt Mask Field
  *  [31:29] | ???    | 0x0   | *UNDEFINED*         
  * 
+ */
+#endif
+/*
+ * Register : Interrupt Mask Register - gpio_intmask
+ *
+ * Controls which pins cause interrupts on Port A Data Register inputs.
+ *
+ * Register Layout - dependent on port width x where x=GPIO_PWIDTH_A
+ *
+ *  Bits    | Access | Reset | Description
+ * :--------|:-------|:------|:---------------------
+ *  [x:0]   | RW     | 0x0   | Interrupt Mask Field
+ *  [31:y]  | R      | 0x0   | *Reserved - read as zero*
+ *
  */
 /*
  * Field : Interrupt Mask Field - gpio_intmask
@@ -500,6 +721,7 @@ typedef volatile struct ALT_GPIO_INTEN_s  ALT_GPIO_INTEN_t;
 
 /* The Least Significant Bit (LSB) position of the ALT_GPIO_INTMSK_GPIO_INTMSK register field. */
 #define ALT_GPIO_INTMSK_GPIO_INTMSK_LSB        0
+#if 0
 /* The Most Significant Bit (MSB) position of the ALT_GPIO_INTMSK_GPIO_INTMSK register field. */
 #define ALT_GPIO_INTMSK_GPIO_INTMSK_MSB        28
 /* The width in bits of the ALT_GPIO_INTMSK_GPIO_INTMSK register field. */
@@ -514,6 +736,38 @@ typedef volatile struct ALT_GPIO_INTEN_s  ALT_GPIO_INTEN_t;
 #define ALT_GPIO_INTMSK_GPIO_INTMSK_GET(value) (((value) & 0x1fffffff) >> 0)
 /* Produces a ALT_GPIO_INTMSK_GPIO_INTMSK register field value suitable for setting the register. */
 #define ALT_GPIO_INTMSK_GPIO_INTMSK_SET(value) (((value) << 0) & 0x1fffffff)
+#endif
+/* The Most Significant Bit (MSB) position of the ALT_GPIO_INTMSK_GPIO_INTMSK register field. */
+#define ALT_GPIO_INTMSK_GPIO_INTMSK_MSB        (GPIO0_PWIDTH_A-1)
+/* The width in bits of the ALT_GPIO_INTMSK_GPIO_INTMSK register field. */
+#define ALT_GPIO_INTMSK_GPIO_INTMSK_WIDTH      GPIO0_PWIDTH_A
+#if GPIO0_PWIDTH_A == 8
+  /* The mask used to set the ALT_GPIO_INTMSK_GPIO_INTMSK register field value. */
+  #define ALT_GPIO_INTMSK_GPIO_INTMSK_SET_MSK    0xff
+  /* The mask used to clear the ALT_GPIO_INTMSK_GPIO_INTMSK register field value. */
+  #define ALT_GPIO_INTMSK_GPIO_INTMSK_CLR_MSK    0x00
+  /* Extracts the ALT_GPIO_INTMSK_GPIO_INTMSK field value from a register. */
+  #define ALT_GPIO_INTMSK_GPIO_INTMSK_GET(value) (((value) & 0xff) >> 0)
+  /* Produces a ALT_GPIO_INTMSK_GPIO_INTMSK register field value suitable for setting the register. */
+  #define ALT_GPIO_INTMSK_GPIO_INTMSK_SET(value) (((value) << 0) & 0xff)
+#elif GPIO0_PWIDTH_A == 16
+  #define ALT_GPIO_INTMSK_GPIO_INTMSK_SET_MSK    0xffff
+  #define ALT_GPIO_INTMSK_GPIO_INTMSK_CLR_MSK    0x0000
+  #define ALT_GPIO_INTMSK_GPIO_INTMSK_GET(value) (((value) & 0xffff) >> 0)
+  #define ALT_GPIO_INTMSK_GPIO_INTMSK_SET(value) (((value) << 0) & 0xffff)
+#elif GPIO0_PWIDTH_A == 32
+  #define ALT_GPIO_INTMSK_GPIO_INTMSK_SET_MSK    0xffffffff
+  #define ALT_GPIO_INTMSK_GPIO_INTMSK_CLR_MSK    0x00000000
+  #define ALT_GPIO_INTMSK_GPIO_INTMSK_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_INTMSK_GPIO_INTMSK_SET(value) (((value) << 0) & 0xffffffff)
+#else
+  #define ALT_GPIO_INTMSK_GPIO_INTMSK_SET_MSK    0xffffffff
+  #define ALT_GPIO_INTMSK_GPIO_INTMSK_CLR_MSK    0x00000000
+  #define ALT_GPIO_INTMSK_GPIO_INTMSK_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_INTMSK_GPIO_INTMSK_SET(value) (((value) << 0) & 0xffffffff)
+#endif
+/* The reset value of the ALT_GPIO_INTMSK_GPIO_INTMSK register field. */
+#define ALT_GPIO_INTMSK_GPIO_INTMSK_RESET      0x0
 
 #ifndef __ASSEMBLY__
 /*
@@ -526,10 +780,17 @@ typedef volatile struct ALT_GPIO_INTEN_s  ALT_GPIO_INTEN_t;
  * 
  * The struct declaration for register ALT_GPIO_INTMSK.
  */
+#if 0
 struct ALT_GPIO_INTMSK_s
 {
     uint32_t  gpio_intmask : 29;  /* Interrupt Mask Field */
     uint32_t               :  3;  /* *UNDEFINED* */
+};
+#endif
+struct ALT_GPIO_INTMSK_s
+{
+  uint32_t gpio_intmask : GPIO0_PWIDTH_A;      /* Interrupt Mask Field */
+  uint32_t              : (32-GPIO0_PWIDTH_A); /* Reserved - read as zero */
 };
 
 /* The typedef declaration for register ALT_GPIO_INTMSK. */
@@ -540,7 +801,7 @@ typedef volatile struct ALT_GPIO_INTMSK_s  ALT_GPIO_INTMSK_t;
 #define ALT_GPIO_INTMSK_OFST        0x34
 /* The address of the ALT_GPIO_INTMSK register. */
 #define ALT_GPIO_INTMSK_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_INTMSK_OFST))
-
+#if 0
 /*
  * Register : Interrupt Level Register - gpio_inttype_level
  * 
@@ -553,6 +814,20 @@ typedef volatile struct ALT_GPIO_INTMSK_s  ALT_GPIO_INTMSK_t;
  *  [28:0]  | RW     | 0x0   | Interrupt Level Field
  *  [31:29] | ???    | 0x0   | *UNDEFINED*          
  * 
+ */
+#endif
+/*
+ * Register : Interrupt Level Register - gpio_inttype_level
+ *
+ * The interrupt level register defines the type of interrupt (edge or level).
+ *
+ * Register Layout - dependent on port width x where x=GPIO_PWIDTH_A
+ *
+ *  Bits    | Access | Reset | Description
+ * :--------|:-------|:------|:----------------------
+ *  [x:0]   | RW     | 0x0    | Interrupt Level Field
+ *  [31:y]  | R      | 0x0    | *Reserved - read as zero*
+ *
  */
 /*
  * Field : Interrupt Level Field - gpio_inttype_level
@@ -585,6 +860,7 @@ typedef volatile struct ALT_GPIO_INTMSK_s  ALT_GPIO_INTMSK_t;
 
 /* The Least Significant Bit (LSB) position of the ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL register field. */
 #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_LSB        0
+#if 0
 /* The Most Significant Bit (MSB) position of the ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL register field. */
 #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_MSB        28
 /* The width in bits of the ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL register field. */
@@ -599,6 +875,38 @@ typedef volatile struct ALT_GPIO_INTMSK_s  ALT_GPIO_INTMSK_t;
 #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_GET(value) (((value) & 0x1fffffff) >> 0)
 /* Produces a ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL register field value suitable for setting the register. */
 #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_SET(value) (((value) << 0) & 0x1fffffff)
+#endif
+/* The Most Significant Bit (MSB) position of the ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL register field. */
+#define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_MSB        (GPIO0_PWIDTH_A-1)
+/* The width in bits of the ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL register field. */
+#define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_WIDTH      GPIO0_PWIDTH_A
+#if GPIO0_PWIDTH_A == 8
+  /* The mask used to set the ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL register field value. */
+  #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_SET_MSK    0xff
+  /* The mask used to clear the ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL register field value. */
+  #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_CLR_MSK    0x00
+  /* Extracts the ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL field value from a register. */
+  #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_GET(value) (((value) & 0xff) >> 0)
+  /* Produces a ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL register field value suitable for setting the register. */
+  #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_SET(value) (((value) << 0) & 0xff)
+#elif GPIO0_PWIDTH_A == 16
+  #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_SET_MSK    0xffff
+  #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_CLR_MSK    0x0000
+  #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_GET(value) (((value) & 0xffff) >> 0)
+  #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_SET(value) (((value) << 0) & 0xffff)
+#elif GPIO0_PWIDTH_A == 32
+  #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_SET_MSK    0xffffffff
+  #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_CLR_MSK    0x00000000
+  #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_SET(value) (((value) << 0) & 0xffffffff)
+#else
+  #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_SET_MSK    0xffffffff
+  #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_CLR_MSK    0x00000000
+  #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_SET(value) (((value) << 0) & 0xffffffff)
+#endif
+/* The reset value of the ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL register field. */
+#define ALT_GPIO_INTTYPE_LEVEL_GPIO_INTTYPE_LEVEL_RESET      0x0
 
 #ifndef __ASSEMBLY__
 /*
@@ -611,10 +919,17 @@ typedef volatile struct ALT_GPIO_INTMSK_s  ALT_GPIO_INTMSK_t;
  * 
  * The struct declaration for register ALT_GPIO_INTTYPE_LEVEL.
  */
+#if 0
 struct ALT_GPIO_INTTYPE_LEVEL_s
 {
     uint32_t  gpio_inttype_level : 29;  /* Interrupt Level Field */
     uint32_t                     :  3;  /* *UNDEFINED* */
+};
+#endif
+struct ALT_GPIO_INTTYPE_LEVEL_s
+{
+  uint32_t gpio_inttype_level : GPIO0_PWIDTH_A;      /* Interrupt Level Field */
+  uint32_t                    : (32-GPIO0_PWIDTH_A); /* Reserved - read as zero */
 };
 
 /* The typedef declaration for register ALT_GPIO_INTTYPE_LEVEL. */
@@ -625,7 +940,7 @@ typedef volatile struct ALT_GPIO_INTTYPE_LEVEL_s  ALT_GPIO_INTTYPE_LEVEL_t;
 #define ALT_GPIO_INTTYPE_LEVEL_OFST        0x38
 /* The address of the ALT_GPIO_INTTYPE_LEVEL register. */
 #define ALT_GPIO_INTTYPE_LEVEL_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_INTTYPE_LEVEL_OFST))
-
+#if 0
 /*
  * Register : Interrupt Polarity Register - gpio_int_polarity
  * 
@@ -639,6 +954,21 @@ typedef volatile struct ALT_GPIO_INTTYPE_LEVEL_s  ALT_GPIO_INTTYPE_LEVEL_t;
  *  [28:0]  | RW     | 0x0   | Polarity Control Field
  *  [31:29] | ???    | 0x0   | *UNDEFINED*           
  * 
+ */
+#endif
+/*
+ * Register : Interrupt Polarity Register - gpio_int_polarity
+ *
+ * Controls the Polarity of Interrupts that can occur on inputs of Port A Data
+ * Register
+ *
+ * Register Layout - dependent on port width x where x=GPIO_PWIDTH_A
+ *
+ *  Bits    | Access | Reset | Description
+ * :--------|:-------|:------|:-----------------------
+ *  [x:0]  | RW      | 0x0   | Polarity Control Field
+ *  [31:y] | R       | 0x0   | *Reserved - read as zero*
+ *
  */
 /*
  * Field : Polarity Control Field - gpio_int_polarity
@@ -668,7 +998,7 @@ typedef volatile struct ALT_GPIO_INTTYPE_LEVEL_s  ALT_GPIO_INTTYPE_LEVEL_t;
  * Active high
  */
 #define ALT_GPIO_INT_POL_GPIO_INT_POL_E_ACTHIGH 0x1
-
+#if 0
 /* The Least Significant Bit (LSB) position of the ALT_GPIO_INT_POL_GPIO_INT_POL register field. */
 #define ALT_GPIO_INT_POL_GPIO_INT_POL_LSB        0
 /* The Most Significant Bit (MSB) position of the ALT_GPIO_INT_POL_GPIO_INT_POL register field. */
@@ -685,7 +1015,40 @@ typedef volatile struct ALT_GPIO_INTTYPE_LEVEL_s  ALT_GPIO_INTTYPE_LEVEL_t;
 #define ALT_GPIO_INT_POL_GPIO_INT_POL_GET(value) (((value) & 0x1fffffff) >> 0)
 /* Produces a ALT_GPIO_INT_POL_GPIO_INT_POL register field value suitable for setting the register. */
 #define ALT_GPIO_INT_POL_GPIO_INT_POL_SET(value) (((value) << 0) & 0x1fffffff)
-
+#endif
+/* The Least Significant Bit (LSB) position of the ALT_GPIO_INT_POL_GPIO_INT_POL register field. */
+#define ALT_GPIO_INT_POL_GPIO_INT_POL_LSB        0
+/* The Most Significant Bit (MSB) position of the ALT_GPIO_INT_POL_GPIO_INT_POL register field. */
+#define ALT_GPIO_INT_POL_GPIO_INT_POL_MSB        (GPIO0_PWIDTH_A-1)
+/* The width in bits of the ALT_GPIO_INT_POL_GPIO_INT_POL register field. */
+#define ALT_GPIO_INT_POL_GPIO_INT_POL_WIDTH      GPIO0_PWIDTH_A
+#if GPIO0_PWIDTH_A == 8
+  /* The mask used to set the ALT_GPIO_INT_POL_GPIO_INT_POL register field value. */
+  #define ALT_GPIO_INT_POL_GPIO_INT_POL_SET_MSK    0xff
+  /* The mask used to clear the ALT_GPIO_INT_POL_GPIO_INT_POL register field value. */
+  #define ALT_GPIO_INT_POL_GPIO_INT_POL_CLR_MSK    0x00
+  /* Extracts the ALT_GPIO_INT_POL_GPIO_INT_POL field value from a register. */
+  #define ALT_GPIO_INT_POL_GPIO_INT_POL_GET(value) (((value) & 0xff) >> 0)
+  /* Produces a ALT_GPIO_INT_POL_GPIO_INT_POL register field value suitable for setting the register. */
+  #define ALT_GPIO_INT_POL_GPIO_INT_POL_SET(value) (((value) << 0) & 0xff)
+#elif GPIO0_PWIDTH_A == 16
+  #define ALT_GPIO_INT_POL_GPIO_INT_POL_SET_MSK    0xffff
+  #define ALT_GPIO_INT_POL_GPIO_INT_POL_CLR_MSK    0x0000
+  #define ALT_GPIO_INT_POL_GPIO_INT_POL_GET(value) (((value) & 0xffff) >> 0)
+  #define ALT_GPIO_INT_POL_GPIO_INT_POL_SET(value) (((value) << 0) & 0xffff)
+#elif GPIO0_PWIDTH_A == 32
+  #define ALT_GPIO_INT_POL_GPIO_INT_POL_SET_MSK    0xffffffff
+  #define ALT_GPIO_INT_POL_GPIO_INT_POL_CLR_MSK    0x00000000
+  #define ALT_GPIO_INT_POL_GPIO_INT_POL_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_INT_POL_GPIO_INT_POL_SET(value) (((value) << 0) & 0xffffffff)
+#else
+  #define ALT_GPIO_INT_POL_GPIO_INT_POL_SET_MSK    0xffffffff
+  #define ALT_GPIO_INT_POL_GPIO_INT_POL_CLR_MSK    0x00000000
+  #define ALT_GPIO_INT_POL_GPIO_INT_POL_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_INT_POL_GPIO_INT_POL_SET(value) (((value) << 0) & 0xffffffff)
+#endif
+/* The reset value of the ALT_GPIO_INT_POL_GPIO_INT_POL register field. */
+#define ALT_GPIO_INT_POL_GPIO_INT_POL_RESET      0x0
 #ifndef __ASSEMBLY__
 /*
  * WARNING: The C register and register group struct declarations are provided for
@@ -697,10 +1060,17 @@ typedef volatile struct ALT_GPIO_INTTYPE_LEVEL_s  ALT_GPIO_INTTYPE_LEVEL_t;
  * 
  * The struct declaration for register ALT_GPIO_INT_POL.
  */
+#if 0
 struct ALT_GPIO_INT_POL_s
 {
     uint32_t  gpio_int_polarity : 29;  /* Polarity Control Field */
     uint32_t                    :  3;  /* *UNDEFINED* */
+};
+#endif
+struct ALT_GPIO_INT_POL_s
+{
+  uint32_t gpio_int_polarity : GPIO0_PWIDTH_A;      /* Polarity Control Field */
+  uint32_t                   : (32-GPIO0_PWIDTH_A); /* Reserved - read as zero */
 };
 
 /* The typedef declaration for register ALT_GPIO_INT_POL. */
@@ -711,7 +1081,7 @@ typedef volatile struct ALT_GPIO_INT_POL_s  ALT_GPIO_INT_POL_t;
 #define ALT_GPIO_INT_POL_OFST        0x3c
 /* The address of the ALT_GPIO_INT_POL register. */
 #define ALT_GPIO_INT_POL_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_INT_POL_OFST))
-
+#if 0
 /*
  * Register : Interrupt Status Register - gpio_intstatus
  * 
@@ -724,6 +1094,20 @@ typedef volatile struct ALT_GPIO_INT_POL_s  ALT_GPIO_INT_POL_t;
  *  [28:0]  | RW     | 0x0   | Interrupt Status Field
  *  [31:29] | ???    | 0x0   | *UNDEFINED*           
  * 
+ */
+#endif
+/*
+ * Register : Interrupt Status Register - gpio_intstatus
+ *
+ * The Interrupt status is reported for all Port A Data Register Bits.
+ *
+ * Register Layout - dependent on port width x where x=GPIO_PWIDTH_A
+ *
+ *  Bits    | Access | Reset | Description
+ * :--------|:-------|:------|:-----------------------
+ *  [x:0]   | R      | 0x0   | Interrupt Status Field
+ *  [31:y]  | R      | 0x0   | *Reserved - read as zero*
+ *
  */
 /*
  * Field : Interrupt Status Field - gpio_intstatus
@@ -752,7 +1136,7 @@ typedef volatile struct ALT_GPIO_INT_POL_s  ALT_GPIO_INT_POL_t;
  * Active
  */
 #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_E_ACT     0x1
-
+#if 0
 /* The Least Significant Bit (LSB) position of the ALT_GPIO_INTSTAT_GPIO_INTSTAT register field. */
 #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_LSB        0
 /* The Most Significant Bit (MSB) position of the ALT_GPIO_INTSTAT_GPIO_INTSTAT register field. */
@@ -769,6 +1153,40 @@ typedef volatile struct ALT_GPIO_INT_POL_s  ALT_GPIO_INT_POL_t;
 #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_GET(value) (((value) & 0x1fffffff) >> 0)
 /* Produces a ALT_GPIO_INTSTAT_GPIO_INTSTAT register field value suitable for setting the register. */
 #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_SET(value) (((value) << 0) & 0x1fffffff)
+#endif
+/* The Least Significant Bit (LSB) position of the ALT_GPIO_INTSTAT_GPIO_INTSTAT register field. */
+#define ALT_GPIO_INTSTAT_GPIO_INTSTAT_LSB        0
+/* The Most Significant Bit (MSB) position of the ALT_GPIO_INTSTAT_GPIO_INTSTAT register field. */
+#define ALT_GPIO_INTSTAT_GPIO_INTSTAT_MSB        (GPIO0_PWIDTH_A-1)
+/* The width in bits of the ALT_GPIO_INTSTAT_GPIO_INTSTAT register field. */
+#define ALT_GPIO_INTSTAT_GPIO_INTSTAT_WIDTH      GPIO0_PWIDTH_A
+#if GPIO0_PWIDTH_A == 8
+  /* The mask used to set the ALT_GPIO_INTSTAT_GPIO_INTSTAT register field value. */
+  #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_SET_MSK    0xff
+  /* The mask used to clear the ALT_GPIO_INTSTAT_GPIO_INTSTAT register field value. */
+  #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_CLR_MSK    0x00
+  /* Extracts the ALT_GPIO_INTSTAT_GPIO_INTSTAT field value from a register. */
+  #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_GET(value) (((value) & 0xff) >> 0)
+  /* Produces a ALT_GPIO_INTSTAT_GPIO_INTSTAT register field value suitable for setting the register. */
+  #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_SET(value) (((value) << 0) & 0xff)
+#elif GPIO0_PWIDTH_A == 16
+  #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_SET_MSK    0xffff
+  #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_CLR_MSK    0x0000
+  #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_GET(value) (((value) & 0xffff) >> 0)
+  #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_SET(value) (((value) << 0) & 0xffff)
+#elif GPIO0_PWIDTH_A == 32
+  #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_SET_MSK    0xffffffff
+  #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_CLR_MSK    0x00000000
+  #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_SET(value) (((value) << 0) & 0xffffffff)
+#else
+  #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_SET_MSK    0xffffffff
+  #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_CLR_MSK    0x00000000
+  #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_INTSTAT_GPIO_INTSTAT_SET(value) (((value) << 0) & 0xffffffff)
+#endif
+/* The reset value of the ALT_GPIO_INTSTAT_GPIO_INTSTAT register field. */
+#define ALT_GPIO_INTSTAT_GPIO_INTSTAT_RESET      0x0
 
 #ifndef __ASSEMBLY__
 /*
@@ -781,10 +1199,17 @@ typedef volatile struct ALT_GPIO_INT_POL_s  ALT_GPIO_INT_POL_t;
  * 
  * The struct declaration for register ALT_GPIO_INTSTAT.
  */
+#if 0
 struct ALT_GPIO_INTSTAT_s
 {
     uint32_t  gpio_intstatus : 29;  /* Interrupt Status Field */
     uint32_t                 :  3;  /* *UNDEFINED* */
+};
+#endif
+struct ALT_GPIO_INTSTAT_s
+{
+  uint32_t gpio_intstatus : GPIO0_PWIDTH_A;      /* Interrupt Status Field */
+  uint32_t                : (32-GPIO0_PWIDTH_A); /* Reserved - read as zero */
 };
 
 /* The typedef declaration for register ALT_GPIO_INTSTAT. */
@@ -795,7 +1220,7 @@ typedef volatile struct ALT_GPIO_INTSTAT_s  ALT_GPIO_INTSTAT_t;
 #define ALT_GPIO_INTSTAT_OFST        0x40
 /* The address of the ALT_GPIO_INTSTAT register. */
 #define ALT_GPIO_INTSTAT_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_INTSTAT_OFST))
-
+#if 0
 /*
  * Register : Raw Interrupt Status Register - gpio_raw_intstatus
  * 
@@ -810,6 +1235,22 @@ typedef volatile struct ALT_GPIO_INTSTAT_s  ALT_GPIO_INTSTAT_t;
  *  [28:0]  | RW     | 0x0   | Raw Interrupt Status Field
  *  [31:29] | ???    | 0x0   | *UNDEFINED*               
  * 
+ */
+#endif
+/*
+ * Register : Raw Interrupt Status Register - gpio_raw_intstatus
+ *
+ * This is the Raw Interrupt Status Register for Port A Data Register. It is used
+ * with the Interrupt Mask Register to allow interrupts from the Port A Data
+ * Register.
+ *
+ * Register Layout - dependent on port width x where x=GPIO_PWIDTH_A
+ *
+ *  Bits    | Access | Reset | Description
+ * :--------|:-------|:------|:---------------------------
+ *  [x:0]   | R      | 0x0   | Raw Interrupt Status Field
+ *  [31:y]  | R      | 0x0   | *Reserved - read as zero*
+ *
  */
 /*
  * Field : Raw Interrupt Status Field - gpio_raw_intstatus
@@ -838,7 +1279,7 @@ typedef volatile struct ALT_GPIO_INTSTAT_s  ALT_GPIO_INTSTAT_t;
  * Active
  */
 #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_E_ACT     0x1
-
+#if 0
 /* The Least Significant Bit (LSB) position of the ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT register field. */
 #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_LSB        0
 /* The Most Significant Bit (MSB) position of the ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT register field. */
@@ -855,7 +1296,40 @@ typedef volatile struct ALT_GPIO_INTSTAT_s  ALT_GPIO_INTSTAT_t;
 #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_GET(value) (((value) & 0x1fffffff) >> 0)
 /* Produces a ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT register field value suitable for setting the register. */
 #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_SET(value) (((value) << 0) & 0x1fffffff)
-
+#endif
+/* The Least Significant Bit (LSB) position of the ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT register field. */
+#define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_LSB        0
+/* The Most Significant Bit (MSB) position of the ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT register field. */
+#define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_MSB        (GPIO0_PWIDTH_A-1)
+/* The width in bits of the ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT register field. */
+#define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_WIDTH      GPIO0_PWIDTH_A
+#if GPIO0_PWIDTH_A == 8
+  /* The mask used to set the ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT register field value. */
+  #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_SET_MSK    0xff
+  /* The mask used to clear the ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT register field value. */
+  #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_CLR_MSK    0x00
+  /* Extracts the ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT field value from a register. */
+  #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_GET(value) (((value) & 0xff) >> 0)
+  /* Produces a ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT register field value suitable for setting the register. */
+  #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_SET(value) (((value) << 0) & 0xff)
+#elif GPIO0_PWIDTH_A == 16
+  #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_SET_MSK    0xffff
+  #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_CLR_MSK    0x0000
+  #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_GET(value) (((value) & 0xffff) >> 0)
+  #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_SET(value) (((value) << 0) & 0xffff)
+#elif GPIO0_PWIDTH_A == 32
+  #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_SET_MSK    0xffffffff
+  #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_CLR_MSK    0x00000000
+  #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_SET(value) (((value) << 0) & 0xffffffff)
+#else
+  #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_SET_MSK    0xffffffff
+  #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_CLR_MSK    0x00000000
+  #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_SET(value) (((value) << 0) & 0xffffffff)
+#endif
+/* The reset value of the ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT register field. */
+#define ALT_GPIO_RAW_INTSTAT_GPIO_RAW_INTSTAT_RESET      0x0
 #ifndef __ASSEMBLY__
 /*
  * WARNING: The C register and register group struct declarations are provided for
@@ -867,10 +1341,17 @@ typedef volatile struct ALT_GPIO_INTSTAT_s  ALT_GPIO_INTSTAT_t;
  * 
  * The struct declaration for register ALT_GPIO_RAW_INTSTAT.
  */
+#if 0
 struct ALT_GPIO_RAW_INTSTAT_s
 {
     uint32_t  gpio_raw_intstatus : 29;  /* Raw Interrupt Status Field */
     uint32_t                     :  3;  /* *UNDEFINED* */
+};
+#endif
+struct ALT_GPIO_RAW_INTSTAT_s
+{
+  uint32_t gpio_raw_intstatus : GPIO0_PWIDTH_A;      /* Raw Interrupt Status Field */
+  uint32_t                    : (32-GPIO0_PWIDTH_A); /* Reserved - read as zero */
 };
 
 /* The typedef declaration for register ALT_GPIO_RAW_INTSTAT. */
@@ -881,7 +1362,7 @@ typedef volatile struct ALT_GPIO_RAW_INTSTAT_s  ALT_GPIO_RAW_INTSTAT_t;
 #define ALT_GPIO_RAW_INTSTAT_OFST        0x44
 /* The address of the ALT_GPIO_RAW_INTSTAT register. */
 #define ALT_GPIO_RAW_INTSTAT_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_RAW_INTSTAT_OFST))
-
+#if 0
 /*
  * Register : Debounce Enable Register - gpio_debounce
  * 
@@ -894,6 +1375,20 @@ typedef volatile struct ALT_GPIO_RAW_INTSTAT_s  ALT_GPIO_RAW_INTSTAT_t;
  *  [28:0]  | RW     | 0x0   | ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE
  *  [31:29] | ???    | 0x0   | *UNDEFINED*                    
  * 
+ */
+#endif
+/*
+ * Register : Debounce Enable Register - gpio_debounce
+ *
+ * Debounces each IO Pin
+ *
+ * Register Layout - dependent on port width x where x=GPIO_PWIDTH_A
+ *
+ *  Bits    | Access | Reset | Description
+ * :--------|:-------|:------|:--------------------------------
+ *  [x:0]  | RW      | 0x0   | ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE
+ *  [31:y] | R       | 0x0   | *Reserved - read as zero*
+ *
  */
 /*
  * Field : gpio_debounce
@@ -924,7 +1419,7 @@ typedef volatile struct ALT_GPIO_RAW_INTSTAT_s  ALT_GPIO_RAW_INTSTAT_t;
  * Enable debounce
  */
 #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_E_EN    0x1
-
+#if 0
 /* The Least Significant Bit (LSB) position of the ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE register field. */
 #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_LSB        0
 /* The Most Significant Bit (MSB) position of the ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE register field. */
@@ -941,6 +1436,40 @@ typedef volatile struct ALT_GPIO_RAW_INTSTAT_s  ALT_GPIO_RAW_INTSTAT_t;
 #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_GET(value) (((value) & 0x1fffffff) >> 0)
 /* Produces a ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE register field value suitable for setting the register. */
 #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_SET(value) (((value) << 0) & 0x1fffffff)
+#endif
+/* The Least Significant Bit (LSB) position of the ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE register field. */
+#define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_LSB        0
+/* The Most Significant Bit (MSB) position of the ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE register field. */
+#define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_MSB        (GPIO0_PWIDTH_A-1)
+/* The width in bits of the ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE register field. */
+#define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_WIDTH      GPIO0_PWIDTH_A
+#if GPIO0_PWIDTH_A == 8
+  /* The mask used to set the ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE register field value. */
+  #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_SET_MSK    0xff
+  /* The mask used to clear the ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE register field value. */
+  #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_CLR_MSK    0x00
+  /* Extracts the ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE field value from a register. */
+  #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_GET(value) (((value) & 0xff) >> 0)
+  /* Produces a ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE register field value suitable for setting the register. */
+  #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_SET(value) (((value) << 0) & 0xff)
+#elif GPIO0_PWIDTH_A == 16
+  #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_SET_MSK    0xffff
+  #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_CLR_MSK    0x0000
+  #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_GET(value) (((value) & 0xffff) >> 0)
+  #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_SET(value) (((value) << 0) & 0xffff)
+#elif GPIO0_PWIDTH_A == 32
+  #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_SET_MSK    0xffffffff
+  #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_CLR_MSK    0x00000000
+  #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_SET(value) (((value) << 0) & 0xffffffff)
+#else
+  #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_SET_MSK    0xffffffff
+  #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_CLR_MSK    0x00000000
+  #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_SET(value) (((value) << 0) & 0xffffffff)
+#endif
+/* The reset value of the ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE register field. */
+#define ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE_RESET      0x0
 
 #ifndef __ASSEMBLY__
 /*
@@ -953,10 +1482,17 @@ typedef volatile struct ALT_GPIO_RAW_INTSTAT_s  ALT_GPIO_RAW_INTSTAT_t;
  * 
  * The struct declaration for register ALT_GPIO_DEBOUNCE.
  */
+#if 0
 struct ALT_GPIO_DEBOUNCE_s
 {
     uint32_t  gpio_debounce : 29;  /* ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE */
     uint32_t                :  3;  /* *UNDEFINED* */
+};
+#endif
+struct ALT_GPIO_DEBOUNCE_s
+{
+  uint32_t gpio_debounce : GPIO0_PWIDTH_A;      /* ALT_GPIO_DEBOUNCE_GPIO_DEBOUNCE */
+  uint32_t               : (32-GPIO0_PWIDTH_A); /* Reserved - read as zero */
 };
 
 /* The typedef declaration for register ALT_GPIO_DEBOUNCE. */
@@ -967,7 +1503,7 @@ typedef volatile struct ALT_GPIO_DEBOUNCE_s  ALT_GPIO_DEBOUNCE_t;
 #define ALT_GPIO_DEBOUNCE_OFST        0x48
 /* The address of the ALT_GPIO_DEBOUNCE register. */
 #define ALT_GPIO_DEBOUNCE_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_DEBOUNCE_OFST))
-
+#if 0
 /*
  * Register : Clear Interrupt Register - gpio_porta_eoi
  * 
@@ -980,6 +1516,20 @@ typedef volatile struct ALT_GPIO_DEBOUNCE_s  ALT_GPIO_DEBOUNCE_t;
  *  [28:0]  | W      | 0x0   | Clears Edge Interrupts Field
  *  [31:29] | ???    | 0x0   | *UNDEFINED*                 
  * 
+ */
+#endif
+/*
+ * Register : Clear Interrupt Register - gpio_porta_eoi
+ *
+ * Port A Data Register interrupt handling.
+ *
+ * Register Layout - dependent on port width x where x=GPIO_PWIDTH_A
+ *
+ *  Bits    | Access | Reset | Description
+ * :--------|:-------|:------|:-----------------------------
+ *  [x:0]   | W      | 0x0   | Clears Edge Interrupts Field
+ *  [31:y]  | W      | 0x0   | *Reserved - read as zero*
+ *
  */
 /*
  * Field : Clears Edge Interrupts Field - gpio_porta_eoi
@@ -1008,7 +1558,7 @@ typedef volatile struct ALT_GPIO_DEBOUNCE_s  ALT_GPIO_DEBOUNCE_t;
  * Clear interrupt
  */
 #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_E_CLR     0x1
-
+#if 0
 /* The Least Significant Bit (LSB) position of the ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI register field. */
 #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_LSB        0
 /* The Most Significant Bit (MSB) position of the ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI register field. */
@@ -1025,7 +1575,40 @@ typedef volatile struct ALT_GPIO_DEBOUNCE_s  ALT_GPIO_DEBOUNCE_t;
 #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_GET(value) (((value) & 0x1fffffff) >> 0)
 /* Produces a ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI register field value suitable for setting the register. */
 #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_SET(value) (((value) << 0) & 0x1fffffff)
-
+#endif
+/* The Least Significant Bit (LSB) position of the ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI register field. */
+#define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_LSB        0
+/* The Most Significant Bit (MSB) position of the ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI register field. */
+#define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_MSB        (GPIO0_PWIDTH_A-1)
+/* The width in bits of the ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI register field. */
+#define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_WIDTH      GPIO0_PWIDTH_A
+#if GPIO0_PWIDTH_A == 8
+  /* The mask used to set the ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI register field value. */
+  #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_SET_MSK    0xffffffff
+  /* The mask used to clear the ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI register field value. */
+  #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_CLR_MSK    0x00000000
+  /* Extracts the ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI field value from a register. */
+  #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_GET(value) (((value) & 0xffffffff) >> 0)
+  /* Produces a ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI register field value suitable for setting the register. */
+  #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_SET(value) (((value) << 0) & 0xffffffff)
+#elif GPIO0_PWIDTH_A == 16
+  #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_SET_MSK    0xffff
+  #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_CLR_MSK    0x0000
+  #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_GET(value) (((value) & 0xffff) >> 0)
+  #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_SET(value) (((value) << 0) & 0xffff)
+#elif GPIO0_PWIDTH_A == 32
+  #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_SET_MSK    0xffffffff
+  #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_CLR_MSK    0x00000000
+  #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_SET(value) (((value) << 0) & 0xffffffff)
+#else
+  #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_SET_MSK    0xffffffff
+  #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_CLR_MSK    0x00000000
+  #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_SET(value) (((value) << 0) & 0xffffffff)
+#endif
+/* The reset value of the ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI register field. */
+#define ALT_GPIO_PORTA_EOI_GPIO_PORTA_EOI_RESET      0x0
 #ifndef __ASSEMBLY__
 /*
  * WARNING: The C register and register group struct declarations are provided for
@@ -1037,10 +1620,17 @@ typedef volatile struct ALT_GPIO_DEBOUNCE_s  ALT_GPIO_DEBOUNCE_t;
  * 
  * The struct declaration for register ALT_GPIO_PORTA_EOI.
  */
+#if 0
 struct ALT_GPIO_PORTA_EOI_s
 {
     uint32_t  gpio_porta_eoi : 29;  /* Clears Edge Interrupts Field */
     uint32_t                 :  3;  /* *UNDEFINED* */
+};
+#endif
+struct ALT_GPIO_PORTA_EOI_s
+{
+  uint32_t gpio_porta_eoi : GPIO0_PWIDTH_A;      /* Clears Edge Interrupts Field */
+  uint32_t                : (32-GPIO0_PWIDTH_A); /* Reserved - read as zero */
 };
 
 /* The typedef declaration for register ALT_GPIO_PORTA_EOI. */
@@ -1051,7 +1641,7 @@ typedef volatile struct ALT_GPIO_PORTA_EOI_s  ALT_GPIO_PORTA_EOI_t;
 #define ALT_GPIO_PORTA_EOI_OFST        0x4c
 /* The address of the ALT_GPIO_PORTA_EOI register. */
 #define ALT_GPIO_PORTA_EOI_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_PORTA_EOI_OFST))
-
+#if 0
 /*
  * Register : External Port A Register - gpio_ext_porta
  * 
@@ -1065,6 +1655,20 @@ typedef volatile struct ALT_GPIO_PORTA_EOI_s  ALT_GPIO_PORTA_EOI_t;
  *  [31:29] | ???    | 0x0   | *UNDEFINED*        
  * 
  */
+#endif
+/*
+ * Register : External Port A Register - gpio_ext_porta
+ *
+ * The external port register is used to input data to the metastability flops.
+ *
+ * Register Layout - dependent on port width x where x=GPIO_PWIDTH_A
+ *
+ *  Bits    | Access | Reset | Description
+ * :--------|:-------|:------|:--------------------
+ *  [x:0]   | R      | 0x0   | External Port Field
+ *  [31:y]  | R      | 0x0   | *Reserved - read as zero*
+ *
+ */
 /*
  * Field : External Port Field - gpio_ext_porta
  * 
@@ -1075,6 +1679,7 @@ typedef volatile struct ALT_GPIO_PORTA_EOI_s  ALT_GPIO_PORTA_EOI_t;
  * Field Access Macros:
  * 
  */
+#if 0
 /* The Least Significant Bit (LSB) position of the ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA register field. */
 #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_LSB        0
 /* The Most Significant Bit (MSB) position of the ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA register field. */
@@ -1091,7 +1696,40 @@ typedef volatile struct ALT_GPIO_PORTA_EOI_s  ALT_GPIO_PORTA_EOI_t;
 #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_GET(value) (((value) & 0x1fffffff) >> 0)
 /* Produces a ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA register field value suitable for setting the register. */
 #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_SET(value) (((value) << 0) & 0x1fffffff)
-
+#endif
+/* The Least Significant Bit (LSB) position of the ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA register field. */
+#define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_LSB        0
+/* The Most Significant Bit (MSB) position of the ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA register field. */
+#define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_MSB        (GPIO0_PWIDTH_A-1)
+/* The width in bits of the ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA register field. */
+#define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_WIDTH      GPIO0_PWIDTH_A
+#if GPIO0_PWIDTH_A == 8
+  /* The mask used to set the ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA register field value. */
+  #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_SET_MSK    0xff
+  /* The mask used to clear the ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA register field value. */
+  #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_CLR_MSK    0x00
+  /* Extracts the ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA field value from a register. */
+  #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_GET(value) (((value) & 0xff) >> 0)
+  /* Produces a ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA register field value suitable for setting the register. */
+  #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_SET(value) (((value) << 0) & 0xff)
+#elif GPIO0_PWIDTH_A == 16
+  #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_SET_MSK    0xffff
+  #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_CLR_MSK    0x00000000
+  #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_GET(value) (((value) & 0xffff) >> 0)
+  #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_SET(value) (((value) << 0) & 0xffff)
+#elif GPIO0_PWIDTH_A == 32
+  #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_SET_MSK    0xffffffff
+  #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_CLR_MSK    0x00000000
+  #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_SET(value) (((value) << 0) & 0xffffffff)
+#else
+  #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_SET_MSK    0xffffffff
+  #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_CLR_MSK    0x00000000
+  #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_SET(value) (((value) << 0) & 0xffffffff)
+#endif
+/* The reset value of the ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA register field. */
+#define ALT_GPIO_EXT_PORTA_GPIO_EXT_PORTA_RESET      0x0
 #ifndef __ASSEMBLY__
 /*
  * WARNING: The C register and register group struct declarations are provided for
@@ -1103,10 +1741,17 @@ typedef volatile struct ALT_GPIO_PORTA_EOI_s  ALT_GPIO_PORTA_EOI_t;
  * 
  * The struct declaration for register ALT_GPIO_EXT_PORTA.
  */
+#if 0
 struct ALT_GPIO_EXT_PORTA_s
 {
     const uint32_t  gpio_ext_porta : 29;  /* External Port Field */
     uint32_t                       :  3;  /* *UNDEFINED* */
+};
+#endif
+struct ALT_GPIO_EXT_PORTA_s
+{
+  const uint32_t gpio_ext_porta : GPIO0_PWIDTH_A;      /* External Port Field */
+  uint32_t                      : (32-GPIO0_PWIDTH_A); /* Reserved - read as zero */
 };
 
 /* The typedef declaration for register ALT_GPIO_EXT_PORTA. */
@@ -1117,7 +1762,7 @@ typedef volatile struct ALT_GPIO_EXT_PORTA_s  ALT_GPIO_EXT_PORTA_t;
 #define ALT_GPIO_EXT_PORTA_OFST        0x50
 /* The address of the ALT_GPIO_EXT_PORTA register. */
 #define ALT_GPIO_EXT_PORTA_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_EXT_PORTA_OFST))
-
+#if 0
 /*
  * Register : Synchronization Level Register - gpio_ls_sync
  * 
@@ -1131,10 +1776,25 @@ typedef volatile struct ALT_GPIO_EXT_PORTA_s  ALT_GPIO_EXT_PORTA_t;
  *  [31:1] | ???    | 0x0   | *UNDEFINED*                
  * 
  */
+#endif
+/*
+ * Register : Synchronization Level Register - gpio_ls_sync
+ *
+ * The Synchronization level register is used to synchronize input with pclk_intr
+ *
+ * Register Layout
+ *
+ *  Bits   | Access | Reset | Description
+ * :-------|:-------|:------|:----------------------------
+ *  [0]    | RW     | 0x0   | Synchronization Level Field
+ *  [31:1] | R      | 0x0   | *Reserved - read as zero*
+ *
+ */
+#if 0
 /*
  * Field : Synchronization Level Field - gpio_ls_sync
  * 
- * The level-sensitive interrupts is synchronized to l4_mp_clk.
+ * The level-sensitive interrupts is synchronized to pclk_intr.
  * 
  * Field Enumeration Values:
  * 
@@ -1146,23 +1806,53 @@ typedef volatile struct ALT_GPIO_EXT_PORTA_s  ALT_GPIO_EXT_PORTA_t;
  * Field Access Macros:
  * 
  */
+#endif
+/*
+ * Field : Synchronization Level Field - gpio_ls_sync
+ *
+ * The level-sensitive interrupts is synchronized to pclk_intr.
+ *
+ * Field Enumeration Values:
+ *
+ *  Enum                                   | Value | Description
+ * :---------------------------------------|:------|:--------------------------------
+ *  ALT_GPIO_LS_SYNC_GPIO_LS_SYNC_E_NOSYNC | 0x0   | No synchronization to pclk_intr
+ *  ALT_GPIO_LS_SYNC_GPIO_LS_SYNC_E_SYNC   | 0x1   | Synchronize to pclk_intr
+ *
+ * Field Access Macros:
+ *
+ */
+#if 0
 /*
  * Enumerated value for register field ALT_GPIO_LS_SYNC_GPIO_LS_SYNC
  * 
  * No synchronization to l4_mp_clk
  */
+#endif
+/*
+ * Enumerated value for register field ALT_GPIO_LS_SYNC_GPIO_LS_SYNC
+ *
+ * No synchronization to pclk_intr
+ */
 #define ALT_GPIO_LS_SYNC_GPIO_LS_SYNC_E_NOSYNC  0x0
+#if 0
 /*
  * Enumerated value for register field ALT_GPIO_LS_SYNC_GPIO_LS_SYNC
  * 
  * Synchronize to l4_mp_clk
+ */
+#endif
+/*
+ * Enumerated value for register field ALT_GPIO_LS_SYNC_GPIO_LS_SYNC
+ *
+ * Synchronize to pclk_intr
  */
 #define ALT_GPIO_LS_SYNC_GPIO_LS_SYNC_E_SYNC    0x1
 
 /* The Least Significant Bit (LSB) position of the ALT_GPIO_LS_SYNC_GPIO_LS_SYNC register field. */
 #define ALT_GPIO_LS_SYNC_GPIO_LS_SYNC_LSB        0
 /* The Most Significant Bit (MSB) position of the ALT_GPIO_LS_SYNC_GPIO_LS_SYNC register field. */
-#define ALT_GPIO_LS_SYNC_GPIO_LS_SYNC_MSB        0
+#define ALT_GPIO_LS_SYNC_GPIO_LS_SYNC_MSB        (GPIO0_PWIDTH_A-1)
 /* The width in bits of the ALT_GPIO_LS_SYNC_GPIO_LS_SYNC register field. */
 #define ALT_GPIO_LS_SYNC_GPIO_LS_SYNC_WIDTH      1
 /* The mask used to set the ALT_GPIO_LS_SYNC_GPIO_LS_SYNC register field value. */
@@ -1201,7 +1891,7 @@ typedef volatile struct ALT_GPIO_LS_SYNC_s  ALT_GPIO_LS_SYNC_t;
 #define ALT_GPIO_LS_SYNC_OFST        0x60
 /* The address of the ALT_GPIO_LS_SYNC register. */
 #define ALT_GPIO_LS_SYNC_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_LS_SYNC_OFST))
-
+#if 0
 /*
  * Register : ID Code Register - gpio_id_code
  * 
@@ -1214,6 +1904,20 @@ typedef volatile struct ALT_GPIO_LS_SYNC_s  ALT_GPIO_LS_SYNC_t;
  *  [31:0] | R      | 0x0   | ID Code Field
  * 
  */
+#endif
+/*
+ * Register : ID Code Register - gpio_id_code
+ *
+ * GPIO ID code.
+ *
+ * Register Layout - dependent on port width x where x=GPIO_PWIDTH_A
+ *
+ *  Bits   | Access | Reset | Description
+ * :-------|:-------|:------|:--------------
+ *  [x:0]  | R      | 0x0   | ID Code Field
+ *  [31:y] | R      | 0x0   | *Reserved - read as zero*
+ *
+ */
 /*
  * Field : ID Code Field - gpio_id_code
  * 
@@ -1224,6 +1928,7 @@ typedef volatile struct ALT_GPIO_LS_SYNC_s  ALT_GPIO_LS_SYNC_t;
  */
 /* The Least Significant Bit (LSB) position of the ALT_GPIO_ID_CODE_GPIO_ID_CODE register field. */
 #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_LSB        0
+#if 0
 /* The Most Significant Bit (MSB) position of the ALT_GPIO_ID_CODE_GPIO_ID_CODE register field. */
 #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_MSB        31
 /* The width in bits of the ALT_GPIO_ID_CODE_GPIO_ID_CODE register field. */
@@ -1238,6 +1943,38 @@ typedef volatile struct ALT_GPIO_LS_SYNC_s  ALT_GPIO_LS_SYNC_t;
 #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_GET(value) (((value) & 0xffffffff) >> 0)
 /* Produces a ALT_GPIO_ID_CODE_GPIO_ID_CODE register field value suitable for setting the register. */
 #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_SET(value) (((value) << 0) & 0xffffffff)
+#endif
+/* The Most Significant Bit (MSB) position of the ALT_GPIO_ID_CODE_GPIO_ID_CODE register field. */
+#define ALT_GPIO_ID_CODE_GPIO_ID_CODE_MSB        (GPIO0_PWIDTH_A-1)
+/* The width in bits of the ALT_GPIO_ID_CODE_GPIO_ID_CODE register field. */
+#define ALT_GPIO_ID_CODE_GPIO_ID_CODE_WIDTH      GPIO0_PWIDTH_A
+#if GPIO0_PWIDTH_A == 8
+  /* The mask used to set the ALT_GPIO_ID_CODE_GPIO_ID_CODE register field value. */
+  #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_SET_MSK    0xff
+  /* The mask used to clear the ALT_GPIO_ID_CODE_GPIO_ID_CODE register field value. */
+  #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_CLR_MSK    0x00
+  /* Extracts the ALT_GPIO_ID_CODE_GPIO_ID_CODE field value from a register. */
+  #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_GET(value) (((value) & 0xff) >> 0)
+  /* Produces a ALT_GPIO_ID_CODE_GPIO_ID_CODE register field value suitable for setting the register. */
+  #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_SET(value) (((value) << 0) & 0xff)
+#elif GPIO0_PWIDTH_A == 16
+  #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_SET_MSK    0xffff
+  #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_CLR_MSK    0x00000000
+  #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_GET(value) (((value) & 0xffff) >> 0)
+  #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_SET(value) (((value) << 0) & 0xffff)
+#elif GPIO0_PWIDTH_A == 32
+  #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_SET_MSK    0xffffffff
+  #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_CLR_MSK    0x00000000
+  #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_SET(value) (((value) << 0) & 0xffffffff)
+#else
+  #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_SET_MSK    0xffffffff
+  #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_CLR_MSK    0x00000000
+  #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_GET(value) (((value) & 0xffffffff) >> 0)
+  #define ALT_GPIO_ID_CODE_GPIO_ID_CODE_SET(value) (((value) << 0) & 0xffffffff)
+#endif
+/* The reset value of the ALT_GPIO_ID_CODE_GPIO_ID_CODE register field. */
+#define ALT_GPIO_ID_CODE_GPIO_ID_CODE_RESET      0x0
 
 #ifndef __ASSEMBLY__
 /*
@@ -1252,7 +1989,8 @@ typedef volatile struct ALT_GPIO_LS_SYNC_s  ALT_GPIO_LS_SYNC_t;
  */
 struct ALT_GPIO_ID_CODE_s
 {
-    const uint32_t  gpio_id_code : 32;  /* ID Code Field */
+    const uint32_t  gpio_id_code : GPIO0_PWIDTH_A;      /* ID Code Field */
+    const uint32_t               : (32-GPIO0_PWIDTH_A); /* Reserved - read as zero */
 };
 
 /* The typedef declaration for register ALT_GPIO_ID_CODE. */
@@ -1326,7 +2064,7 @@ typedef volatile struct ALT_GPIO_VER_ID_CODE_s  ALT_GPIO_VER_ID_CODE_t;
 #define ALT_GPIO_VER_ID_CODE_OFST        0x6c
 /* The address of the ALT_GPIO_VER_ID_CODE register. */
 #define ALT_GPIO_VER_ID_CODE_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_VER_ID_CODE_OFST))
-
+#if 0
 /*
  * Register : Configuration Register 2 - gpio_config_reg2
  * 
@@ -1371,7 +2109,43 @@ typedef volatile struct ALT_GPIO_VER_ID_CODE_s  ALT_GPIO_VER_ID_CODE_t;
  * Width (less 1) of 29 bits
  */
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A_E_WIDTHLESSONE29BITS  0x1c
-
+#endif
+/*
+ * Register : Configuration Register 2 - gpio_config_reg2
+ *
+ * Specifies the bit width of ports A-D.
+ *   0x0 = 8 bits
+ *   0x1 = 16 bits
+ *   0x2 = 32 bits
+ *   0x3 = Reserved
+ *
+ * This register is a read-only register that is present when the configuration parameter
+ * GPIO_ADD_ENCODED_PARAMS is set to True.
+ * If this configuration is set to False, then this register reads back 0.
+ *
+ * Register Layout
+ *
+ *  Bits    | Access | Reset | Description
+ * :--------|:-------|:------|:----------------------
+ *  [4:0]   | R      | 0x?   | Port A Width
+ *  [9:5]   | R      | 0x?   | Port B Width
+ *  [14:10] | R      | 0x?   | Port C Width
+ *  [19:15] | R      | 0x?   | Port D Width
+ *  [31:20] | R      | 0x0   | *Reserved - read as zero*
+ *
+ */
+/*
+ * Field : Port A Width - encoded_id_pwidth_a
+ *
+ * Specifies the width of GPIO Port A.
+ *   0x0 = 8 bits
+ *   0x1 = 16 bits
+ *   0x2 = 32 bits
+ *   0x3 = Reserved
+ *
+ * Field Access Macros:
+ *
+ */
 /* The Least Significant Bit (LSB) position of the ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A register field. */
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A_LSB        0
 /* The Most Significant Bit (MSB) position of the ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A register field. */
@@ -1382,13 +2156,11 @@ typedef volatile struct ALT_GPIO_VER_ID_CODE_s  ALT_GPIO_VER_ID_CODE_t;
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A_SET_MSK    0x0000001f
 /* The mask used to clear the ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A register field value. */
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A_CLR_MSK    0xffffffe0
-/* The reset value of the ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A register field. */
-#define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A_RESET      0x1c
 /* Extracts the ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A field value from a register. */
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A_GET(value) (((value) & 0x0000001f) >> 0)
 /* Produces a ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A register field value suitable for setting the register. */
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A_SET(value) (((value) << 0) & 0x0000001f)
-
+#if 0
 /*
  * Field : Port B Width (less 1) - encoded_id_pwidth_b
  * 
@@ -1405,18 +2177,19 @@ typedef volatile struct ALT_GPIO_VER_ID_CODE_s  ALT_GPIO_VER_ID_CODE_t;
  * Field Access Macros:
  * 
  */
+#endif
 /*
- * Enumerated value for register field ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_B
- * 
- * Width (less 1) of 8 bits
+ * Field : Port B Width - encoded_id_pwidth_b
+ *
+ * Specifies the width of GPIO Port B.
+ *   0x0 = 8 bits
+ *   0x1 = 16 bits
+ *   0x2 = 32 bits
+ *   0x3 = Reserved
+ *
+ * Field Access Macros:
+ *
  */
-#define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_B_E_WIDTHLESSONE8BITS   0x7
-/*
- * Enumerated value for register field ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_B
- * 
- * Width (less 1) of 29 bits
- */
-#define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_B_E_WIDTHLESSONE29BITS  0x1c
 
 /* The Least Significant Bit (LSB) position of the ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_B register field. */
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_B_LSB        5
@@ -1434,7 +2207,7 @@ typedef volatile struct ALT_GPIO_VER_ID_CODE_s  ALT_GPIO_VER_ID_CODE_t;
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_B_GET(value) (((value) & 0x000003e0) >> 5)
 /* Produces a ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_B register field value suitable for setting the register. */
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_B_SET(value) (((value) << 5) & 0x000003e0)
-
+#if 0
 /*
  * Field : Port C Width (less 1) - encoded_id_pwidth_c
  * 
@@ -1451,18 +2224,20 @@ typedef volatile struct ALT_GPIO_VER_ID_CODE_s  ALT_GPIO_VER_ID_CODE_t;
  * Field Access Macros:
  * 
  */
+#endif
 /*
- * Enumerated value for register field ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_C
- * 
- * Width (less 1) of 8 bits
+ * Field : Port C Width - encoded_id_pwidth_c
+ *
+ * Specifies the width of GPIO Port C.
+ *   0x0 = 8 bits
+ *   0x1 = 16 bits
+ *   0x2 = 32 bits
+ *   0x3 = Reserved
+ *
+ *
+ * Field Access Macros:
+ *
  */
-#define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_C_E_WIDTHLESSONE8BITS   0x7
-/*
- * Enumerated value for register field ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_C
- * 
- * Width (less 1) of 29 bits
- */
-#define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_C_E_WIDTHLESSONE29BITS  0x1c
 
 /* The Least Significant Bit (LSB) position of the ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_C register field. */
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_C_LSB        10
@@ -1480,7 +2255,7 @@ typedef volatile struct ALT_GPIO_VER_ID_CODE_s  ALT_GPIO_VER_ID_CODE_t;
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_C_GET(value) (((value) & 0x00007c00) >> 10)
 /* Produces a ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_C register field value suitable for setting the register. */
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_C_SET(value) (((value) << 10) & 0x00007c00)
-
+#if 0
 /*
  * Field : Port D Width (less 1) - encoded_id_pwidth_d
  * 
@@ -1497,18 +2272,19 @@ typedef volatile struct ALT_GPIO_VER_ID_CODE_s  ALT_GPIO_VER_ID_CODE_t;
  * Field Access Macros:
  * 
  */
+#endif
 /*
- * Enumerated value for register field ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_D
- * 
- * Width (less 1) of 8 bits
+ * Field : Port D Width - encoded_id_pwidth_d
+ *
+ * Specifies the width of GPIO Port D.
+ *   0x0 = 8 bits
+ *   0x1 = 16 bits
+ *   0x2 = 32 bits
+ *   0x3 = Reserved
+ *
+ * Field Access Macros:
+ *
  */
-#define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_D_E_WIDTHLESSONE8BITS   0x7
-/*
- * Enumerated value for register field ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_D
- * 
- * Width (less 1) of 29 bits
- */
-#define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_D_E_WIDTHLESSONE29BITS  0x1c
 
 /* The Least Significant Bit (LSB) position of the ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_D register field. */
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_D_LSB        15
@@ -1626,19 +2402,24 @@ typedef volatile struct ALT_GPIO_CFG_REG2_s  ALT_GPIO_CFG_REG2_t;
  * 
  * Field Enumeration Values:
  * 
- *  Enum                                   | Value | Description             
- * :---------------------------------------|:------|:-------------------------
- *  ALT_GPIO_CFG_REG1_NUM_PORTS_E_ONEPORTA | 0x0   | Number of GPIO Ports = 1
- * 
+ *  Enum                                     | Value | Description
+ * :-----------------------------------------|:------|:-------------------------
+ *  ALT_GPIO_CFG_REG1_NUM_PORTS_E_ONEPORTA   | 0x0   | Number of GPIO Ports = 1
+ *  ALT_GPIO_CFG_REG1_NUM_PORTS_E_TWOPORTA   | 0x0   | Number of GPIO Ports = 2
+ *  ALT_GPIO_CFG_REG1_NUM_PORTS_E_THREEPORTA | 0x0   | Number of GPIO Ports = 3
+ *  ALT_GPIO_CFG_REG1_NUM_PORTS_E_FOURPORTA  | 0x0   | Number of GPIO Ports = 4
+ *
  * Field Access Macros:
  * 
  */
 /*
  * Enumerated value for register field ALT_GPIO_CFG_REG1_NUM_PORTS
  * 
- * Number of GPIO Ports = 1
  */
-#define ALT_GPIO_CFG_REG1_NUM_PORTS_E_ONEPORTA  0x0
+#define ALT_GPIO_CFG_REG1_NUM_PORTS_E_ONEPORTA    0x0
+#define ALT_GPIO_CFG_REG1_NUM_PORTS_E_TWOPORTA    0x1
+#define ALT_GPIO_CFG_REG1_NUM_PORTS_E_THREEPORTA  0x2
+#define ALT_GPIO_CFG_REG1_NUM_PORTS_E_FOURPORTA   0x3
 
 /* The Least Significant Bit (LSB) position of the ALT_GPIO_CFG_REG1_NUM_PORTS register field. */
 #define ALT_GPIO_CFG_REG1_NUM_PORTS_LSB        2
@@ -1694,7 +2475,7 @@ typedef volatile struct ALT_GPIO_CFG_REG2_s  ALT_GPIO_CFG_REG2_t;
 #define ALT_GPIO_CFG_REG1_PORTA_SINGLE_CTL_GET(value) (((value) & 0x00000010) >> 4)
 /* Produces a ALT_GPIO_CFG_REG1_PORTA_SINGLE_CTL register field value suitable for setting the register. */
 #define ALT_GPIO_CFG_REG1_PORTA_SINGLE_CTL_SET(value) (((value) << 4) & 0x00000010)
-
+#if 0
 /*
  * Field : PORT B SINGLE CTL - portb_single_ctl
  * 
@@ -1709,6 +2490,21 @@ typedef volatile struct ALT_GPIO_CFG_REG2_s  ALT_GPIO_CFG_REG2_t;
  * 
  * Field Access Macros:
  * 
+ */
+#endif
+/*
+ * Field : PORT B SINGLE CTL - portb_single_ctl
+ *
+ * Indicates the mode of operation of Port B to be software controlled only.
+ *
+ * Field Enumeration Values:
+ *
+ *  Enum                                             | Value | Description
+ * :-------------------------------------------------|:------|:-----------------------------------------
+ *  ALT_GPIO_CFG_REG1_PORTB_SINGLE_CTL_E_SOFTCTLONLY | 0x1   | Software Enabled Individual Port Control
+ *
+ * Field Access Macros:
+ *
  */
 /*
  * Enumerated value for register field ALT_GPIO_CFG_REG1_PORTB_SINGLE_CTL
@@ -1733,7 +2529,7 @@ typedef volatile struct ALT_GPIO_CFG_REG2_s  ALT_GPIO_CFG_REG2_t;
 #define ALT_GPIO_CFG_REG1_PORTB_SINGLE_CTL_GET(value) (((value) & 0x00000020) >> 5)
 /* Produces a ALT_GPIO_CFG_REG1_PORTB_SINGLE_CTL register field value suitable for setting the register. */
 #define ALT_GPIO_CFG_REG1_PORTB_SINGLE_CTL_SET(value) (((value) << 5) & 0x00000020)
-
+#if 0
 /*
  * Field : PORT C SINGLE CTL - portc_single_ctl
  * 
@@ -1748,6 +2544,21 @@ typedef volatile struct ALT_GPIO_CFG_REG2_s  ALT_GPIO_CFG_REG2_t;
  * 
  * Field Access Macros:
  * 
+ */
+#endif
+/*
+ * Field : PORT C SINGLE CTL - portc_single_ctl
+ *
+ * Indicates the mode of operation of Port C to be software controlled only.
+ *
+ * Field Enumeration Values:
+ *
+ *  Enum                                             | Value | Description
+ * :-------------------------------------------------|:------|:-----------------------------------------
+ *  ALT_GPIO_CFG_REG1_PORTC_SINGLE_CTL_E_SOFTCTLONLY | 0x1   | Software Enabled Individual Port Control
+ *
+ * Field Access Macros:
+ *
  */
 /*
  * Enumerated value for register field ALT_GPIO_CFG_REG1_PORTC_SINGLE_CTL
@@ -1772,7 +2583,7 @@ typedef volatile struct ALT_GPIO_CFG_REG2_s  ALT_GPIO_CFG_REG2_t;
 #define ALT_GPIO_CFG_REG1_PORTC_SINGLE_CTL_GET(value) (((value) & 0x00000040) >> 6)
 /* Produces a ALT_GPIO_CFG_REG1_PORTC_SINGLE_CTL register field value suitable for setting the register. */
 #define ALT_GPIO_CFG_REG1_PORTC_SINGLE_CTL_SET(value) (((value) << 6) & 0x00000040)
-
+#if 0
 /*
  * Field : PORT D SINGLE CTL - portd_single_ctl
  * 
@@ -1787,6 +2598,21 @@ typedef volatile struct ALT_GPIO_CFG_REG2_s  ALT_GPIO_CFG_REG2_t;
  * 
  * Field Access Macros:
  * 
+ */
+#endif
+/*
+ * Field : PORT D SINGLE CTL - portd_single_ctl
+ *
+ * Indicates the mode of operation of Port D to be software controlled only.
+ *
+ * Field Enumeration Values:
+ *
+ *  Enum                                             | Value | Description
+ * :-------------------------------------------------|:------|:-----------------------------------------
+ *  ALT_GPIO_CFG_REG1_PORTD_SINGLE_CTL_E_SOFTCTLONLY | 0x1   | Software Enabled Individual Port Control
+ *
+ * Field Access Macros:
+ *
  */
 /*
  * Enumerated value for register field ALT_GPIO_CFG_REG1_PORTD_SINGLE_CTL

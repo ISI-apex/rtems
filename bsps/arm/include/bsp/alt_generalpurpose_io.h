@@ -51,7 +51,7 @@
 extern "C" {
 #endif  /* __cplusplus */
 
-#define     ALT_GPIO_BITMASK                0x1FFFFFFF
+#define     ALT_GPIO_BITMASK                0xFFFFFFFF
 
 /* If the GPIO special test mode flag was not defined in the makefile,   */
     /* set the ALT_GPIO_DATAREAD_TEST_MODE flag to false to specify that     */
@@ -199,13 +199,49 @@ typedef enum ALT_GPIO_PIN_DATA_e
     ALT_GPIO_PIN_DATAONE
 } ALT_GPIO_PIN_DATA_t;
 
+/******************************************************************************/
+/*!
+ * This type definition enumerates the disabled/enabled states of the GPIO
+ * parameters.
+ */
+
+typedef enum ALT_GPIO_PARAM_ENABLE_STATE_e
+{
+    /*! # */
+    ALT_GPIO_PARAM_DISABLED,
+    /*! # */
+    ALT_GPIO_PARAM_ENABLED
+} ALT_GPIO_PARAM_ENABLE_STATE_t;
+
+/******************************************************************************/
+/*!
+ * This type definition enumerates the GPIO instances that the GPIO manager
+ * handles.
+ */
+typedef enum ALT_GPIO_INSTANCE_e
+{
+    /*!
+     * \b Instance \b 0 - GPIO instance 0.
+     */
+    ALT_GPIO_INSTANCE0,
+
+    /*!
+     * \b Instance \b 1 - GPIO instance 1.
+     */
+    ALT_GPIO_INSTANCE1,
+
+    /*!
+     * \b Unknown \b Instance - Used to indicate an error.
+     */
+    ALT_GPIO_INSTANCE_UNKNOWN
+} ALT_GPIO_INSTANCE_t;
 
 /******************************************************************************/
 /*!
  * This type definition enumerates the GPIO ports that the GPIO manager
  * handles.
  */
-
+#if 0
 typedef enum ALT_GPIO_PORT_e
 {
     /*!
@@ -232,7 +268,34 @@ typedef enum ALT_GPIO_PORT_e
      */
     ALT_GPIO_PORT_UNKNOWN
 } ALT_GPIO_PORT_t;
+#endif
+typedef enum ALT_GPIO_PORT_e
+{
+    /*!
+     * \b Port \b A - GPIO port A.
+     */
+    ALT_GPIO_PORTA,
 
+    /*!
+     * \b Port \b B - GPIO port B.
+     */
+    ALT_GPIO_PORTB,
+
+    /*!
+     * \b Port \b C - GPIO port C.
+     */
+    ALT_GPIO_PORTC,
+
+    /*!
+     * \b Port \b D - GPIO port D.
+     */
+    ALT_GPIO_PORTD,
+
+    /*!
+     * \b Unknown \b Port - Used to indicate an error.
+     */
+    ALT_GPIO_PORT_UNKNOWN
+} ALT_GPIO_PORT_t;
 
 /******************************************************************************/
 /*!
@@ -306,11 +369,18 @@ typedef enum ALT_GPIO_PORTBIT_e
     ALT_GPIO_BIT27 = ALT_TWO_TO_POW27,
     /*! # */
     ALT_GPIO_BIT28 = ALT_TWO_TO_POW28,
+#if 0
     ALT_GPIO_BIT29 = ALT_TWO_TO_POW29,              /* Not currently used */
     ALT_GPIO_BIT30 = ALT_TWO_TO_POW30,              /* Not currently used */
     ALT_GPIO_BIT31 = (int32_t) (1UL<<31),           /* Not currently used */
 
     ALT_GPIO_BITNUM_MAX = (28),
+#endif
+    ALT_GPIO_BIT29 = ALT_TWO_TO_POW29,
+    ALT_GPIO_BIT30 = ALT_TWO_TO_POW30,
+    ALT_GPIO_BIT31 = (int32_t) (1UL<<31),
+
+    ALT_GPIO_BITNUM_MAX = (31),
     ALT_GPIO_BIT_MAX = (1 << ALT_GPIO_BITNUM_MAX),
     ALT_END_OF_GPIO_PORT_SIGNALS = (32)
 } ALT_GPIO_PORTBIT_t;
@@ -341,12 +411,14 @@ ALT_STATUS_CODE alt_gpio_uninit(void);
  * specified.
  *
  *
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
  * \param       gpio_pid
  *              The GPIO port identifier.
  * \param       mask
  *              The group of bits (where mask bits equal one) to apply this
  *              operation to. Other bits (where mask bits equal zero) are
- *              not changed. Specify mask = ALT_GPIO_BITMASK (0x1FFFFFFF) to
+ *              not changed. Specify mask = ALT_GPIO_BITMASK (0xFFFFFFFF) to
  *              configure all data direction bits of the port.
  * \param       config
  *              The data-directions of the bits to be set in this operation.
@@ -357,7 +429,8 @@ ALT_STATUS_CODE alt_gpio_uninit(void);
  * \retval      ALT_E_ERROR     The operation failed.
  * \retval      ALT_E_BAD_ARG   Bad input argument.
  */
-ALT_STATUS_CODE alt_gpio_port_datadir_set(ALT_GPIO_PORT_t gpio_pid,
+ALT_STATUS_CODE alt_gpio_port_datadir_set(ALT_GPIO_INSTANCE_t gpio_iid,
+        ALT_GPIO_PORT_t gpio_pid,
         uint32_t mask, uint32_t config);
 
 /******************************************************************************/
@@ -365,20 +438,22 @@ ALT_STATUS_CODE alt_gpio_port_datadir_set(ALT_GPIO_PORT_t gpio_pid,
  * Returns the data direction configuration of selected bits of the
  * specified GPIO module.
  *
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
  * \param       gpio_pid
  *              The GPIO port identifier.
  * \param       mask
  *              The group of bits (where mask bits equal one) to read and
  *              return. Other bits (where mask bits equal zero) are returned
- *              as zero. Specify mask = ALT_GPIO_BITMASK (0x1FFFFFFF) to
- *              return all data direction bits of the port.
+ *              as zero. Specify mask = ALT_GPIO_BITMASK (0xFFFFFFFF) to
  *
  * \retval      uint32_t \n Individual bits are: \n \b 0 - The signal is
  *              configured as an input.
  *              \n \b 1 - The signal is configured as an output.
  *
  */
-uint32_t alt_gpio_port_datadir_get(ALT_GPIO_PORT_t gpio_pid,
+uint32_t alt_gpio_port_datadir_get(ALT_GPIO_INSTANCE_t gpio_iid,
+        ALT_GPIO_PORT_t gpio_pid,
         uint32_t mask);
 
 /******************************************************************************/
@@ -387,21 +462,28 @@ uint32_t alt_gpio_port_datadir_get(ALT_GPIO_PORT_t gpio_pid,
  * zero. Outputs are only set if the data direction for those bits is also
  * set to configure them as outputs.
  *
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
  * \param       gpio_pid
  *              The GPIO port identifier.
  * \param       mask
  *              The group of bits (mask bits equal one) to apply this
  *              operation to. Other bits (mask bits equal zero) are
  *              not changed.
+ * #if 0
  * \param       val
  *              The 32-bit word to write to the GPIO outputs. Only the 29 LSBs
  *              are used. Setting the three MSBs causes an error.
+ * #endif
+ * \param       val
+ *              The 32-bit word to write to the GPIO outputs.
  *
  * \retval      ALT_E_SUCCESS   The operation was successful.
  * \retval      ALT_E_ERROR     The operation failed.
  * \retval      ALT_E_BAD_ARG   Bad input argument.
  */
-ALT_STATUS_CODE alt_gpio_port_data_write(ALT_GPIO_PORT_t gpio_pid,
+ALT_STATUS_CODE alt_gpio_port_data_write(ALT_GPIO_INSTANCE_t gpio_iid,
+        ALT_GPIO_PORT_t gpio_pid,
         uint32_t mask, uint32_t val);
 
 /******************************************************************************/
@@ -411,17 +493,20 @@ ALT_STATUS_CODE alt_gpio_port_data_write(ALT_GPIO_PORT_t gpio_pid,
  * \n If a given signal is set to be an output, this input value can be read to
  * determine if the pin is grounded, pulled high, or is floating.
  *
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
  * \param       gpio_pid
  *              The GPIO port identifier.
  * \param       mask
  *              The group of bits (where mask bits equal one) to return. Other
  *              bits (where mask bits equal zero) are returned as zero. Specify
- *              mask = ALT_GPIO_BITMASK (0x1FFFFFFF) to return all data bits of
+ *              mask = ALT_GPIO_BITMASK (0xFFFFFFFF) to return all data bits of
  *              the port.
  *
  * \retval      uint32_t   The current value of the GPIO module input signals.
  */
-uint32_t alt_gpio_port_data_read(ALT_GPIO_PORT_t gpio_pid, uint32_t mask);
+uint32_t alt_gpio_port_data_read(ALT_GPIO_INSTANCE_t gpio_iid,
+        ALT_GPIO_PORT_t gpio_pid, uint32_t mask);
 
 
 /*! @} */
@@ -439,12 +524,13 @@ uint32_t alt_gpio_port_data_read(ALT_GPIO_PORT_t gpio_pid, uint32_t mask);
  * specified signals of the specified GPIO module.
  *
  *
- * \param       gpio_pid
- *              The GPIO port identifier.
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
+ *
  * \param       mask
  *              The group of bits (where mask bits equal one) to apply this
  *              operation to. Other bits (where mask bits equal zero) are
- *              not changed. Specify mask = ALT_GPIO_BITMASK (0x1FFFFFFF) to
+ *              not changed. Specify mask = ALT_GPIO_BITMASK (0xFFFFFFFF) to
  *              configure all interrupt type bits of the port.
  * \param       config
  *              The interrupt configuration to write. Individual bits
@@ -456,7 +542,7 @@ uint32_t alt_gpio_port_data_read(ALT_GPIO_PORT_t gpio_pid, uint32_t mask);
  * \retval      ALT_E_ERROR     The operation failed.
  * \retval      ALT_E_BAD_ARG   Invalid input data.
  */
-ALT_STATUS_CODE alt_gpio_port_int_type_set(ALT_GPIO_PORT_t gpio_pid,
+ALT_STATUS_CODE alt_gpio_port_int_type_set(ALT_GPIO_INSTANCE_t gpio_iid,
         uint32_t mask, uint32_t config);
 
 /******************************************************************************/
@@ -464,12 +550,12 @@ ALT_STATUS_CODE alt_gpio_port_int_type_set(ALT_GPIO_PORT_t gpio_pid,
  * Returns the interrupt configuration (edge-triggered or level-triggered) for
  * the specified bits of the specified GPIO module.
  *
- * \param       gpio_pid
- *              The GPIO port identifier.
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
  * \param       mask
  *              The group of bits (where mask bits equal one) to return. Other
  *              bits (where mask bits equal zero) are returned as zero. Specify
- *              mask = ALT_GPIO_BITMASK (0x1FFFFFFF) to return all configuration
+ *              mask = ALT_GPIO_BITMASK (0xFFFFFFFF) to return all configuration
  *              bits of the port.
  * \retval      uint32_t
  *              The current interrupt source configuration. Individual bits
@@ -478,7 +564,7 @@ ALT_STATUS_CODE alt_gpio_port_int_type_set(ALT_GPIO_PORT_t gpio_pid,
  *              The interrupt for this bit is set to be edge-sensitive.
  *
  */
-uint32_t alt_gpio_port_int_type_get(ALT_GPIO_PORT_t gpio_pid,
+uint32_t alt_gpio_port_int_type_get(ALT_GPIO_INSTANCE_t gpio_iid,
         uint32_t mask);
 
 /******************************************************************************/
@@ -487,8 +573,8 @@ uint32_t alt_gpio_port_int_type_get(ALT_GPIO_PORT_t gpio_pid,
  * (when used as inputs) to active-high or active-low (for level-sensitive
  * interrupts) or to rising-edge or falling-edge (for edge-sensitive interrupts).
  *
- * \param       gpio_pid
- *              The GPIO port identifier.
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
  * \param       mask
  *              The group of bits (where mask bits equal one) to apply this
  *              operation to. Other bits (where mask bits equal zero) are
@@ -503,7 +589,7 @@ uint32_t alt_gpio_port_int_type_get(ALT_GPIO_PORT_t gpio_pid,
  * \retval      ALT_E_ERROR     The operation failed.
  * \retval      ALT_E_BAD_ARG   Invalid input data.
  */
-ALT_STATUS_CODE alt_gpio_port_int_pol_set(ALT_GPIO_PORT_t gpio_pid,
+ALT_STATUS_CODE alt_gpio_port_int_pol_set(ALT_GPIO_INSTANCE_t gpio_iid,
         uint32_t mask, uint32_t config);
 
 /******************************************************************************/
@@ -512,12 +598,12 @@ ALT_STATUS_CODE alt_gpio_port_int_pol_set(ALT_GPIO_PORT_t gpio_pid,
  * possible interrupt sources of the specified GPIO module.
  *
  *
- * \param       gpio_pid
- *              The GPIO port identifier.
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
  * \param       mask
  *              The group of bits (where mask bits equal one) to return. Other
  *              bits (where mask bits equal zero) are returned as zero. Specify
- *              mask = ALT_GPIO_BITMASK (0x1FFFFFFF) to return all the
+ *              mask = ALT_GPIO_BITMASK (0xFFFFFFFF) to return all the
  *              configuration bits of the port.
  *
  * \retval      uint32_t
@@ -527,7 +613,7 @@ ALT_STATUS_CODE alt_gpio_port_int_pol_set(ALT_GPIO_PORT_t gpio_pid,
  *              polarity for this bit is set to active-high or rising-edge mode.
  *
  */
-uint32_t alt_gpio_port_int_pol_get(ALT_GPIO_PORT_t gpio_pid,
+uint32_t alt_gpio_port_int_pol_get(ALT_GPIO_INSTANCE_t gpio_iid,
         uint32_t mask);
 
 
@@ -545,12 +631,12 @@ uint32_t alt_gpio_port_int_pol_get(ALT_GPIO_PORT_t gpio_pid,
  * two periods of the gpio_db_clk clock before it is considered valid. The
  * frequency of the gpio_db_clk clock may be set using the Clock Manager API.
  *
- * \param       gpio_pid
- *              The GPIO port identifier.
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
  * \param       mask
  *              The group of bits (where mask bits equal one) to apply this
  *              operation to. Other bits (where mask bits equal zero) are
- *              not changed. Specify mask = ALT_GPIO_BITMASK (0x1FFFFFFF) to
+ *              not changed. Specify mask = ALT_GPIO_BITMASK (0xFFFFFFFF) to
  *              configure the debounce setting for all bits of the port.
  * \param       config
  *              The debounce configuration to set. Individual bits are: \n
@@ -561,7 +647,7 @@ uint32_t alt_gpio_port_int_pol_get(ALT_GPIO_PORT_t gpio_pid,
  * \retval      ALT_E_ERROR     The operation failed.
  * \retval      ALT_E_BAD_ARG   Invalid input data.
  */
-ALT_STATUS_CODE alt_gpio_port_debounce_set(ALT_GPIO_PORT_t gpio_pid,
+ALT_STATUS_CODE alt_gpio_port_debounce_set(ALT_GPIO_INSTANCE_t gpio_iid,
         uint32_t mask, uint32_t config);
 
 /******************************************************************************/
@@ -570,12 +656,12 @@ ALT_STATUS_CODE alt_gpio_port_debounce_set(ALT_GPIO_PORT_t gpio_pid,
  * GPIO register. If debounce is selected, metastability flip-flops are
  * inserted to debounce signals presented to the GPIO inputs.
  *
- * \param       gpio_pid
- *              The GPIO port identifier.
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
  * \param       mask
  *              The group of bits (where mask bits equal one) to return. Other
  *              bits (where mask bits equal zero) are returned as zero. Specify
- *              mask = ALT_GPIO_BITMASK (0x1FFFFFFF) to return all debounce
+ *              mask = ALT_GPIO_BITMASK (0xFFFFFFFF) to return all debounce
  *              configuration bits of the port.
  *
  * \retval      uint32_t
@@ -584,7 +670,7 @@ ALT_STATUS_CODE alt_gpio_port_debounce_set(ALT_GPIO_PORT_t gpio_pid,
  *              Debounce is selected for this signal.
  *
  */
-uint32_t alt_gpio_port_debounce_get(ALT_GPIO_PORT_t gpio_pid,
+uint32_t alt_gpio_port_debounce_get(ALT_GPIO_INSTANCE_t gpio_iid,
         uint32_t mask);
 
 /******************************************************************************/
@@ -594,8 +680,8 @@ uint32_t alt_gpio_port_debounce_get(ALT_GPIO_PORT_t gpio_pid,
  * an internal clock signal. This is a port-wide option that controls all
  * level-sensitive interrupt signals of that GPIO port.
  *
- * \param       gpio_pid
- *              The GPIO port identifier.
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
  * \param       config
  *              \n \b Any \b non-zero \b value - Synchronize to internal clock signal.
  *              \n \b Zero - Do not synchronize to internal clock signal.
@@ -605,7 +691,7 @@ uint32_t alt_gpio_port_debounce_get(ALT_GPIO_PORT_t gpio_pid,
  * \retval      ALT_E_ERROR     The operation failed.
  * \retval      ALT_E_BAD_ARG   Invalid input data.
  */
-ALT_STATUS_CODE alt_gpio_port_sync_set(ALT_GPIO_PORT_t gpio_pid,
+ALT_STATUS_CODE alt_gpio_port_sync_set(ALT_GPIO_INSTANCE_t gpio_iid,
         uint32_t config);
 
 /******************************************************************************/
@@ -616,8 +702,8 @@ ALT_STATUS_CODE alt_gpio_port_sync_set(ALT_GPIO_PORT_t gpio_pid,
  * interrupts to the internal clock signal. This is a port-wide option that
  * controls all level-sensitive interrupt signals of that GPIO port.
  *
- * \param       gpio_pid
- *              The GPIO port identifier.
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
 
 
  * \retval      ALT_E_TRUE      Synchronization to clock is enabled for
@@ -626,13 +712,15 @@ ALT_STATUS_CODE alt_gpio_port_sync_set(ALT_GPIO_PORT_t gpio_pid,
  *                              level-sensitive interrupts.
  * \retval      ALT_E_BAD_ARG   Invalid input argument.
  */
-ALT_STATUS_CODE alt_gpio_port_sync_get(ALT_GPIO_PORT_t gpio_pid);
+ALT_STATUS_CODE alt_gpio_port_sync_get(ALT_GPIO_INSTANCE_t gpio_iid);
 
 /******************************************************************************/
 /*!
  * Configures a group of GPIO signals with identical setup parameters. Allows
  * for configuring all parameters of a given port at one time.
  *
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
  * \param       gpio_pid
  *              The GPIO port identifier.
  * \param       mask
@@ -654,7 +742,8 @@ ALT_STATUS_CODE alt_gpio_port_sync_get(ALT_GPIO_PORT_t gpio_pid);
  * \retval      ALT_E_BAD_ARG   Invalid input argument.
 
  */
-ALT_STATUS_CODE alt_gpio_port_config(ALT_GPIO_PORT_t gpio_pid,
+ALT_STATUS_CODE alt_gpio_port_config(ALT_GPIO_INSTANCE_t gpio_iid,
+        ALT_GPIO_PORT_t gpio_pid,
         uint32_t mask, ALT_GPIO_PIN_DIR_t dir, ALT_GPIO_PIN_TYPE_t type,
         ALT_GPIO_PIN_POL_t pol, ALT_GPIO_PIN_DEBOUNCE_t debounc,
         uint32_t data);
@@ -670,8 +759,8 @@ ALT_STATUS_CODE alt_gpio_port_config(ALT_GPIO_PORT_t gpio_pid,
  * Enables the specified GPIO data input interrupts.
  *
  *
- * \param       gpio_pid
- *              The GPIO port identifier.
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
  * \param       config
  *              Individual bit interrupt enables \n
  *              \b 0 - Interrupt disabled. \n
@@ -681,15 +770,15 @@ ALT_STATUS_CODE alt_gpio_port_config(ALT_GPIO_PORT_t gpio_pid,
  * \retval      ALT_E_ERROR     The operation failed.
  * \retval      ALT_E_BAD_ARG   Bad input argument.
  */
-ALT_STATUS_CODE alt_gpio_port_int_enable(ALT_GPIO_PORT_t gpio_pid, uint32_t config);
+ALT_STATUS_CODE alt_gpio_port_int_enable(ALT_GPIO_INSTANCE_t gpio_iid, uint32_t config);
 
 /******************************************************************************/
 /*!
  * Disables the specified GPIO data module interrupt.
  *
  *
- * \param       gpio_pid
- *              The GPIO port identifier.
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
  * \param       config
  *              Individual bit interrupt enables \n
  *              \b 0 - Interrupt disabled. \n
@@ -699,21 +788,21 @@ ALT_STATUS_CODE alt_gpio_port_int_enable(ALT_GPIO_PORT_t gpio_pid, uint32_t conf
  * \retval      ALT_E_ERROR     The operation failed.
  * \retval      ALT_E_BAD_ARG   Bad input argument.
  */
-ALT_STATUS_CODE alt_gpio_port_int_disable(ALT_GPIO_PORT_t gpio_pid, uint32_t config);
+ALT_STATUS_CODE alt_gpio_port_int_disable(ALT_GPIO_INSTANCE_t gpio_iid, uint32_t config);
 
 /******************************************************************************/
 /*!
  *  Returns the current state of the specified GPIO port interrupts enables.
  *
- * \param       gpio_pid
- *              The GPIO port identifier.
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
  *
  * \retval      uint32_t
  *              The interrupt enable configuration that was read. Individual bits
  *              are: \n \b 0 = The interrupt for this bit is not enabled. \n \b
  *              1 = The interrupt for this bit is enabled.
  */
-uint32_t alt_gpio_port_int_enable_get(ALT_GPIO_PORT_t gpio_pid);
+uint32_t alt_gpio_port_int_enable_get(ALT_GPIO_INSTANCE_t gpio_iid);
 
 
 /******************************************************************************/
@@ -723,8 +812,8 @@ uint32_t alt_gpio_port_int_enable_get(ALT_GPIO_PORT_t gpio_pid);
  * signals may be changed by this call.
  *
  *
- * \param       gpio_pid
- *              The GPIO port identifier.
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
  * \param       mask
  *              Which bits to change among the port \n \b 0 =
  *              Do not change this bit. \n \b 1 = Allow this bit to change.
@@ -737,7 +826,7 @@ uint32_t alt_gpio_port_int_enable_get(ALT_GPIO_PORT_t gpio_pid);
  * \retval      ALT_E_ERROR     The operation failed.
  * \retval      ALT_E_BAD_ARG   Invalid input data.
  */
-ALT_STATUS_CODE alt_gpio_port_int_mask_set(ALT_GPIO_PORT_t gpio_pid,
+ALT_STATUS_CODE alt_gpio_port_int_mask_set(ALT_GPIO_INSTANCE_t gpio_iid,
         uint32_t mask, uint32_t val);
 
 /******************************************************************************/
@@ -745,8 +834,8 @@ ALT_STATUS_CODE alt_gpio_port_int_mask_set(ALT_GPIO_PORT_t gpio_pid,
  * Returns the interrupt mask of the specified GPIO module.
  *
  *
- * \param       gpio_pid
- *              The GPIO port identifier.
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
  *
  * \retval      uint32_t
  *              The interrupt mask that was read. Individual bits are: \n
@@ -754,7 +843,7 @@ ALT_STATUS_CODE alt_gpio_port_int_mask_set(ALT_GPIO_PORT_t gpio_pid,
  *              interrupt for this bit is masked.
  *
  */
-uint32_t alt_gpio_port_int_mask_get(ALT_GPIO_PORT_t gpio_pid);
+uint32_t alt_gpio_port_int_mask_get(ALT_GPIO_INSTANCE_t gpio_iid);
 
 /******************************************************************************/
 /*!
@@ -762,8 +851,8 @@ uint32_t alt_gpio_port_int_mask_get(ALT_GPIO_PORT_t gpio_pid);
  * register.
  *
  *
- * \param       gpio_pid
- *              The GPIO port identifier.
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
 
  * \retval      uint32_t
  *              The current interrupt pending status. Individual bits are: \n
@@ -771,7 +860,7 @@ uint32_t alt_gpio_port_int_mask_get(ALT_GPIO_PORT_t gpio_pid);
  *              The interrupt for this bit is pending.
  *
  */
-uint32_t alt_gpio_port_int_status_get(ALT_GPIO_PORT_t gpio_pid);
+uint32_t alt_gpio_port_int_status_get(ALT_GPIO_INSTANCE_t gpio_iid);
 
 /******************************************************************************/
 /*!
@@ -779,8 +868,8 @@ uint32_t alt_gpio_port_int_status_get(ALT_GPIO_PORT_t gpio_pid);
  * specified GPIO register.
  *
  *
- * \param       gpio_pid
- *              The GPIO port identifier.
+ * \param       gpio_iid
+ *              The GPIO instance identifier.
  * \param       clrmask
  *              The interrupt bits to clear. Individual bits are: \n \b 0 -
  *              The interrupt for this bit will not be changed. \n \b 1 -
@@ -790,7 +879,7 @@ uint32_t alt_gpio_port_int_status_get(ALT_GPIO_PORT_t gpio_pid);
  * \retval      ALT_E_ERROR     The operation failed.
  * \retval      ALT_E_BAD_ARG   Invalid input data.
  */
-ALT_STATUS_CODE alt_gpio_port_int_status_clear(ALT_GPIO_PORT_t gpio_pid,
+ALT_STATUS_CODE alt_gpio_port_int_status_clear(ALT_GPIO_INSTANCE_t gpio_iid,
         uint32_t clrmask);
 
 /*! @} */
@@ -799,7 +888,7 @@ ALT_STATUS_CODE alt_gpio_port_int_status_clear(ALT_GPIO_PORT_t gpio_pid,
 /*! \addtogroup ALT_GPIO_BITVIEW General-Purpose IO via Bit Index
  *
  * This functional group presents a perspective of the General-Purpose IO
- * signals as individual GPIO and GPI bits spread across a number of signals
+ * signals as individual GPIO bits spread across a number of signals
  * across several GPIO ports. This allows the programmer the freedom to generally
  * ignore the underlying port and signal structure of the GPIO hardware if
  * desired.
@@ -949,6 +1038,7 @@ typedef enum ALT_GPIO_1BIT_e
     ALT_GPIO_1BIT_65,
     /*! # */
     ALT_GPIO_1BIT_66,
+#if 0
     /*! # */
     ALT_GPIO_1BIT_67,        /* Not bonded out on some versions */
     /*! # */
@@ -1001,6 +1091,72 @@ typedef enum ALT_GPIO_1BIT_e
     ALT_GPIO_INVALID,
     ALT_END_OF_GPIO_SIGNALS = -1,
     ALT_LAST_VALID_GPIO_BIT = ALT_HLGPI_15
+#endif
+    /*! # */
+    ALT_GPIO_1BIT_67,
+    ALT_GPIO_1BIT_68,
+    ALT_GPIO_1BIT_69,
+    ALT_GPIO_1BIT_70,
+    ALT_GPIO_1BIT_71,
+    ALT_GPIO_1BIT_72,
+    ALT_GPIO_1BIT_73,
+    ALT_GPIO_1BIT_74,
+    ALT_GPIO_1BIT_75,
+    ALT_GPIO_1BIT_76,
+    ALT_GPIO_1BIT_77,
+    ALT_GPIO_1BIT_78,
+    ALT_GPIO_1BIT_79,
+    ALT_GPIO_1BIT_80,
+    ALT_GPIO_1BIT_81,
+    ALT_GPIO_1BIT_82,
+    ALT_GPIO_1BIT_83,
+    ALT_GPIO_1BIT_84,
+    ALT_GPIO_1BIT_85,
+    ALT_GPIO_1BIT_86,
+    ALT_GPIO_1BIT_87,
+    ALT_GPIO_1BIT_88,
+    ALT_GPIO_1BIT_89,
+    ALT_GPIO_1BIT_90,
+    ALT_GPIO_1BIT_91,
+    ALT_GPIO_1BIT_92,
+    ALT_GPIO_1BIT_93,
+    ALT_GPIO_1BIT_94,
+    ALT_GPIO_1BIT_95,
+    ALT_GPIO_1BIT_96,
+    ALT_GPIO_1BIT_97,
+    ALT_GPIO_1BIT_98,
+    ALT_GPIO_1BIT_99,
+    ALT_GPIO_1BIT_100,
+    ALT_GPIO_1BIT_101,
+    ALT_GPIO_1BIT_102,
+    ALT_GPIO_1BIT_103,
+    ALT_GPIO_1BIT_104,
+    ALT_GPIO_1BIT_105,
+    ALT_GPIO_1BIT_106,
+    ALT_GPIO_1BIT_107,
+    ALT_GPIO_1BIT_108,
+    ALT_GPIO_1BIT_109,
+    ALT_GPIO_1BIT_110,
+    ALT_GPIO_1BIT_111,
+    ALT_GPIO_1BIT_112,
+    ALT_GPIO_1BIT_113,
+    ALT_GPIO_1BIT_114,
+    ALT_GPIO_1BIT_115,
+    ALT_GPIO_1BIT_116,
+    ALT_GPIO_1BIT_117,
+    ALT_GPIO_1BIT_118,
+    ALT_GPIO_1BIT_119,
+    ALT_GPIO_1BIT_120,
+    ALT_GPIO_1BIT_121,
+    ALT_GPIO_1BIT_122,
+    ALT_GPIO_1BIT_123,
+    ALT_GPIO_1BIT_124,
+    ALT_GPIO_1BIT_125,
+    ALT_GPIO_1BIT_126,
+    ALT_GPIO_1BIT_127,
+    ALT_GPIO_INVALID,
+    ALT_END_OF_GPIO_SIGNALS = -1,
+    ALT_LAST_VALID_GPIO_BIT = ALT_GPIO_1BIT_127
 } ALT_GPIO_1BIT_t;
 
 
@@ -1057,6 +1213,8 @@ typedef struct ALT_GPIO_PIN_RECORD_s
 /*!
  * Configures all parameters for one bit (signal) of the GPIO ports.
  *
+ * \param       gpio_iid
+ *              The GPIO instance id.
  * \param       signal_num
  *              The GPIO port signal index.
  * \param       dir
@@ -1075,7 +1233,8 @@ typedef struct ALT_GPIO_PIN_RECORD_s
  * \retval      ALT_E_ERROR     The operation failed.
  * \retval      ALT_E_BAD_ARG   Invalid input argument.
  */
-ALT_STATUS_CODE alt_gpio_bit_config(ALT_GPIO_1BIT_t signal_num,
+ALT_STATUS_CODE alt_gpio_bit_config(ALT_GPIO_INSTANCE_t gpio_iid,
+        ALT_GPIO_1BIT_t signal_num,
         ALT_GPIO_PIN_DIR_t dir, ALT_GPIO_PIN_TYPE_t type,
         ALT_GPIO_PIN_POL_t pol, ALT_GPIO_PIN_DEBOUNCE_t debounce,
         ALT_GPIO_PIN_DATA_t data);
@@ -1084,6 +1243,8 @@ ALT_STATUS_CODE alt_gpio_bit_config(ALT_GPIO_1BIT_t signal_num,
 /*!
  * Returns the configuration parameters of a given GPIO bit.
  *
+ * \param       gpio_iid
+ *              The GPIO instance id.
  * \param       signal_num
  *              The GPIO port signal index.
  * \param       config
@@ -1096,7 +1257,8 @@ ALT_STATUS_CODE alt_gpio_bit_config(ALT_GPIO_1BIT_t signal_num,
  * \retval      ALT_E_BAD_ARG   Invalid input argument.
 
  */
-ALT_STATUS_CODE alt_gpio_bitconfig_get(ALT_GPIO_1BIT_t signal_num,
+ALT_STATUS_CODE alt_gpio_bitconfig_get(ALT_GPIO_INSTANCE_t gpio_iid,
+        ALT_GPIO_1BIT_t signal_num,
         ALT_GPIO_CONFIG_RECORD_t *config);
 
 /******************************************************************************/
@@ -1106,6 +1268,8 @@ ALT_STATUS_CODE alt_gpio_bitconfig_get(ALT_GPIO_1BIT_t signal_num,
  * alt_gpio_port_config(). Each bit may be configured differently and bits may
  * be listed in any order.
  *
+ * \param       gpio_iid
+ *              The GPIO instance id.
  * \param       config_array
  *              Pointer to an array of GPIO_CONFIG_RECORD_s configuration
  *              records. These definitions contain all the parameters
@@ -1125,7 +1289,8 @@ ALT_STATUS_CODE alt_gpio_bitconfig_get(ALT_GPIO_1BIT_t signal_num,
  * \retval      ALT_E_BAD_ARG   Invalid input argument.
 
  */
-ALT_STATUS_CODE alt_gpio_group_config(ALT_GPIO_CONFIG_RECORD_t* config_array,
+ALT_STATUS_CODE alt_gpio_group_config(ALT_GPIO_INSTANCE_t gpio_iid,
+        ALT_GPIO_CONFIG_RECORD_t* config_array,
         uint32_t len);
 
 /******************************************************************************/
@@ -1134,6 +1299,8 @@ ALT_STATUS_CODE alt_gpio_group_config(ALT_GPIO_CONFIG_RECORD_t* config_array,
  * settings (data direction, interrupt type, polarity, and debounce) of that
  * list of signals.
  *
+ * \param       gpio_iid
+ *              The GPIO instance id.
  * \param       config_array
  *              Pointer to an array of ALT_GPIO_CONFIG_RECORD_t configuration
  *              records. Only the signal indices in the first field of each
@@ -1156,7 +1323,8 @@ ALT_STATUS_CODE alt_gpio_group_config(ALT_GPIO_CONFIG_RECORD_t* config_array,
  * \retval      ALT_E_BAD_ARG   Invalid input argument.
 
  */
-ALT_STATUS_CODE alt_gpio_group_config_get(ALT_GPIO_CONFIG_RECORD_t *config_array,
+ALT_STATUS_CODE alt_gpio_group_config_get(ALT_GPIO_INSTANCE_t gpio_iid,
+        ALT_GPIO_CONFIG_RECORD_t *config_array,
         uint32_t len);
 
 /******************************************************************************/
@@ -1168,6 +1336,8 @@ ALT_STATUS_CODE alt_gpio_group_config_get(ALT_GPIO_CONFIG_RECORD_t *config_array
  * signal indices instead of having the signal list provided in the first
  * field of the configuration records in the array.
  *
+ * \param       gpio_iid
+ *              The GPIO instance id.
  * \param       pinid_array
  *              Pointer to a list of signal index numbers. These indices
  *              are copied to the first field of each configuration record
@@ -1192,7 +1362,8 @@ ALT_STATUS_CODE alt_gpio_group_config_get(ALT_GPIO_CONFIG_RECORD_t *config_array
  * \retval      ALT_E_BAD_ARG   Invalid input argument.
  *
  */
-ALT_STATUS_CODE alt_gpio_group_config_get2(ALT_GPIO_1BIT_t* pinid_array,
+ALT_STATUS_CODE alt_gpio_group_config_get2(ALT_GPIO_INSTANCE_t gpio_iid,
+        ALT_GPIO_1BIT_t* pinid_array,
         ALT_GPIO_CONFIG_RECORD_t *config_array, uint32_t len);
 
 
@@ -1208,25 +1379,25 @@ ALT_STATUS_CODE alt_gpio_group_config_get2(ALT_GPIO_1BIT_t* pinid_array,
 /*!
  * Returns the ID code of the specified GPIO module.
  *
- * \param       gpio_pid
- *              The GPIO port identifier.
+ * \param       gpio_iid
+ *              The GPIO instance id.
  *
  *
  * \retval      uint32_t    The component code of the module, GPIO_MODULE_IDCODE.
  */
-uint32_t alt_gpio_port_idcode_get(ALT_GPIO_PORT_t gpio_pid);
+uint32_t alt_gpio_port_idcode_get(ALT_GPIO_INSTANCE_t gpio_iid);
 
 /******************************************************************************/
 /*!
  * Returns the version code of the specified GPIO module.
  *
- * \param       gpio_pid
- *              The GPIO port identifier.
- *
+ * \param       gpio_iid
+ *              The GPIO instance id.
+  *
  *
  * \retval      uint32_t      The encoded revision number of the module.
  */
-uint32_t alt_gpio_port_ver_get(ALT_GPIO_PORT_t gpio_pid);
+uint32_t alt_gpio_port_ver_get(ALT_GPIO_INSTANCE_t gpio_iid);
 
 
 /******************************************************************************/
@@ -1253,6 +1424,16 @@ ALT_GPIO_PORTBIT_t alt_gpio_bit_to_port_pin(ALT_GPIO_1BIT_t pin_num);
 ALT_GPIO_1BIT_t alt_gpio_port_pin_to_bit(ALT_GPIO_PORT_t pid,
         uint32_t bitmask);
 
+/*!
+ * Returns the Add Encoded Params value of the specified GPIO module.
+ *
+ * \param       gpio_iid
+ *              The GPIO instance id.
+ *
+ *
+ * \retval      ALT_GPIO_PARAM_ENABLE_STATE_t    The Add Encoded Params value of the module, ADD_ENCODED_PARAMS.
+ */
+ALT_GPIO_PARAM_ENABLE_STATE_t alt_gpio_add_encoded_params_state_get(ALT_GPIO_INSTANCE_t gpio_iid);
 
 /*! @} */
 /*! @} */
