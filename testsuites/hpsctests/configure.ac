@@ -41,6 +41,7 @@ RTEMS_CANONICALIZE_TOOLS
 #RTEMS_TEST_CHECK([smc_nand_block])
 #RTEMS_TEST_CHECK([smc_nand_jffs2])
 RTEMS_TEST_CHECK([gpio_init])
+RTEMS_TEST_CHECK([gpio_config])
 RTEMS_TEST_CHECK([i2c_basic])
 
 AC_CONFIG_FILES([Makefile])
