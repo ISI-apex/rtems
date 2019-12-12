@@ -16,3 +16,7 @@ include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/altera/alt_adapter
 include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/altera/alt_dma.h
 include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/altera/alt_dma_common.h
 include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/altera/alt_dma_program.h
+include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/alt_qspi.h
+include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/alt_qspi_private.h
+include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/socal/alt_qspi.h
+include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/socal/alt_qspidata.h
