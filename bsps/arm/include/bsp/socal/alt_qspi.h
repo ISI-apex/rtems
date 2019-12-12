@@ -43,10 +43,10 @@
 extern "C"
 {
 #endif  /* __cplusplus */
-#include <bsp/hwinfo.h>
 #include <bspopts.h>
+#include <bsp/hwinfo.h>
 #define ALT_HPS_ADDR        0
-
+#if NUM_SPI_SLAVE >= 1
 /*
  * Component Instance : spis0
  *
@@ -97,15 +97,19 @@ extern "C"
 /* The address of the ALT_SPIS_DR register for the ALT_SPIS0 instance. */
 #define ALT_SPIS0_DR_ADDR  ALT_SPIS_DR_ADDR(ALT_SPIS0_ADDR)
 /* The base address byte offset for the start of the ALT_SPIS0 component. */
+#if 0
 #define ALT_SPIS0_OFST        0xffe02000
+#endif
+#define ALT_SPIS0_OFST        SPI0_BASE
 /* The start address of the ALT_SPIS0 component. */
 #define ALT_SPIS0_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_SPIS0_OFST))
 /* The lower bound address range of the ALT_SPIS0 component. */
 #define ALT_SPIS0_LB_ADDR     ALT_SPIS0_ADDR
 /* The upper bound address range of the ALT_SPIS0 component. */
 #define ALT_SPIS0_UB_ADDR     ALT_CAST(void *, ((ALT_CAST(char *, ALT_SPIS0_ADDR) + 0x80) - 1))
+#endif
 
-
+#if NUM_SPI_SLAVE >= 2
 /*
  * Component Instance : spis1
  *
@@ -156,15 +160,20 @@ extern "C"
 /* The address of the ALT_SPIS_DR register for the ALT_SPIS1 instance. */
 #define ALT_SPIS1_DR_ADDR  ALT_SPIS_DR_ADDR(ALT_SPIS1_ADDR)
 /* The base address byte offset for the start of the ALT_SPIS1 component. */
+#if 0
 #define ALT_SPIS1_OFST        0xffe03000
+#endif
+#define ALT_SPIS1_OFST        SPI1_BASE
+
 /* The start address of the ALT_SPIS1 component. */
 #define ALT_SPIS1_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_SPIS1_OFST))
 /* The lower bound address range of the ALT_SPIS1 component. */
 #define ALT_SPIS1_LB_ADDR     ALT_SPIS1_ADDR
 /* The upper bound address range of the ALT_SPIS1 component. */
 #define ALT_SPIS1_UB_ADDR     ALT_CAST(void *, ((ALT_CAST(char *, ALT_SPIS1_ADDR) + 0x80) - 1))
+#endif
 
-
+#if NUM_SPI_MASTER >= 1
 /*
  * Component Instance : spim0
  *
@@ -223,15 +232,19 @@ extern "C"
 /* The address of the ALT_SPIM_RX_SMPL_DLY register for the ALT_SPIM0 instance. */
 #define ALT_SPIM0_RX_SMPL_DLY_ADDR  ALT_SPIM_RX_SMPL_DLY_ADDR(ALT_SPIM0_ADDR)
 /* The base address byte offset for the start of the ALT_SPIM0 component. */
+#if 0
 #define ALT_SPIM0_OFST        0xfff00000
+#endif
+#define ALT_SPIM0_OFST        SPI0_BASE
 /* The start address of the ALT_SPIM0 component. */
 #define ALT_SPIM0_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_SPIM0_OFST))
 /* The lower bound address range of the ALT_SPIM0 component. */
 #define ALT_SPIM0_LB_ADDR     ALT_SPIM0_ADDR
 /* The upper bound address range of the ALT_SPIM0 component. */
 #define ALT_SPIM0_UB_ADDR     ALT_CAST(void *, ((ALT_CAST(char *, ALT_SPIM0_ADDR) + 0x100) - 1))
+#endif
 
-
+#if NUM_SPI_MASTER >= 2
 /*
  * Component Instance : spim1
  *
@@ -290,13 +303,17 @@ extern "C"
 /* The address of the ALT_SPIM_RX_SMPL_DLY register for the ALT_SPIM1 instance. */
 #define ALT_SPIM1_RX_SMPL_DLY_ADDR  ALT_SPIM_RX_SMPL_DLY_ADDR(ALT_SPIM1_ADDR)
 /* The base address byte offset for the start of the ALT_SPIM1 component. */
+#if 0
 #define ALT_SPIM1_OFST        0xfff01000
+#endif
+#define ALT_SPIM1_OFST        SPI1_BASE
 /* The start address of the ALT_SPIM1 component. */
 #define ALT_SPIM1_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_SPIM1_OFST))
 /* The lower bound address range of the ALT_SPIM1 component. */
 #define ALT_SPIM1_LB_ADDR     ALT_SPIM1_ADDR
 /* The upper bound address range of the ALT_SPIM1 component. */
 #define ALT_SPIM1_UB_ADDR     ALT_CAST(void *, ((ALT_CAST(char *, ALT_SPIM1_ADDR) + 0x100) - 1))
+#endif
 
 /*
  * Component Instance : qspiregs
