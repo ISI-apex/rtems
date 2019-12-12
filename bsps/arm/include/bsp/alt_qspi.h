@@ -58,8 +58,10 @@
 #ifndef __ALT_QSPI_H__
 #define __ALT_QSPI_H__
 
+#if 0
 #include <bsp/hwlib.h>
-
+#endif
+#include <bsp/alt_adapter.h>
 #ifdef __cplusplus
 extern "C"
 {

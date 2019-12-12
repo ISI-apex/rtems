@@ -41,8 +41,9 @@
 #ifndef __ALT_QSPI_PRIVATE_H__
 #define __ALT_QSPI_PRIVATE_H__
 
+#if 0
 #include "socal/socal.h"
-
+#endif
 //
 // This section provisions support for various flash devices.
 //

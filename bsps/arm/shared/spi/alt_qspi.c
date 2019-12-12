@@ -43,16 +43,20 @@
 #include <string.h>
 #include <stdio.h>
 #include <inttypes.h>
+#if 0
 #include <bsp/hwlib.h>
 #include <bsp/alt_clock_manager.h>
 #include "alt_qspi.h"
-#include <bsp/alt_qspi_private.h>
+#endif
 #include <bsp/socal/alt_qspi.h>
+#include <bsp/alt_qspi.h>
+#include <bsp/alt_qspi_private.h>
+#if 0
 #include <bsp/socal/alt_rstmgr.h>
 #include <bsp/socal/alt_sysmgr.h>
 #include <bsp/socal/hps.h>
 #include <bsp/socal/socal.h>
-
+#endif
 /////
 
 // NOTE: To enable debugging output, delete the next line and uncomment the
@@ -314,6 +318,8 @@ ALT_STATUS_CODE alt_qspi_init(void)
     ALT_STATUS_CODE status = ALT_E_SUCCESS;
     alt_freq_t qspi_clk_freq = 0;
 
+    /* TODO(Richard): Implement a valid clock frequency here */
+#if 0
     // Validate QSPI module input clocks.
     //  - pclk    - l4_mp_clk
     //  - hclk    - l4_mp_clk
@@ -339,16 +345,18 @@ ALT_STATUS_CODE alt_qspi_init(void)
             }
         }
     }
-
+#endif
     int qspi_clk_mhz = qspi_clk_freq / 1000000;
 
+    /* TODO(Richard): Take QSPI controller out of reset */
+#if 0
     /////
 
     // Take QSPI controller out of reset.
     alt_clrbits_word(ALT_RSTMGR_PERMODRST_ADDR, ALT_RSTMGR_PERMODRST_QSPI_SET_MSK);
 
     /////
-
+#endif
     // Configure the device timing
 
     if (status == ALT_E_SUCCESS)
@@ -406,8 +414,11 @@ ALT_STATUS_CODE alt_qspi_init(void)
 
 ALT_STATUS_CODE alt_qspi_uninit(void)
 {
+  /* TODO(Richard): IPut QSPI controller into reset */
+#if 0
     // Put QSPI controller into reset.
     alt_setbits_word(ALT_RSTMGR_PERMODRST_ADDR, ALT_RSTMGR_PERMODRST_QSPI_SET_MSK);
+#endif
 
     return ALT_E_SUCCESS;
 }
@@ -2468,10 +2479,11 @@ ALT_STATUS_CODE alt_qspi_ecc_start(void * block, size_t size)
     dprintf("DEBUG[QSPI][ECC]: Set new SRAM as %" PRIu32 ".\n", sram_fill);
 
     // Step 2
-
+    /* TODO (Richard): Enable EDAC */
+#if 0
     dprintf("DEBUG[QSPI][ECC]: Enable ECC in SysMgr.\n");
     alt_write_word(ALT_SYSMGR_ECC_QSPI_ADDR, ALT_SYSMGR_ECC_QSPI_EN_SET_MSK);
-
+#endif
     // Step 3
 
     // Issue a read ~ 2x larger than the read partition. We will read out 1 page,
@@ -2600,7 +2612,8 @@ ALT_STATUS_CODE alt_qspi_ecc_start(void * block, size_t size)
     }
 
     // Step 5
-
+    /* TODO (Richard): Clear any pending QSPI EDAC interrupts */
+#if 0
     if (status == ALT_E_SUCCESS)
     {
         dprintf("DEBUG[QSPI][ECC]: Clear any pending spurious QSPI ECC interrupts.\n");
@@ -2610,7 +2623,7 @@ ALT_STATUS_CODE alt_qspi_ecc_start(void * block, size_t size)
                        | ALT_SYSMGR_ECC_QSPI_SERR_SET_MSK
                        | ALT_SYSMGR_ECC_QSPI_DERR_SET_MSK);
     }
-
+#endif
     /////
 
     // Restore original partition

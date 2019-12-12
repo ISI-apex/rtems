@@ -43,6 +43,360 @@
 extern "C"
 {
 #endif  /* __cplusplus */
+#include <bsp/hwinfo.h>
+#include <bspopts.h>
+#define ALT_HPS_ADDR        0
+
+/*
+ * Component Instance : spis0
+ *
+ * Instance spis0 of component ALT_SPIS.
+ *
+ *
+ */
+/* The address of the ALT_SPIS_CTLR0 register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_CTLR0_ADDR  ALT_SPIS_CTLR0_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_SPIENR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_SPIENR_ADDR  ALT_SPIS_SPIENR_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_MWCR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_MWCR_ADDR  ALT_SPIS_MWCR_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_TXFTLR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_TXFTLR_ADDR  ALT_SPIS_TXFTLR_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_RXFTLR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_RXFTLR_ADDR  ALT_SPIS_RXFTLR_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_TXFLR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_TXFLR_ADDR  ALT_SPIS_TXFLR_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_RXFLR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_RXFLR_ADDR  ALT_SPIS_RXFLR_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_SR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_SR_ADDR  ALT_SPIS_SR_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_IMR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_IMR_ADDR  ALT_SPIS_IMR_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_ISR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_ISR_ADDR  ALT_SPIS_ISR_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_RISR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_RISR_ADDR  ALT_SPIS_RISR_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_TXOICR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_TXOICR_ADDR  ALT_SPIS_TXOICR_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_RXOICR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_RXOICR_ADDR  ALT_SPIS_RXOICR_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_RXUICR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_RXUICR_ADDR  ALT_SPIS_RXUICR_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_ICR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_ICR_ADDR  ALT_SPIS_ICR_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_DMACR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_DMACR_ADDR  ALT_SPIS_DMACR_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_DMATDLR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_DMATDLR_ADDR  ALT_SPIS_DMATDLR_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_DMARDLR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_DMARDLR_ADDR  ALT_SPIS_DMARDLR_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_IDR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_IDR_ADDR  ALT_SPIS_IDR_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_SPI_VER_ID register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_SPI_VER_ID_ADDR  ALT_SPIS_SPI_VER_ID_ADDR(ALT_SPIS0_ADDR)
+/* The address of the ALT_SPIS_DR register for the ALT_SPIS0 instance. */
+#define ALT_SPIS0_DR_ADDR  ALT_SPIS_DR_ADDR(ALT_SPIS0_ADDR)
+/* The base address byte offset for the start of the ALT_SPIS0 component. */
+#define ALT_SPIS0_OFST        0xffe02000
+/* The start address of the ALT_SPIS0 component. */
+#define ALT_SPIS0_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_SPIS0_OFST))
+/* The lower bound address range of the ALT_SPIS0 component. */
+#define ALT_SPIS0_LB_ADDR     ALT_SPIS0_ADDR
+/* The upper bound address range of the ALT_SPIS0 component. */
+#define ALT_SPIS0_UB_ADDR     ALT_CAST(void *, ((ALT_CAST(char *, ALT_SPIS0_ADDR) + 0x80) - 1))
+
+
+/*
+ * Component Instance : spis1
+ *
+ * Instance spis1 of component ALT_SPIS.
+ *
+ *
+ */
+/* The address of the ALT_SPIS_CTLR0 register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_CTLR0_ADDR  ALT_SPIS_CTLR0_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_SPIENR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_SPIENR_ADDR  ALT_SPIS_SPIENR_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_MWCR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_MWCR_ADDR  ALT_SPIS_MWCR_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_TXFTLR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_TXFTLR_ADDR  ALT_SPIS_TXFTLR_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_RXFTLR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_RXFTLR_ADDR  ALT_SPIS_RXFTLR_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_TXFLR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_TXFLR_ADDR  ALT_SPIS_TXFLR_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_RXFLR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_RXFLR_ADDR  ALT_SPIS_RXFLR_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_SR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_SR_ADDR  ALT_SPIS_SR_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_IMR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_IMR_ADDR  ALT_SPIS_IMR_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_ISR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_ISR_ADDR  ALT_SPIS_ISR_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_RISR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_RISR_ADDR  ALT_SPIS_RISR_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_TXOICR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_TXOICR_ADDR  ALT_SPIS_TXOICR_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_RXOICR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_RXOICR_ADDR  ALT_SPIS_RXOICR_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_RXUICR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_RXUICR_ADDR  ALT_SPIS_RXUICR_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_ICR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_ICR_ADDR  ALT_SPIS_ICR_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_DMACR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_DMACR_ADDR  ALT_SPIS_DMACR_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_DMATDLR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_DMATDLR_ADDR  ALT_SPIS_DMATDLR_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_DMARDLR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_DMARDLR_ADDR  ALT_SPIS_DMARDLR_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_IDR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_IDR_ADDR  ALT_SPIS_IDR_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_SPI_VER_ID register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_SPI_VER_ID_ADDR  ALT_SPIS_SPI_VER_ID_ADDR(ALT_SPIS1_ADDR)
+/* The address of the ALT_SPIS_DR register for the ALT_SPIS1 instance. */
+#define ALT_SPIS1_DR_ADDR  ALT_SPIS_DR_ADDR(ALT_SPIS1_ADDR)
+/* The base address byte offset for the start of the ALT_SPIS1 component. */
+#define ALT_SPIS1_OFST        0xffe03000
+/* The start address of the ALT_SPIS1 component. */
+#define ALT_SPIS1_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_SPIS1_OFST))
+/* The lower bound address range of the ALT_SPIS1 component. */
+#define ALT_SPIS1_LB_ADDR     ALT_SPIS1_ADDR
+/* The upper bound address range of the ALT_SPIS1 component. */
+#define ALT_SPIS1_UB_ADDR     ALT_CAST(void *, ((ALT_CAST(char *, ALT_SPIS1_ADDR) + 0x80) - 1))
+
+
+/*
+ * Component Instance : spim0
+ *
+ * Instance spim0 of component ALT_SPIM.
+ *
+ *
+ */
+/* The address of the ALT_SPIM_CTLR0 register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_CTLR0_ADDR  ALT_SPIM_CTLR0_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_CTLR1 register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_CTLR1_ADDR  ALT_SPIM_CTLR1_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_SPIENR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_SPIENR_ADDR  ALT_SPIM_SPIENR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_MWCR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_MWCR_ADDR  ALT_SPIM_MWCR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_SER register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_SER_ADDR  ALT_SPIM_SER_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_BAUDR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_BAUDR_ADDR  ALT_SPIM_BAUDR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_TXFTLR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_TXFTLR_ADDR  ALT_SPIM_TXFTLR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_RXFTLR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_RXFTLR_ADDR  ALT_SPIM_RXFTLR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_TXFLR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_TXFLR_ADDR  ALT_SPIM_TXFLR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_RXFLR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_RXFLR_ADDR  ALT_SPIM_RXFLR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_SR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_SR_ADDR  ALT_SPIM_SR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_IMR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_IMR_ADDR  ALT_SPIM_IMR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_ISR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_ISR_ADDR  ALT_SPIM_ISR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_RISR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_RISR_ADDR  ALT_SPIM_RISR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_TXOICR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_TXOICR_ADDR  ALT_SPIM_TXOICR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_RXOICR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_RXOICR_ADDR  ALT_SPIM_RXOICR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_RXUICR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_RXUICR_ADDR  ALT_SPIM_RXUICR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_ICR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_ICR_ADDR  ALT_SPIM_ICR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_DMACR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_DMACR_ADDR  ALT_SPIM_DMACR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_DMATDLR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_DMATDLR_ADDR  ALT_SPIM_DMATDLR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_DMARDLR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_DMARDLR_ADDR  ALT_SPIM_DMARDLR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_IDR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_IDR_ADDR  ALT_SPIM_IDR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_SPI_VER_ID register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_SPI_VER_ID_ADDR  ALT_SPIM_SPI_VER_ID_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_DR register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_DR_ADDR  ALT_SPIM_DR_ADDR(ALT_SPIM0_ADDR)
+/* The address of the ALT_SPIM_RX_SMPL_DLY register for the ALT_SPIM0 instance. */
+#define ALT_SPIM0_RX_SMPL_DLY_ADDR  ALT_SPIM_RX_SMPL_DLY_ADDR(ALT_SPIM0_ADDR)
+/* The base address byte offset for the start of the ALT_SPIM0 component. */
+#define ALT_SPIM0_OFST        0xfff00000
+/* The start address of the ALT_SPIM0 component. */
+#define ALT_SPIM0_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_SPIM0_OFST))
+/* The lower bound address range of the ALT_SPIM0 component. */
+#define ALT_SPIM0_LB_ADDR     ALT_SPIM0_ADDR
+/* The upper bound address range of the ALT_SPIM0 component. */
+#define ALT_SPIM0_UB_ADDR     ALT_CAST(void *, ((ALT_CAST(char *, ALT_SPIM0_ADDR) + 0x100) - 1))
+
+
+/*
+ * Component Instance : spim1
+ *
+ * Instance spim1 of component ALT_SPIM.
+ *
+ *
+ */
+/* The address of the ALT_SPIM_CTLR0 register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_CTLR0_ADDR  ALT_SPIM_CTLR0_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_CTLR1 register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_CTLR1_ADDR  ALT_SPIM_CTLR1_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_SPIENR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_SPIENR_ADDR  ALT_SPIM_SPIENR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_MWCR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_MWCR_ADDR  ALT_SPIM_MWCR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_SER register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_SER_ADDR  ALT_SPIM_SER_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_BAUDR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_BAUDR_ADDR  ALT_SPIM_BAUDR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_TXFTLR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_TXFTLR_ADDR  ALT_SPIM_TXFTLR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_RXFTLR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_RXFTLR_ADDR  ALT_SPIM_RXFTLR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_TXFLR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_TXFLR_ADDR  ALT_SPIM_TXFLR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_RXFLR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_RXFLR_ADDR  ALT_SPIM_RXFLR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_SR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_SR_ADDR  ALT_SPIM_SR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_IMR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_IMR_ADDR  ALT_SPIM_IMR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_ISR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_ISR_ADDR  ALT_SPIM_ISR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_RISR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_RISR_ADDR  ALT_SPIM_RISR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_TXOICR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_TXOICR_ADDR  ALT_SPIM_TXOICR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_RXOICR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_RXOICR_ADDR  ALT_SPIM_RXOICR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_RXUICR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_RXUICR_ADDR  ALT_SPIM_RXUICR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_ICR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_ICR_ADDR  ALT_SPIM_ICR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_DMACR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_DMACR_ADDR  ALT_SPIM_DMACR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_DMATDLR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_DMATDLR_ADDR  ALT_SPIM_DMATDLR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_DMARDLR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_DMARDLR_ADDR  ALT_SPIM_DMARDLR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_IDR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_IDR_ADDR  ALT_SPIM_IDR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_SPI_VER_ID register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_SPI_VER_ID_ADDR  ALT_SPIM_SPI_VER_ID_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_DR register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_DR_ADDR  ALT_SPIM_DR_ADDR(ALT_SPIM1_ADDR)
+/* The address of the ALT_SPIM_RX_SMPL_DLY register for the ALT_SPIM1 instance. */
+#define ALT_SPIM1_RX_SMPL_DLY_ADDR  ALT_SPIM_RX_SMPL_DLY_ADDR(ALT_SPIM1_ADDR)
+/* The base address byte offset for the start of the ALT_SPIM1 component. */
+#define ALT_SPIM1_OFST        0xfff01000
+/* The start address of the ALT_SPIM1 component. */
+#define ALT_SPIM1_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_SPIM1_OFST))
+/* The lower bound address range of the ALT_SPIM1 component. */
+#define ALT_SPIM1_LB_ADDR     ALT_SPIM1_ADDR
+/* The upper bound address range of the ALT_SPIM1 component. */
+#define ALT_SPIM1_UB_ADDR     ALT_CAST(void *, ((ALT_CAST(char *, ALT_SPIM1_ADDR) + 0x100) - 1))
+
+/*
+ * Component Instance : qspiregs
+ *
+ * Instance qspiregs of component ALT_QSPI.
+ *
+ *
+ */
+/* The address of the ALT_QSPI_CFG register for the ALT_QSPI instance. */
+#define ALT_QSPI_CFG_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_CFG_OFST))
+/* The address of the ALT_QSPI_DEVRD register for the ALT_QSPI instance. */
+#define ALT_QSPI_DEVRD_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_DEVRD_OFST))
+/* The address of the ALT_QSPI_DEVWR register for the ALT_QSPI instance. */
+#define ALT_QSPI_DEVWR_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_DEVWR_OFST))
+/* The address of the ALT_QSPI_DELAY register for the ALT_QSPI instance. */
+#define ALT_QSPI_DELAY_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_DELAY_OFST))
+/* The address of the ALT_QSPI_RDDATACAP register for the ALT_QSPI instance. */
+#define ALT_QSPI_RDDATACAP_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_RDDATACAP_OFST))
+/* The address of the ALT_QSPI_DEVSZ register for the ALT_QSPI instance. */
+#define ALT_QSPI_DEVSZ_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_DEVSZ_OFST))
+/* The address of the ALT_QSPI_SRAMPART register for the ALT_QSPI instance. */
+#define ALT_QSPI_SRAMPART_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_SRAMPART_OFST))
+/* The address of the ALT_QSPI_INDADDRTRIG register for the ALT_QSPI instance. */
+#define ALT_QSPI_INDADDRTRIG_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_INDADDRTRIG_OFST))
+/* The address of the ALT_QSPI_DMAPER register for the ALT_QSPI instance. */
+#define ALT_QSPI_DMAPER_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_DMAPER_OFST))
+/* The address of the ALT_QSPI_REMAPADDR register for the ALT_QSPI instance. */
+#define ALT_QSPI_REMAPADDR_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_REMAPADDR_OFST))
+/* The address of the ALT_QSPI_MODBIT register for the ALT_QSPI instance. */
+#define ALT_QSPI_MODBIT_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_MODBIT_OFST))
+/* The address of the ALT_QSPI_SRAMFILL register for the ALT_QSPI instance. */
+#define ALT_QSPI_SRAMFILL_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_SRAMFILL_OFST))
+/* The address of the ALT_QSPI_TXTHRESH register for the ALT_QSPI instance. */
+#define ALT_QSPI_TXTHRESH_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_TXTHRESH_OFST))
+/* The address of the ALT_QSPI_RXTHRESH register for the ALT_QSPI instance. */
+#define ALT_QSPI_RXTHRESH_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_RXTHRESH_OFST))
+/* The address of the ALT_QSPI_IRQSTAT register for the ALT_QSPI instance. */
+#define ALT_QSPI_IRQSTAT_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_IRQSTAT_OFST))
+/* The address of the ALT_QSPI_IRQMSK register for the ALT_QSPI instance. */
+#define ALT_QSPI_IRQMSK_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_IRQMSK_OFST))
+/* The address of the ALT_QSPI_LOWWRPROT register for the ALT_QSPI instance. */
+#define ALT_QSPI_LOWWRPROT_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_LOWWRPROT_OFST))
+/* The address of the ALT_QSPI_UPPWRPROT register for the ALT_QSPI instance. */
+#define ALT_QSPI_UPPWRPROT_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_UPPWRPROT_OFST))
+/* The address of the ALT_QSPI_WRPROT register for the ALT_QSPI instance. */
+#define ALT_QSPI_WRPROT_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_WRPROT_OFST))
+/* The address of the ALT_QSPI_INDRD register for the ALT_QSPI instance. */
+#define ALT_QSPI_INDRD_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_INDRD_OFST))
+/* The address of the ALT_QSPI_INDRDWATER register for the ALT_QSPI instance. */
+#define ALT_QSPI_INDRDWATER_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_INDRDWATER_OFST))
+/* The address of the ALT_QSPI_INDRDSTADDR register for the ALT_QSPI instance. */
+#define ALT_QSPI_INDRDSTADDR_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_INDRDSTADDR_OFST))
+/* The address of the ALT_QSPI_INDRDCNT register for the ALT_QSPI instance. */
+#define ALT_QSPI_INDRDCNT_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_INDRDCNT_OFST))
+/* The address of the ALT_QSPI_INDWR register for the ALT_QSPI instance. */
+#define ALT_QSPI_INDWR_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_INDWR_OFST))
+/* The address of the ALT_QSPI_INDWRWATER register for the ALT_QSPI instance. */
+#define ALT_QSPI_INDWRWATER_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_INDWRWATER_OFST))
+/* The address of the ALT_QSPI_INDWRSTADDR register for the ALT_QSPI instance. */
+#define ALT_QSPI_INDWRSTADDR_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_INDWRSTADDR_OFST))
+/* The address of the ALT_QSPI_INDWRCNT register for the ALT_QSPI instance. */
+#define ALT_QSPI_INDWRCNT_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_INDWRCNT_OFST))
+/* The address of the ALT_QSPI_FLSHCMD register for the ALT_QSPI instance. */
+#define ALT_QSPI_FLSHCMD_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_FLSHCMD_OFST))
+/* The address of the ALT_QSPI_FLSHCMDADDR register for the ALT_QSPI instance. */
+#define ALT_QSPI_FLSHCMDADDR_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_FLSHCMDADDR_OFST))
+/* The address of the ALT_QSPI_FLSHCMDRDDATALO register for the ALT_QSPI instance. */
+#define ALT_QSPI_FLSHCMDRDDATALO_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_FLSHCMDRDDATALO_OFST))
+/* The address of the ALT_QSPI_FLSHCMDRDDATAUP register for the ALT_QSPI instance. */
+#define ALT_QSPI_FLSHCMDRDDATAUP_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_FLSHCMDRDDATAUP_OFST))
+/* The address of the ALT_QSPI_FLSHCMDWRDATALO register for the ALT_QSPI instance. */
+#define ALT_QSPI_FLSHCMDWRDATALO_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_FLSHCMDWRDATALO_OFST))
+/* The address of the ALT_QSPI_FLSHCMDWRDATAUP register for the ALT_QSPI instance. */
+#define ALT_QSPI_FLSHCMDWRDATAUP_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_FLSHCMDWRDATAUP_OFST))
+/* The address of the ALT_QSPI_MODULEID register for the ALT_QSPI instance. */
+#define ALT_QSPI_MODULEID_ADDR  ALT_CAST(void *, (ALT_CAST(char *, ALT_QSPI_ADDR) + ALT_QSPI_MODULEID_OFST))
+/* The base address byte offset for the start of the ALT_QSPI component. */
+#define ALT_QSPI_OFST        0xff705000
+/* The start address of the ALT_QSPI component. */
+#define ALT_QSPI_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_QSPI_OFST))
+/* The lower bound address range of the ALT_QSPI component. */
+#define ALT_QSPI_LB_ADDR     ALT_QSPI_ADDR
+/* The upper bound address range of the ALT_QSPI component. */
+#define ALT_QSPI_UB_ADDR     ALT_CAST(void *, ((ALT_CAST(char *, ALT_QSPI_ADDR) + 0x100) - 1))
+
+/*
+ * Component Instance : qspidata
+ *
+ * Instance qspidata of component ALT_QSPIDATA.
+ *
+ *
+ */
+/* The base address byte offset for the start of the ALT_QSPIDATA component. */
+#define ALT_QSPIDATA_OFST        0xffa00000
+/* The start address of the ALT_QSPIDATA component. */
+#define ALT_QSPIDATA_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_QSPIDATA_OFST))
+/* The lower bound address range of the ALT_QSPIDATA component. */
+#define ALT_QSPIDATA_LB_ADDR     ALT_QSPIDATA_ADDR
+/* The upper bound address range of the ALT_QSPIDATA component. */
+#define ALT_QSPIDATA_UB_ADDR     ALT_CAST(void *, ((ALT_CAST(char *, ALT_QSPIDATA_ADDR) + 0x100000) - 1))
 
 /*
  * Component : QSPI Flash Controller Module Registers - ALT_QSPI

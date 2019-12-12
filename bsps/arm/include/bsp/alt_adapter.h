@@ -30,6 +30,16 @@
 
 #include <rtems.h>
 
+/******************************************************************************/
+/*!
+ * This type definition is an opaque type definition for clock frequency values
+ * in Hz.
+ */
+typedef uint32_t    alt_freq_t;
+
+
+/******************************************************************************/
+
 #define ALT_STATUS_CODE rtems_status_code
 
 /*! Definitions of status codes returned by the HWLIB. */
@@ -49,7 +59,8 @@
 #define ALT_E_TMO                   RTEMS_TIMEOUT
 /*! The buffer does not contain enough free space for the operation. */
 #define ALT_E_BUF_OVF               RTEMS_NO_MEMORY
-
+/*! An invalid option was passed. */
+#define ALT_E_INV_OPTION            RTEMS_INVALID_NUMBER
 /*!
  * Indicates a FALSE condition.
  */
