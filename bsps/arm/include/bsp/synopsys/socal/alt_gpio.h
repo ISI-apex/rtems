@@ -112,9 +112,8 @@ extern "C"
 /* The base address byte offset for the start of the ALT_GPIO0 component. */
 #if 0
 #define ALT_GPIO0_OFST        0xff708000
-#define ALT_GPIO0_OFST        0x26006000
 #endif
-#define ALT_GPIO0_OFST        LSIO_GPIO0_BASE
+#define ALT_GPIO0_OFST        GPIO0_BASE
 /* The start address of the ALT_GPIO0 component. */
 #define ALT_GPIO0_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_GPIO0_OFST))
 /* The lower bound address range of the ALT_GPIO0 component. */
@@ -187,9 +186,8 @@ extern "C"
 /* The base address byte offset for the start of the ALT_GPIO1 component. */
 #if 0
 #define ALT_GPIO1_OFST        0xff709000
-#define ALT_GPIO1_OFST        0x26007000
 #endif
-#define ALT_GPIO1_OFST        LSIO_GPIO1_BASE
+#define ALT_GPIO1_OFST        GPIO1_BASE
 /* The start address of the ALT_GPIO1 component. */
 #define ALT_GPIO1_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_GPIO1_OFST))
 /* The lower bound address range of the ALT_GPIO1 component. */
