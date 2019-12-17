@@ -205,10 +205,7 @@ typedef uint32_t    alt_freq_t;
 /* The address of the ALT_I2C_COMP_TYPE register for the ALT_I2C0 instance. */
 #define ALT_I2C0_IC_COMP_TYPE_ADDR  ALT_I2C_COMP_TYPE_ADDR(ALT_I2C0_ADDR)
 /* The base address byte offset for the start of the ALT_I2C0 component. */
-#if 0
-#define ALT_I2C0_OFST        0x26008000
-#endif
-#define ALT_I2C0_OFST        LSIO_I2C0_BASE
+#define ALT_I2C0_OFST        I2C0_BASE
 /* The start address of the ALT_I2C0 component. */
 #define ALT_I2C0_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_I2C0_OFST))
 /* The lower bound address range of the ALT_I2C0 component. */
@@ -307,10 +304,7 @@ typedef uint32_t    alt_freq_t;
 /* The address of the ALT_I2C_COMP_TYPE register for the ALT_I2C1 instance. */
 #define ALT_I2C1_IC_COMP_TYPE_ADDR  ALT_I2C_COMP_TYPE_ADDR(ALT_I2C1_ADDR)
 /* The base address byte offset for the start of the ALT_I2C1 component. */
-#if 0
-#define ALT_I2C1_OFST        0x2600a000
-#endif
-#define ALT_I2C1_OFST        LSIO_I2C1_BASE
+#define ALT_I2C1_OFST        I2C1_BASE
 /* The start address of the ALT_I2C1 component. */
 #define ALT_I2C1_ADDR        ALT_CAST(void *, (ALT_CAST(char *, ALT_HPS_ADDR) + ALT_I2C1_OFST))
 /* The lower bound address range of the ALT_I2C1 component. */
