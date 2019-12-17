@@ -34,7 +34,7 @@
  * 
  ******************************************************************************/
 
-#include <bsp/altera/alt_i2c.h>
+#include <bsp/synopsys/alt_i2c.h>
 #if 0
 #include <bsp/alt_i2c.h>
 #include <bsp/alt_reset_manager.h>

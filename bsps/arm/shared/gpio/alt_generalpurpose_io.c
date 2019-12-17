@@ -42,12 +42,12 @@
 #include    <bsp/socal/hps.h>
 #include    <bsp/socal/socal.h>
 #endif
-#include    <bsp/socal/alt_gpio.h>
+#include    <bsp/synopsys/socal/alt_gpio.h>
 #if 0
 #include    <bsp/socal/alt_rstmgr.h>
 #include    <bsp/hwlib.h>
 #endif
-#include    <bsp/alt_generalpurpose_io.h>
+#include    <bsp/synopsys/alt_generalpurpose_io.h>
 
 
 /****************************************************************************************/

@@ -22,7 +22,7 @@
 #define XXX_H
 
 #include <rtems.h>
-#include <bsp/altera/alt_i2c.h>
+#include <bsp/synopsys/alt_i2c.h>
 
 #ifdef __cplusplus
 extern "C" {

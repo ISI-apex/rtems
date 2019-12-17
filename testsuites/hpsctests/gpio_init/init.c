@@ -35,7 +35,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <tmacros.h>
-#include <bsp/alt_generalpurpose_io.h>
+#include <bsp/synopsys/alt_generalpurpose_io.h>
 
 const char rtems_test_name[] = "RTPS GPIO Init Test";
 

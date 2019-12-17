@@ -45,7 +45,7 @@
 #include "hwlib.h"
 #include "alt_clock_manager.h"
 #endif
-#include <bsp/altera/alt_adapter.h>
+#include <bsp/synopsys/alt_adapter.h>
 #include "socal/alt_i2c.h"
 #include <bsp/hwinfo.h>
 #if 0

@@ -48,9 +48,9 @@
 #include <bsp/alt_clock_manager.h>
 #include "alt_qspi.h"
 #endif
-#include <bsp/socal/alt_qspi.h>
-#include <bsp/alt_qspi.h>
-#include <bsp/alt_qspi_private.h>
+#include <bsp/synopsys/socal/alt_qspi.h>
+#include <bsp/synopsys/alt_qspi.h>
+#include <bsp/synopsys/alt_qspi_private.h>
 #if 0
 #include <bsp/socal/alt_rstmgr.h>
 #include <bsp/socal/alt_sysmgr.h>
