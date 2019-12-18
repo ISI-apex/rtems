@@ -113,17 +113,24 @@
 #define TRCH_M4_BUSYLOOP_FACTOR		800000
 
 #define LSIO_I2C0_BASE         0x26008000
+#define I2C0_BASE              LSIO_I2C0_BASE
 #define LSIO_I2C0_ECC_CSR_BASE 0x26009000
 #define LSIO_I2C1_BASE         0x2600a000
+#define I2C1_BASE              LSIO_I2C1_BASE
 #define LSIO_I2C1_ECC_CSR_BASE 0x2600b000
 
 #define LSIO_SPI0_BASE         0x2600c000
+#define SPI0_BASE              LSIO_SPI0_BASE
 #define LSIO_SPI0_ECC_CSR_BASE 0x2600d000
 #define LSIO_SPI1_BASE         0x2600e000
+#define SPI1_BASE              LSIO_SPI1_BASE
 #define LSIO_SPI1_ECC_CSR_BASE 0x2600f000
 #define RTPS_SPI0_BASE         0x3420c000
+#define SPI2_BASE              RTPS_SPI0_BASE
 
 #define LSIO_GPIO0_BASE        0x26006000
+#define GPIO0_BASE             LSIO_GPIO0_BASE
 #define LSIO_GPIO1_BASE        0x26007000
+#define GPIO1_BASE             LSIO_GPIO1_BASE
 
 #endif // HWINFO_H
