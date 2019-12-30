@@ -45,7 +45,7 @@ rtems_task Init(
 )
 {
   rtems_status_code status = RTEMS_SUCCESSFUL;
-  int bsp_configured_gpio_instances = TRCH_NO_GPIO;
+  int bsp_configured_gpio_instances = NUM_GPIO_BLOCKS;
   ALT_GPIO_PARAM_ENABLE_STATE_t state;
 
   TEST_BEGIN();
