@@ -37,16 +37,7 @@
 #include    <stdint.h>
 #include    <stdlib.h>
 #include    <stdbool.h>
-
-#if 0
-#include    <bsp/socal/hps.h>
-#include    <bsp/socal/socal.h>
-#endif
-#include    <bsp/synopsys/socal/alt_gpio.h>
-#if 0
-#include    <bsp/socal/alt_rstmgr.h>
-#include    <bsp/hwlib.h>
-#endif
+#include    <bspopts.h>
 #include    <bsp/synopsys/alt_generalpurpose_io.h>
 
 
@@ -1180,7 +1171,7 @@ ALT_STATUS_CODE alt_gpio_bit_config(ALT_GPIO_INSTANCE_t gpio_iid,
     uint32_t            mask;
 
     pid = alt_gpio_bit_to_pid(signal_num);
-    mask = 0x1 << alt_gpio_bit_to_port_pin(signal_num);
+    mask = 0x1 << alt_gpio_bit_to_port_pin(gpio_iid, signal_num);
     return alt_gpio_port_config(gpio_iid, pid, mask, dir, type, pol, debounce, data);
 }
 
@@ -1200,7 +1191,7 @@ ALT_STATUS_CODE alt_gpio_bitconfig_get(ALT_GPIO_INSTANCE_t gpio_iid,
     if ((config != NULL) && (signal_num != ALT_END_OF_GPIO_SIGNALS) && (signal_num <= ALT_LAST_VALID_GPIO_BIT))
     {
         pid = alt_gpio_bit_to_pid(signal_num);
-        shift = alt_gpio_bit_to_port_pin(signal_num);
+        shift = alt_gpio_bit_to_port_pin(gpio_iid, signal_num);
         if ((pid != ALT_GPIO_PORT_UNKNOWN) && (shift <= ALT_GPIO_BIT_MAX))
         {
             config->signal_number = signal_num;
@@ -1247,7 +1238,7 @@ ALT_STATUS_CODE alt_gpio_group_config(ALT_GPIO_INSTANCE_t gpio_iid,
                 {
                     // if the pin is set to be an output, set it to the correct value
                     alt_gpio_port_data_write(gpio_iid, alt_gpio_bit_to_pid(config_array->signal_number),
-                             0x1 << alt_gpio_bit_to_port_pin(config_array->signal_number),
+                             0x1 << alt_gpio_bit_to_port_pin(gpio_iid, config_array->signal_number),
                              ALT_GPIO_ALLORNONE(config_array->data));
                         // ret should retain the value returned by alt_gpio_bit_config() above
                         // and should not be changed by the alt_gpio_port_data_write() call.
@@ -1346,22 +1337,102 @@ ALT_GPIO_PORT_t alt_gpio_bit_to_pid(ALT_GPIO_1BIT_t pin_num)
     if (pin_num <= ALT_GPIO_EOPA) { pid = ALT_GPIO_PORTA; }
     else if (pin_num <= ALT_GPIO_EOPB) { pid = ALT_GPIO_PORTB; }
     else if (pin_num <= ALT_GPIO_EOPC) { pid = ALT_GPIO_PORTC; }
+    else if (pin_num <= ALT_GPIO_EOPD) { pid = ALT_GPIO_PORTD; }
     return pid;
 }
 
+/****************************************************************************************/
+/* A helper function to return the GPIO port width for the supplied GPIO instance       */
+/* and Port identifiers.                                                                */
+/****************************************************************************************/
+uint32_t alt_get_gpio_port_width(ALT_GPIO_INSTANCE_t gpio_iid, ALT_GPIO_PORT_t gpio_pid)
+{
+  uint32_t    port_width = 0;
+
+  switch (gpio_iid) {
+  case ALT_GPIO_INSTANCE0:
+    switch (gpio_pid) {
+    case ALT_GPIO_PORTA:
+      port_width = GPIO0_PWIDTH_A;
+      break;
+    case ALT_GPIO_PORTB:
+      port_width = GPIO0_PWIDTH_B;
+      break;
+    case ALT_GPIO_PORTC:
+      port_width = GPIO0_PWIDTH_C;
+      break;
+    case ALT_GPIO_PORTD:
+      port_width = GPIO0_PWIDTH_D;
+      break;
+    case ALT_GPIO_PORT_UNKNOWN:
+      break;
+    default:
+      break;
+    }
+    break;
+  case ALT_GPIO_INSTANCE1:
+    switch (gpio_pid) {
+    case ALT_GPIO_PORTA:
+      port_width = GPIO1_PWIDTH_A;
+      break;
+    case ALT_GPIO_PORTB:
+      port_width = GPIO1_PWIDTH_B;
+      break;
+    case ALT_GPIO_PORTC:
+      port_width = GPIO1_PWIDTH_C;
+      break;
+    case ALT_GPIO_PORTD:
+      port_width = GPIO1_PWIDTH_D;
+      break;
+    case ALT_GPIO_PORT_UNKNOWN:
+      break;
+    default:
+      break;
+    }
+    break;
+  default:
+    port_width = ALT_END_OF_GPIO_SIGNALS;
+    break;
+  }
+
+  return port_width;
+}
 
 /****************************************************************************************/
 /* A useful utility function. Extracts the GPIO signal (pin) mask from the supplied     */
 /* GPIO Signal Index Number.                                                           */
 /****************************************************************************************/
-
-ALT_GPIO_PORTBIT_t alt_gpio_bit_to_port_pin(ALT_GPIO_1BIT_t pin_num)
+ALT_GPIO_PORTBIT_t alt_gpio_bit_to_port_pin(ALT_GPIO_INSTANCE_t gpio_iid,
+        ALT_GPIO_1BIT_t pin_num)
 {
+#if 0
     if (pin_num <= ALT_GPIO_EOPA) {}
     else if (pin_num <= ALT_GPIO_EOPB) { pin_num -= (ALT_GPIO_EOPA + 1); }
     else if (pin_num <= ALT_GPIO_EOPC) { pin_num -= (ALT_GPIO_EOPB + 1); }
+    else if (pin_num <= ALT_GPIO_EOPD) { pin_num -= (ALT_GPIO_EOPC + 1); }
     else { return ALT_END_OF_GPIO_PORT_SIGNALS; }
     return (ALT_GPIO_PORTBIT_t) pin_num;
+#endif
+    /* Determine the IP block and port to which this GPIO Signal Index Number belongs */
+    uint32_t num_pins = 0;
+    ALT_GPIO_INSTANCE_t i;
+    ALT_GPIO_PORT_t p;
+
+    for (i=0; i<ALT_GPIO_INSTANCE_UNKNOWN; i++) {
+      for (p=0; p<ALT_GPIO_PORT_UNKNOWN; p++){
+        num_pins += alt_get_gpio_port_width(i, p);
+        if (pin_num <= num_pins)
+          break;
+      }
+    }
+
+    if (pin_num > num_pins)
+      return ALT_END_OF_GPIO_SIGNALS;
+
+    /* We have the IP block and port, now determine the pin number within that port */
+    uint32_t port_pin;
+    port_pin = num_pins - pin_num;
+    return (1 << port_pin);
 }
 
 
@@ -1371,19 +1442,71 @@ ALT_GPIO_PORTBIT_t alt_gpio_bit_to_port_pin(ALT_GPIO_1BIT_t pin_num)
 /* the signal number of the lowest bitmask presented is returned.                       */
 /****************************************************************************************/
 
-ALT_GPIO_1BIT_t alt_gpio_port_pin_to_bit(ALT_GPIO_PORT_t pid,
+ALT_GPIO_1BIT_t alt_gpio_port_pin_to_bit(ALT_GPIO_INSTANCE_t gpio_iid,
+        ALT_GPIO_PORT_t pid,
         uint32_t bitmask)
 {
     uint32_t    i;
+    uint32_t    port_width;
+
+    port_width = alt_get_gpio_port_width(gpio_iid, pid);
+    if (port_width == ALT_END_OF_GPIO_SIGNALS)
+      return ALT_END_OF_GPIO_SIGNALS;
 
     for (i=0; i <= ALT_GPIO_BITNUM_MAX ;i++)
     {
         if (bitmask & 0x00000001)
         {
-            if (pid == ALT_GPIO_PORTA) {}
-            else if (pid == ALT_GPIO_PORTB) { i += ALT_GPIO_EOPA + 1; }
-            else if (pid == ALT_GPIO_PORTC) { i += ALT_GPIO_EOPB + 1; }
-            else { return ALT_END_OF_GPIO_SIGNALS; }
+            if (pid == ALT_GPIO_PORTA) {
+              switch (port_width) {
+              case 8:
+              case 16:
+              case 32:
+                break;
+              default:
+                return ALT_END_OF_GPIO_SIGNALS;
+                break;
+              }
+            }
+            else if (pid == ALT_GPIO_PORTB) {
+              switch (port_width) {
+              case 8:
+              case 16:
+              case 32:
+                i += ALT_GPIO_EOPA + 1;
+                break;
+              default:
+                return ALT_END_OF_GPIO_SIGNALS;
+                break;
+              }
+            }
+            else if (pid == ALT_GPIO_PORTC) {
+              switch (port_width) {
+              case 8:
+              case 16:
+              case 32:
+                i += ALT_GPIO_EOPB + 1;
+               break;
+              default:
+                return ALT_END_OF_GPIO_SIGNALS;
+                break;
+              }
+            }
+            else if (pid == ALT_GPIO_PORTD) {
+              switch (port_width) {
+              case 8:
+              case 16:
+              case 32:
+                i += ALT_GPIO_EOPC + 1;
+               break;
+              default:
+                return ALT_END_OF_GPIO_SIGNALS;
+                break;
+              }
+            }
+            else {
+              return ALT_END_OF_GPIO_SIGNALS;
+            }
             return (ALT_GPIO_1BIT_t) i;
         }
         bitmask >>= 1;

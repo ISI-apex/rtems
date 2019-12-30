@@ -30,6 +30,13 @@
 
 #include <rtems.h>
 
+/******************************************************************************/
+/*!
+ * This type definition is an opaque type definition for clock frequency values
+ * in Hz.
+ */
+typedef uint32_t    alt_freq_t;
+
 #define ALT_STATUS_CODE rtems_status_code
 
 /*! Definitions of status codes returned by the HWLIB. */
@@ -49,6 +56,8 @@
 #define ALT_E_TMO                   RTEMS_TIMEOUT
 /*! The buffer does not contain enough free space for the operation. */
 #define ALT_E_BUF_OVF               RTEMS_NO_MEMORY
+/*! An invalid option was passed. */
+#define ALT_E_INV_OPTION            RTEMS_INVALID_NUMBER
 
 /*!
  * Indicates a FALSE condition.
@@ -101,5 +110,37 @@
 #define ALT_DMA_PERIPH_PROVISION_QSPI_SUPPORT 0
 
 #define ALT_DMASECURE_ADDR BSP_DMA_BASE
+#define ALT_TWO_TO_POW0             (1)
+#define ALT_TWO_TO_POW1             (1<<1)
+#define ALT_TWO_TO_POW2             (1<<2)
+#define ALT_TWO_TO_POW3             (1<<3)
+#define ALT_TWO_TO_POW4             (1<<4)
+#define ALT_TWO_TO_POW5             (1<<5)
+#define ALT_TWO_TO_POW6             (1<<6)
+#define ALT_TWO_TO_POW7             (1<<7)
+#define ALT_TWO_TO_POW8             (1<<8)
+#define ALT_TWO_TO_POW9             (1<<9)
+#define ALT_TWO_TO_POW10            (1<<10)
+#define ALT_TWO_TO_POW11            (1<<11)
+#define ALT_TWO_TO_POW12            (1<<12)
+#define ALT_TWO_TO_POW13            (1<<13)
+#define ALT_TWO_TO_POW14            (1<<14)
+#define ALT_TWO_TO_POW15            (1<<15)
+#define ALT_TWO_TO_POW16            (1<<16)
+#define ALT_TWO_TO_POW17            (1<<17)
+#define ALT_TWO_TO_POW18            (1<<18)
+#define ALT_TWO_TO_POW19            (1<<19)
+#define ALT_TWO_TO_POW20            (1<<20)
+#define ALT_TWO_TO_POW21            (1<<21)
+#define ALT_TWO_TO_POW22            (1<<22)
+#define ALT_TWO_TO_POW23            (1<<23)
+#define ALT_TWO_TO_POW24            (1<<24)
+#define ALT_TWO_TO_POW25            (1<<25)
+#define ALT_TWO_TO_POW26            (1<<26)
+#define ALT_TWO_TO_POW27            (1<<27)
+#define ALT_TWO_TO_POW28            (1<<28)
+#define ALT_TWO_TO_POW29            (1<<29)
+#define ALT_TWO_TO_POW30            (1<<30)
+#define ALT_TWO_TO_POW31            (1<<31)
 
 #endif /* LIBBSP_ARM_GEN_R52_BSP_ALT_ADAPTER_H */
