@@ -61,7 +61,7 @@
 #if 0
 #include <bsp/hwlib.h>
 #endif
-#include <bsp/alt_adapter.h>
+#include "alt_adapter.h"
 #ifdef __cplusplus
 extern "C"
 {
