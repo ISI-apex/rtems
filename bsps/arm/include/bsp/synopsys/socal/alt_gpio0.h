@@ -59,6 +59,26 @@ extern "C"
 #define ALT_GPIO0_SWPORTA_DR_ADDR  ALT_GPIO_SWPORTA_DR_ADDR(ALT_GPIO0_ADDR)
 /* The address of the ALT_GPIO_SWPORTA_DDR register for the ALT_GPIO0 instance. */
 #define ALT_GPIO0_SWPORTA_DDR_ADDR  ALT_GPIO_SWPORTA_DDR_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_SWPORTA_CTL register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_SWPORTA_CTL_ADDR ALT_GPIO_SWPORTA_CTL_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_SWPORTB_DR register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_SWPORTB_DR_ADDR  ALT_GPIO_SWPORTB_DR_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_SWPORTB_DDR register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_SWPORTB_DDR_ADDR  ALT_GPIO_SWPORTB_DDR_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_SWPORTB_CTL register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_SWPORTB_CTL_ADDR ALT_GPIO_SWPORTB_CTL_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_SWPORTC_DR register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_SWPORTC_DR_ADDR  ALT_GPIO_SWPORTC_DR_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_SWPORTC_DDR register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_SWPORTC_DDR_ADDR  ALT_GPIO_SWPORTC_DDR_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_SWPORTC_CTL register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_SWPORTC_CTL_ADDR ALT_GPIO_SWPORTC_CTL_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_SWPORTD_DR register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_SWPORTD_DR_ADDR  ALT_GPIO_SWPORTD_DR_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_SWPORTD_DDR register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_SWPORTD_DDR_ADDR  ALT_GPIO_SWPORTD_DDR_ADDR(ALT_GPIO0_ADDR)
+/* The address of the ALT_GPIO_SWPORTD_CTL register for the ALT_GPIO0 instance. */
+#define ALT_GPIO0_SWPORTD_CTL_ADDR ALT_GPIO_SWPORTD_CTL_ADDR(ALT_GPIO0_ADDR)
 /* The address of the ALT_GPIO_INTEN register for the ALT_GPIO0 instance. */
 #define ALT_GPIO0_INTEN_ADDR  ALT_GPIO_INTEN_ADDR(ALT_GPIO0_ADDR)
 /* The address of the ALT_GPIO_INTMSK register for the ALT_GPIO0 instance. */
@@ -1448,45 +1468,6 @@ typedef volatile struct ALT_GPIO0_ID_CODE_s  ALT_GPIO0_ID_CODE_t;
 
 /* The address of the ALT_GPIO_ID_CODE register. */
 #define ALT_GPIO_ID_CODE_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_ID_CODE_OFST))
-
-/*
- * Field : Debounce Field - debounce
- *
- * The value of this field is fixed to allow debouncing of the Port A signals.
- *
- * Field Enumeration Values:
- *
- *  Enum                                   | Value | Description
- * :---------------------------------------|:------|:--------------------
- *  ALT_GPIO_CFG_REG1_DEBOUNCE_E_DEBOUNCEA | 0x1   | Debounce is Enabled
- *
- * Field Access Macros:
- *
- */
-/*
- * Enumerated value for register field ALT_GPIO_CFG_REG1_DEBOUNCE
- *
- * Debounce is Enabled
- */
-#define ALT_GPIO_CFG_REG1_DEBOUNCE_E_DEBOUNCEA  0x1
-
-/* TODO (Richard): Fix this */
-/* The Least Significant Bit (LSB) position of the ALT_GPIO_CFG_REG1_DEBOUNCE register field. */
-#define ALT_GPIO_CFG_REG1_DEBOUNCE_LSB        13
-/* The Most Significant Bit (MSB) position of the ALT_GPIO_CFG_REG1_DEBOUNCE register field. */
-#define ALT_GPIO_CFG_REG1_DEBOUNCE_MSB        13
-/* The width in bits of the ALT_GPIO_CFG_REG1_DEBOUNCE register field. */
-#define ALT_GPIO_CFG_REG1_DEBOUNCE_WIDTH      1
-/* The mask used to set the ALT_GPIO_CFG_REG1_DEBOUNCE register field value. */
-#define ALT_GPIO_CFG_REG1_DEBOUNCE_SET_MSK    0x00002000
-/* The mask used to clear the ALT_GPIO_CFG_REG1_DEBOUNCE register field value. */
-#define ALT_GPIO_CFG_REG1_DEBOUNCE_CLR_MSK    0xffffdfff
-/* The reset value of the ALT_GPIO_CFG_REG1_DEBOUNCE register field. */
-#define ALT_GPIO_CFG_REG1_DEBOUNCE_RESET      0x1
-/* Extracts the ALT_GPIO_CFG_REG1_DEBOUNCE field value from a register. */
-#define ALT_GPIO_CFG_REG1_DEBOUNCE_GET(value) (((value) & 0x00002000) >> 13)
-/* Produces a ALT_GPIO_CFG_REG1_DEBOUNCE register field value suitable for setting the register. */
-#define ALT_GPIO_CFG_REG1_DEBOUNCE_SET(value) (((value) << 13) & 0x00002000)
 
 #ifndef __ASSEMBLY__
 /*

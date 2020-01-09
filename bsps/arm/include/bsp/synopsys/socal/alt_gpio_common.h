@@ -70,31 +70,11 @@ extern "C"
 /* The address of the ALT_GPIO_SWPORTD_DR register. */
 #define ALT_GPIO_SWPORTD_DR_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_SWPORTD_DR_OFST))
 
-#if 0
 /*
  * Register : Port A Data Direction Register - gpio_swporta_ddr
  *
  * This register establishes the direction of each corresponding GPIO Data Field
  * Bit.
- *
- * Check the GPIO chapter in the handbook for details on how GPIO2 is implemented.
- *
- * Register Layout
- *
- *  Bits    | Access | Reset | Description
- * :--------|:-------|:------|:----------------------------
- *  [28:0]  | RW     | 0x0   | Port A Data Direction Field
- *  [31:29] | ???    | 0x0   | *UNDEFINED*
- *
- */
-#endif
-/*
- * Register : Port A Data Direction Register - gpio_swporta_ddr
- *
- * This register establishes the direction of each corresponding GPIO Data Field
- * Bit.
- *
- * Check the GPIO chapter in the handbook for details on how GPIO2 is implemented.
  *
  * Register Layout - dependent on port width x where x=GPIO_PWIDTH_A
  *
@@ -110,8 +90,6 @@ extern "C"
  *
  * Values written to this register independently control the direction of the
  * corresponding data bit in the Port A Data Register.
- *
- * Check the GPIO chapter in the handbook for details on how GPIO2 is implemented.
  *
  * Field Enumeration Values:
  *
@@ -144,37 +122,119 @@ extern "C"
 /* The address of the ALT_GPIO_SWPORTA_DDR register. */
 #define ALT_GPIO_SWPORTA_DDR_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_SWPORTA_DDR_OFST))
 
+/*
+ * Register : Port A Data Source Register - gpio_swporta_ctl
+ *
+ * This register establishes the data and control source of each corresponding GPIO Data Field
+ * Bit.
+ *
+ * The data and control source for a signal can come from either software or hardware;
+ * this bit selects between them. The default source is configurable through the
+ * GPIO_DFLT_DIR_A configuration parameter. If GPIO_PORTA_SINGLE_CTL = 0, the register will contain
+ * one bit for each bit of the signal. Upon reset in this case, the value of GPIO_DFLT_SRC_A
+ * is replicated across all bits of the signal so that all bits power up with the same operating mode.
+ * Furthermore, the default source of each bit of the signal can subsequently be changed by writing
+ * to the corresponding bit of this register. This register is not available unless GPIO_HW_PORTA = 1.
+ *
+ * Register Layout - dependent on port width x where x=GPIO_PWIDTH_A
+ *
+ *  Bits    | Access | Reset | Description
+ * :--------|:-------|:------|:----------------------------
+ *  [x:0]   | RW     | z     | Port A Data Source Control Field
+ *  [31:y]  | ???    | 0x0   | *Reserved - read as zero*
+ *
+ * z = If GPIO_PORTA_SINGLE_CTL = 1, then the reset value is GPIO_DFLT_SRC_A.
+ * If GPIO_PORTA_SINGLE_CTL = 0, then the reset value is {GPIO_PWIDTH_A{GPIO_DFLT_SRC_A in each bit}}.
+ */
+/*
+ * Field : Port A Data Source Field - gpio_swporta_ctl
+ *
+ * Values written to this register independently control the data and control source of the
+ * corresponding data bit in the Port A Data Register.
+ *
+ * Field Enumeration Values:
+ *
+ *  Enum                                              | Value | Description
+ * :--------------------------------------------------|:------|:-----------------
+ *  ALT_GPIO_SWPORTA_CTL_GPIO_SWPORTA_CTL_E_SOFTWARE  | 0x0   | Software Mode
+ *  ALT_GPIO_SWPORTA_CTL_GPIO_SWPORTA_CTL_E_HARDWARE  | 0x1   | Hardware Mode
+ *
+ * Field Access Macros:
+ *
+ */
+/*
+ * Enumerated value for register field ALT_GPIO_SWPORTA_CTL_GPIO_SWPORTA_CTL
+ *
+ * Software Mode
+ */
+#define ALT_GPIO_SWPORTA_CTL_GPIO_SWPORTA_CTL_E_SOFTWARE  0x0
+/*
+ * Enumerated value for register field ALT_GPIO_SWPORTA_CTL_GPIO_SWPORTA_CTL
+ *
+ * Hardware Mode
+ */
+#define ALT_GPIO_SWPORTA_CTL_GPIO_SWPORTA_CTL_E_HARDWARE 0x1
+
+/* The byte offset of the ALT_GPIO_SWPORTA_CTL register from the beginning of the component. */
+#define ALT_GPIO_SWPORTA_CTL_OFST        0x08
+/* The address of the ALT_GPIO_SWPORTA_CTL register. */
+#define ALT_GPIO_SWPORTA_CTL_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_SWPORTA_CTL_OFST))
+
+/* The byte offset of the ALT_GPIO_SWPORTB_DR register from the beginning of the component. */
+#define ALT_GPIO_SWPORTB_DR_OFST        0x0c
+/* The address of the ALT_GPIO_SWPORTB_DR register. */
+#define ALT_GPIO_SWPORTB_DR_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_SWPORTB_DR_OFST))
+
 /* The byte offset of the ALT_GPIO_SWPORTB_DDR register from the beginning of the component. */
 #define ALT_GPIO_SWPORTB_DDR_OFST        0x10
 /* The address of the ALT_GPIO_SWPORTB_DDR register. */
 #define ALT_GPIO_SWPORTB_DDR_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_SWPORTB_DDR_OFST))
+
+/* Enumerated values for register field ALT_GPIO_SWPORTB_CTL_GPIO_SWPORTB_CTL */
+#define ALT_GPIO_SWPORTB_CTL_GPIO_SWPORTB_CTL_E_SOFTWARE  0x0
+#define ALT_GPIO_SWPORTB_CTL_GPIO_SWPORTB_CTL_E_HARDWARE 0x1
+/* The byte offset of the ALT_GPIO_SWPORTB_CTL register from the beginning of the component. */
+#define ALT_GPIO_SWPORTB_CTL_OFST        0x14
+/* The address of the ALT_GPIO_SWPORTB_CTL register. */
+#define ALT_GPIO_SWPORTB_CTL_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_SWPORTB_CTL_OFST))
+
+/* The byte offset of the ALT_GPIO_SWPORTC_DR register from the beginning of the component. */
+#define ALT_GPIO_SWPORTC_DR_OFST        0x18
+/* The address of the ALT_GPIO_SWPORTC_DR register. */
+#define ALT_GPIO_SWPORTC_DR_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_SWPORTC_DR_OFST))
 
 /* The byte offset of the ALT_GPIO_SWPORTC_DDR register from the beginning of the component. */
 #define ALT_GPIO_SWPORTC_DDR_OFST        0x1c
 /* The address of the ALT_GPIO_SWPORTC_DDR register. */
 #define ALT_GPIO_SWPORTC_DDR_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_SWPORTC_DDR_OFST))
 
+
+/* Enumerated values for register field ALT_GPIO_SWPORTC_CTL_GPIO_SWPORTC_CTL */
+#define ALT_GPIO_SWPORTC_CTL_GPIO_SWPORTC_CTL_E_SOFTWARE  0x0
+#define ALT_GPIO_SWPORTC_CTL_GPIO_SWPORTC_CTL_E_HARDWARE 0x1
+/* The byte offset of the ALT_GPIO_SWPORTC_CTL register from the beginning of the component. */
+#define ALT_GPIO_SWPORTC_CTL_OFST        0x20
+/* The address of the ALT_GPIO_SWPORTC_CTL register. */
+#define ALT_GPIO_SWPORTC_CTL_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_SWPORTC_CTL_OFST))
+
+/* The byte offset of the ALT_GPIO_SWPORTD_DR register from the beginning of the component. */
+#define ALT_GPIO_SWPORTD_DR_OFST        0x24
+/* The address of the ALT_GPIO_SWPORTD_DR register. */
+#define ALT_GPIO_SWPORTD_DR_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_SWPORTD_DR_OFST))
+
 /* The byte offset of the ALT_GPIO_SWPORTD_DDR register from the beginning of the component. */
 #define ALT_GPIO_SWPORTD_DDR_OFST        0x28
 /* The address of the ALT_GPIO_SWPORTD_DDR register. */
 #define ALT_GPIO_SWPORTD_DDR_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_SWPORTD_DDR_OFST))
 
-#if 0
-/*
- * Register : Interrupt Enable Register - gpio_inten
- *
- * The Interrupt enable register allows interrupts for each bit of the Port A data
- * register.
- *
- * Register Layout
- *
- *  Bits    | Access | Reset | Description
- * :--------|:-------|:------|:-----------------------
- *  [28:0]  | RW     | 0x0   | Interrupt Enable Field
- *  [31:29] | ???    | 0x0   | *UNDEFINED*
- *
- */
-#endif
+/* Enumerated values for register field ALT_GPIO_SWPORTD_CTL_GPIO_SWPORTD_CTL */
+#define ALT_GPIO_SWPORTD_CTL_GPIO_SWPORTD_CTL_E_SOFTWARE  0x0
+#define ALT_GPIO_SWPORTD_CTL_GPIO_SWPORTD_CTL_E_HARDWARE 0x1
+/* The byte offset of the ALT_GPIO_SWPORTD_CTL register from the beginning of the component. */
+#define ALT_GPIO_SWPORTD_CTL_OFST        0x2c
+/* The address of the ALT_GPIO_SWPORTD_CTL register. */
+#define ALT_GPIO_SWPORTD_CTL_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_SWPORTD_CTL_OFST))
+
 /*
  * Register : Interrupt Enable Register - gpio_inten
  *
@@ -224,21 +284,6 @@ extern "C"
 #define ALT_GPIO_INTEN_OFST        0x30
 /* The address of the ALT_GPIO_INTEN register. */
 #define ALT_GPIO_INTEN_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_INTEN_OFST))
-#if 0
-/*
- * Register : Interrupt Mask Register - gpio_intmask
- *
- * Controls which pins cause interrupts on Port A Data Register inputs.
- *
- * Register Layout
- *
- *  Bits    | Access | Reset | Description
- * :--------|:-------|:------|:---------------------
- *  [28:0]  | RW     | 0x0   | Interrupt Mask Field
- *  [31:29] | ???    | 0x0   | *UNDEFINED*
- *
- */
-#endif
 
 /*
  * Field : Interrupt Mask Field - gpio_intmask
@@ -484,23 +529,6 @@ extern "C"
 #define ALT_GPIO_EXT_PORTC_OFST        0x58
 /* The byte offset of the ALT_GPIO_EXT_PORTD register from the beginning of the component. */
 #define ALT_GPIO_EXT_PORTD_OFST        0x5c
-#if 0
-/*
- * Field : Synchronization Level Field - gpio_ls_sync
- *
- * The level-sensitive interrupts is synchronized to pclk_intr.
- *
- * Field Enumeration Values:
- *
- *  Enum                                   | Value | Description
- * :---------------------------------------|:------|:--------------------------------
- *  ALT_GPIO_LS_SYNC_GPIO_LS_SYNC_E_NOSYNC | 0x0   | No synchronization to l4_mp_clk
- *  ALT_GPIO_LS_SYNC_GPIO_LS_SYNC_E_SYNC   | 0x1   | Synchronize to l4_mp_clk
- *
- * Field Access Macros:
- *
- */
-#endif
 /*
  * Field : Synchronization Level Field - gpio_ls_sync
  *
@@ -516,26 +544,12 @@ extern "C"
  * Field Access Macros:
  *
  */
-#if 0
-/*
- * Enumerated value for register field ALT_GPIO_LS_SYNC_GPIO_LS_SYNC
- *
- * No synchronization to l4_mp_clk
- */
-#endif
 /*
  * Enumerated value for register field ALT_GPIO_LS_SYNC_GPIO_LS_SYNC
  *
  * No synchronization to pclk_intr
  */
 #define ALT_GPIO_LS_SYNC_GPIO_LS_SYNC_E_NOSYNC  0x0
-#if 0
-/*
- * Enumerated value for register field ALT_GPIO_LS_SYNC_GPIO_LS_SYNC
- *
- * Synchronize to l4_mp_clk
- */
-#endif
 /*
  * Enumerated value for register field ALT_GPIO_LS_SYNC_GPIO_LS_SYNC
  *
@@ -614,52 +628,6 @@ typedef volatile struct ALT_GPIO_VER_ID_CODE_s  ALT_GPIO_VER_ID_CODE_t;
 /* The address of the ALT_GPIO_VER_ID_CODE register. */
 #define ALT_GPIO_VER_ID_CODE_ADDR(base)  ALT_CAST(void *, (ALT_CAST(char *, (base)) + ALT_GPIO_VER_ID_CODE_OFST))
 
-#if 0
-/*
- * Register : Configuration Register 2 - gpio_config_reg2
- *
- * Specifies the bit width of port A.
- *
- * Register Layout
- *
- *  Bits    | Access | Reset | Description
- * :--------|:-------|:------|:----------------------
- *  [4:0]   | R      | 0x1c  | Port A Width (less 1)
- *  [9:5]   | R      | 0x7   | Port B Width (less 1)
- *  [14:10] | R      | 0x7   | Port C Width (less 1)
- *  [19:15] | R      | 0x7   | Port D Width (less 1)
- *  [31:20] | ???    | 0x0   | *UNDEFINED*
- *
- */
-/*
- * Field : Port A Width (less 1) - encoded_id_pwidth_a
- *
- * Specifies the width of GPIO Port A. The value 28 represents the 29-bit width
- * less one.
- *
- * Field Enumeration Values:
- *
- *  Enum                                                   | Value | Description
- * :-------------------------------------------------------|:------|:--------------------------
- *  ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A_E_WIDTHLESSONE8BITS  | 0x7   | Width (less 1) of 8 bits
- *  ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A_E_WIDTHLESSONE29BITS | 0x1c  | Width (less 1) of 29 bits
- *
- * Field Access Macros:
- *
- */
-/*
- * Enumerated value for register field ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A
- *
- * Width (less 1) of 8 bits
- */
-#define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A_E_WIDTHLESSONE8BITS   0x7
-/*
- * Enumerated value for register field ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A
- *
- * Width (less 1) of 29 bits
- */
-#define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A_E_WIDTHLESSONE29BITS  0x1c
-#endif
 /*
  * Register : Configuration Register 2 - gpio_config_reg2
  *
@@ -710,24 +678,6 @@ typedef volatile struct ALT_GPIO_VER_ID_CODE_s  ALT_GPIO_VER_ID_CODE_t;
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A_GET(value) (((value) & 0x0000001f) >> 0)
 /* Produces a ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A register field value suitable for setting the register. */
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A_SET(value) (((value) << 0) & 0x0000001f)
-#if 0
-/*
- * Field : Port B Width (less 1) - encoded_id_pwidth_b
- *
- * Specifies the width of GPIO Port B. Ignored because there is no Port B in the
- * GPIO.
- *
- * Field Enumeration Values:
- *
- *  Enum                                                   | Value | Description
- * :-------------------------------------------------------|:------|:--------------------------
- *  ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_B_E_WIDTHLESSONE8BITS  | 0x7   | Width (less 1) of 8 bits
- *  ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_B_E_WIDTHLESSONE29BITS | 0x1c  | Width (less 1) of 29 bits
- *
- * Field Access Macros:
- *
- */
-#endif
 /*
  * Field : Port B Width - encoded_id_pwidth_b
  *
@@ -757,24 +707,6 @@ typedef volatile struct ALT_GPIO_VER_ID_CODE_s  ALT_GPIO_VER_ID_CODE_t;
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_B_GET(value) (((value) & 0x000003e0) >> 5)
 /* Produces a ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_B register field value suitable for setting the register. */
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_B_SET(value) (((value) << 5) & 0x000003e0)
-#if 0
-/*
- * Field : Port C Width (less 1) - encoded_id_pwidth_c
- *
- * Specifies the width of GPIO Port C. Ignored because there is no Port C in the
- * GPIO.
- *
- * Field Enumeration Values:
- *
- *  Enum                                                   | Value | Description
- * :-------------------------------------------------------|:------|:--------------------------
- *  ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_C_E_WIDTHLESSONE8BITS  | 0x7   | Width (less 1) of 8 bits
- *  ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_C_E_WIDTHLESSONE29BITS | 0x1c  | Width (less 1) of 29 bits
- *
- * Field Access Macros:
- *
- */
-#endif
 /*
  * Field : Port C Width - encoded_id_pwidth_c
  *
@@ -805,24 +737,6 @@ typedef volatile struct ALT_GPIO_VER_ID_CODE_s  ALT_GPIO_VER_ID_CODE_t;
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_C_GET(value) (((value) & 0x00007c00) >> 10)
 /* Produces a ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_C register field value suitable for setting the register. */
 #define ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_C_SET(value) (((value) << 10) & 0x00007c00)
-#if 0
-/*
- * Field : Port D Width (less 1) - encoded_id_pwidth_d
- *
- * Specifies the width of GPIO Port D. Ignored because there is no Port D in the
- * GPIO.
- *
- * Field Enumeration Values:
- *
- *  Enum                                                   | Value | Description
- * :-------------------------------------------------------|:------|:--------------------------
- *  ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_D_E_WIDTHLESSONE8BITS  | 0x7   | Width (less 1) of 8 bits
- *  ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_D_E_WIDTHLESSONE29BITS | 0x1c  | Width (less 1) of 29 bits
- *
- * Field Access Macros:
- *
- */
-#endif
 /*
  * Field : Port D Width - encoded_id_pwidth_d
  *
@@ -949,16 +863,14 @@ typedef volatile struct ALT_GPIO_CFG_REG2_s  ALT_GPIO_CFG_REG2_t;
 /*
  * Field : NUM PORTS - num_ports
  *
- * The value of this register is fixed at one port (Port A).
- *
  * Field Enumeration Values:
  *
  *  Enum                                     | Value | Description
  * :-----------------------------------------|:------|:-------------------------
  *  ALT_GPIO_CFG_REG1_NUM_PORTS_E_ONEPORTA   | 0x0   | Number of GPIO Ports = 1
- *  ALT_GPIO_CFG_REG1_NUM_PORTS_E_TWOPORTA   | 0x0   | Number of GPIO Ports = 2
- *  ALT_GPIO_CFG_REG1_NUM_PORTS_E_THREEPORTA | 0x0   | Number of GPIO Ports = 3
- *  ALT_GPIO_CFG_REG1_NUM_PORTS_E_FOURPORTA  | 0x0   | Number of GPIO Ports = 4
+ *  ALT_GPIO_CFG_REG1_NUM_PORTS_E_TWOPORTA   | 0x1   | Number of GPIO Ports = 2
+ *  ALT_GPIO_CFG_REG1_NUM_PORTS_E_THREEPORTA | 0x2   | Number of GPIO Ports = 3
+ *  ALT_GPIO_CFG_REG1_NUM_PORTS_E_FOURPORTA  | 0x3   | Number of GPIO Ports = 4
  *
  * Field Access Macros:
  *
@@ -1026,23 +938,6 @@ typedef volatile struct ALT_GPIO_CFG_REG2_s  ALT_GPIO_CFG_REG2_t;
 #define ALT_GPIO_CFG_REG1_PORTA_SINGLE_CTL_GET(value) (((value) & 0x00000010) >> 4)
 /* Produces a ALT_GPIO_CFG_REG1_PORTA_SINGLE_CTL register field value suitable for setting the register. */
 #define ALT_GPIO_CFG_REG1_PORTA_SINGLE_CTL_SET(value) (((value) << 4) & 0x00000010)
-#if 0
-/*
- * Field : PORT B SINGLE CTL - portb_single_ctl
- *
- * Indicates the mode of operation of Port B to be software controlled only.
- * Ignored because there is no Port B in the GPIO.
- *
- * Field Enumeration Values:
- *
- *  Enum                                             | Value | Description
- * :-------------------------------------------------|:------|:-----------------------------------------
- *  ALT_GPIO_CFG_REG1_PORTB_SINGLE_CTL_E_SOFTCTLONLY | 0x1   | Software Enabled Individual Port Control
- *
- * Field Access Macros:
- *
- */
-#endif
 /*
  * Field : PORT B SINGLE CTL - portb_single_ctl
  *
@@ -1080,23 +975,6 @@ typedef volatile struct ALT_GPIO_CFG_REG2_s  ALT_GPIO_CFG_REG2_t;
 #define ALT_GPIO_CFG_REG1_PORTB_SINGLE_CTL_GET(value) (((value) & 0x00000020) >> 5)
 /* Produces a ALT_GPIO_CFG_REG1_PORTB_SINGLE_CTL register field value suitable for setting the register. */
 #define ALT_GPIO_CFG_REG1_PORTB_SINGLE_CTL_SET(value) (((value) << 5) & 0x00000020)
-#if 0
-/*
- * Field : PORT C SINGLE CTL - portc_single_ctl
- *
- * Indicates the mode of operation of Port C to be software controlled only.
- * Ignored because there is no Port C in the GPIO.
- *
- * Field Enumeration Values:
- *
- *  Enum                                             | Value | Description
- * :-------------------------------------------------|:------|:-----------------------------------------
- *  ALT_GPIO_CFG_REG1_PORTC_SINGLE_CTL_E_SOFTCTLONLY | 0x1   | Software Enabled Individual Port Control
- *
- * Field Access Macros:
- *
- */
-#endif
 /*
  * Field : PORT C SINGLE CTL - portc_single_ctl
  *
@@ -1134,23 +1012,6 @@ typedef volatile struct ALT_GPIO_CFG_REG2_s  ALT_GPIO_CFG_REG2_t;
 #define ALT_GPIO_CFG_REG1_PORTC_SINGLE_CTL_GET(value) (((value) & 0x00000040) >> 6)
 /* Produces a ALT_GPIO_CFG_REG1_PORTC_SINGLE_CTL register field value suitable for setting the register. */
 #define ALT_GPIO_CFG_REG1_PORTC_SINGLE_CTL_SET(value) (((value) << 6) & 0x00000040)
-#if 0
-/*
- * Field : PORT D SINGLE CTL - portd_single_ctl
- *
- * Indicates the mode of operation of Port D to be software controlled only.
- * Ignored because there is no Port D in the GPIO.
- *
- * Field Enumeration Values:
- *
- *  Enum                                             | Value | Description
- * :-------------------------------------------------|:------|:-----------------------------------------
- *  ALT_GPIO_CFG_REG1_PORTD_SINGLE_CTL_E_SOFTCTLONLY | 0x1   | Software Enabled Individual Port Control
- *
- * Field Access Macros:
- *
- */
-#endif
 /*
  * Field : PORT D SINGLE CTL - portd_single_ctl
  *
@@ -1229,6 +1090,123 @@ typedef volatile struct ALT_GPIO_CFG_REG2_s  ALT_GPIO_CFG_REG2_t;
 #define ALT_GPIO_CFG_REG1_HW_PORTA_SET(value) (((value) << 8) & 0x00000100)
 
 /*
+ * Field : HW PORTB - hw_portb
+ *
+ * The value is fixed to enable Port B configuration to be controlled by software
+ * only.
+ *
+ * Field Enumeration Values:
+ *
+ *  Enum                                     | Value | Description
+ * :-----------------------------------------|:------|:---------------------------------------
+ *  ALT_GPIO_CFG_REG1_HW_PORTB_E_PORTBNOHARD | 0x0   | Software Configuration Control Enabled
+ *
+ * Field Access Macros:
+ *
+ */
+/*
+ * Enumerated value for register field ALT_GPIO_CFG_REG1_HW_PORTB
+ *
+ * Software Configuration Control Enabled
+ */
+#define ALT_GPIO_CFG_REG1_HW_PORTB_E_PORTANOHARD    0x0
+
+/* The Least Significant Bit (LSB) position of the ALT_GPIO_CFG_REG1_HW_PORTB register field. */
+#define ALT_GPIO_CFG_REG1_HW_PORTB_LSB        9
+/* The Most Significant Bit (MSB) position of the ALT_GPIO_CFG_REG1_HW_PORTB register field. */
+#define ALT_GPIO_CFG_REG1_HW_PORTB_MSB        9
+/* The width in bits of the ALT_GPIO_CFG_REG1_HW_PORTB register field. */
+#define ALT_GPIO_CFG_REG1_HW_PORTB_WIDTH      1
+/* The mask used to set the ALT_GPIO_CFG_REG1_HW_PORTB register field value. */
+#define ALT_GPIO_CFG_REG1_HW_PORTB_SET_MSK    0x00000200
+/* The mask used to clear the ALT_GPIO_CFG_REG1_HW_PORTB register field value. */
+#define ALT_GPIO_CFG_REG1_HW_PORTB_CLR_MSK    0xfffffdff
+/* The reset value of the ALT_GPIO_CFG_REG1_HW_PORTB register field. */
+#define ALT_GPIO_CFG_REG1_HW_PORTB_RESET      0x0
+/* Extracts the ALT_GPIO_CFG_REG1_HW_PORTB field value from a register. */
+#define ALT_GPIO_CFG_REG1_HW_PORTB_GET(value) (((value) & 0x00000100) >> 9)
+/* Produces a ALT_GPIO_CFG_REG1_HW_PORTB register field value suitable for setting the register. */
+#define ALT_GPIO_CFG_REG1_HW_PORTB_SET(value) (((value) << 9) & 0x00000100)
+
+/*
+ * Field : HW PORTC - hw_portc
+ *
+ * The value is fixed to enable Port C configuration to be controlled by software
+ * only.
+ *
+ * Field Enumeration Values:
+ *
+ *  Enum                                     | Value | Description
+ * :-----------------------------------------|:------|:---------------------------------------
+ *  ALT_GPIO_CFG_REG1_HW_PORTC_E_PORTCNOHARD | 0x0   | Software Configuration Control Enabled
+ *
+ * Field Access Macros:
+ *
+ */
+/*
+ * Enumerated value for register field ALT_GPIO_CFG_REG1_HW_PORTC
+ *
+ * Software Configuration Control Enabled
+ */
+#define ALT_GPIO_CFG_REG1_HW_PORTC_E_PORTCNOHARD    0x0
+
+/* The Least Significant Bit (LSB) position of the ALT_GPIO_CFG_REG1_HW_PORTC register field. */
+#define ALT_GPIO_CFG_REG1_HW_PORTC_LSB        10
+/* The Most Significant Bit (MSB) position of the ALT_GPIO_CFG_REG1_HW_PORTC register field. */
+#define ALT_GPIO_CFG_REG1_HW_PORTC_MSB        10
+/* The width in bits of the ALT_GPIO_CFG_REG1_HW_PORTC register field. */
+#define ALT_GPIO_CFG_REG1_HW_PORTC_WIDTH      1
+/* The mask used to set the ALT_GPIO_CFG_REG1_HW_PORTC register field value. */
+#define ALT_GPIO_CFG_REG1_HW_PORTC_SET_MSK    0x00000400
+/* The mask used to clear the ALT_GPIO_CFG_REG1_HW_PORTC register field value. */
+#define ALT_GPIO_CFG_REG1_HW_PORTC_CLR_MSK    0xfffffbff
+/* The reset value of the ALT_GPIO_CFG_REG1_HW_PORTC register field. */
+#define ALT_GPIO_CFG_REG1_HW_PORTC_RESET      0x0
+/* Extracts the ALT_GPIO_CFG_REG1_HW_PORTC field value from a register. */
+#define ALT_GPIO_CFG_REG1_HW_PORTC_GET(value) (((value) & 0x00000100) >> 10)
+/* Produces a ALT_GPIO_CFG_REG1_HW_PORTC register field value suitable for setting the register. */
+#define ALT_GPIO_CFG_REG1_HW_PORTC_SET(value) (((value) << 10) & 0x00000100)
+
+/*
+ * Field : HW PORTD - hw_portd
+ *
+ * The value is fixed to enable Port C configuration to be controlled by software
+ * only.
+ *
+ * Field Enumeration Values:
+ *
+ *  Enum                                     | Value | Description
+ * :-----------------------------------------|:------|:---------------------------------------
+ *  ALT_GPIO_CFG_REG1_HW_PORTD_E_PORTDNOHARD | 0x0   | Software Configuration Control Enabled
+ *
+ * Field Access Macros:
+ *
+ */
+/*
+ * Enumerated value for register field ALT_GPIO_CFG_REG1_HW_PORTD
+ *
+ * Software Configuration Control Enabled
+ */
+#define ALT_GPIO_CFG_REG1_HW_PORTD_E_PORTDNOHARD    0x0
+
+/* The Least Significant Bit (LSB) position of the ALT_GPIO_CFG_REG1_HW_PORTD register field. */
+#define ALT_GPIO_CFG_REG1_HW_PORTD_LSB        11
+/* The Most Significant Bit (MSB) position of the ALT_GPIO_CFG_REG1_HW_PORTD register field. */
+#define ALT_GPIO_CFG_REG1_HW_PORTD_MSB        11
+/* The width in bits of the ALT_GPIO_CFG_REG1_HW_PORTD register field. */
+#define ALT_GPIO_CFG_REG1_HW_PORTD_WIDTH      1
+/* The mask used to set the ALT_GPIO_CFG_REG1_HW_PORTD register field value. */
+#define ALT_GPIO_CFG_REG1_HW_PORTD_SET_MSK    0x00000800
+/* The mask used to clear the ALT_GPIO_CFG_REG1_HW_PORTD register field value. */
+#define ALT_GPIO_CFG_REG1_HW_PORTD_CLR_MSK    0xfffff7ff
+/* The reset value of the ALT_GPIO_CFG_REG1_HW_PORTD register field. */
+#define ALT_GPIO_CFG_REG1_HW_PORTD_RESET      0x0
+/* Extracts the ALT_GPIO_CFG_REG1_HW_PORTD field value from a register. */
+#define ALT_GPIO_CFG_REG1_HW_PORTD_GET(value) (((value) & 0x00000100) >> 11)
+/* Produces a ALT_GPIO_CFG_REG1_HW_PORTD register field value suitable for setting the register. */
+#define ALT_GPIO_CFG_REG1_HW_PORTD_SET(value) (((value) << 11) & 0x00000100)
+
+/*
  * Field : Port A Interrupt Field - porta_intr
  *
  * The value of this field is fixed to allow interrupts on Port A.
@@ -1265,6 +1243,44 @@ typedef volatile struct ALT_GPIO_CFG_REG2_s  ALT_GPIO_CFG_REG2_t;
 #define ALT_GPIO_CFG_REG1_PORTA_INTR_GET(value) (((value) & 0x00001000) >> 12)
 /* Produces a ALT_GPIO_CFG_REG1_PORTA_INTR register field value suitable for setting the register. */
 #define ALT_GPIO_CFG_REG1_PORTA_INTR_SET(value) (((value) << 12) & 0x00001000)
+
+/*
+ * Field : Debounce Field
+ *
+ * The value of this field is fixed to include debounce capability.
+ *
+ * Field Enumeration Values:
+ *
+ *  Enum                                       | Value | Description
+ * :-------------------------------------------|:------|:--------------------------
+ *  ALT_GPIO_CFG_REG1_DEBOUNCE_E_DEBOUNCE      | 0x1   | Debounce capability enabled
+ *
+ * Field Access Macros:
+ *
+ */
+/*
+ * Enumerated value for register field ALT_GPIO_CFG_REG1_DEBOUNCE
+ *
+ * Debounce capability Enabled
+ */
+#define ALT_GPIO_CFG_REG1_DEBOUNCE_E_DEBOUNCE  0x1
+
+/* The Least Significant Bit (LSB) position of the ALT_GPIO_CFG_REG1_DEBOUNCE register field. */
+#define ALT_GPIO_CFG_REG1_DEBOUNCE_LSB        13
+/* The Most Significant Bit (MSB) position of the ALT_GPIO_CFG_REG1_DEBOUNCE register field. */
+#define ALT_GPIO_CFG_REG1_DEBOUNCE_MSB        13
+/* The width in bits of the ALT_GPIO_CFG_REG1_DEBOUNCE register field. */
+#define ALT_GPIO_CFG_REG1_DEBOUNCE_WIDTH      1
+/* The mask used to set the ALT_GPIO_CFG_REG1_DEBOUNCE register field value. */
+#define ALT_GPIO_CFG_REG1_DEBOUNCE_SET_MSK    0x00002000
+/* The mask used to clear the ALT_GPIO_CFG_REG1_DEBOUNCE register field value. */
+#define ALT_GPIO_CFG_REG1_DEBOUNCE_CLR_MSK    0xffffefff
+/* The reset value of the ALT_GPIO_CFG_REG1_DEBOUNCE register field. */
+#define ALT_GPIO_CFG_REG1_DEBOUNCE_RESET      0x1
+/* Extracts the ALT_GPIO_CFG_REG1_DEBOUNCE field value from a register. */
+#define ALT_GPIO_CFG_REG1_DEBOUNCE_GET(value) (((value) & 0x00001000) >> 13)
+/* Produces a ALT_GPIO_CFG_REG1_DEBOUNCE register field value suitable for setting the register. */
+#define ALT_GPIO_CFG_REG1_DEBOUNCE_SET(value) (((value) << 13) & 0x00001000)
 
 /*
  * Field : Encoded GPIO Parameters Available - add_encoded_params
@@ -1380,6 +1396,42 @@ typedef volatile struct ALT_GPIO_CFG_REG2_s  ALT_GPIO_CFG_REG2_t;
 /* Produces a ALT_GPIO_CFG_REG1_ENC_ID_WIDTH register field value suitable for setting the register. */
 #define ALT_GPIO_CFG_REG1_ENC_ID_WIDTH_SET(value) (((value) << 16) & 0x001f0000)
 
+/*
+ * Field : INTERRUPT_BOTH_EDGE_TYPE Field - interrupt_both_edge_type
+ *
+ * Field Enumeration Values:
+ *
+ *  Enum                                                            | Value | Description
+ * :----------------------------------------------------------------|:------|:------------------
+ *  ALT_GPIO_CFG_REG1_INTERRUPT_BOTH_EDGE_TYPE_E_RISING_OR_FALLING  | 0x0   | Rising or Falling
+ *  ALT_GPIO_CFG_REG1_INTERRUPT_BOTH_EDGE_TYPE_E_RISING_AND_FALLING | 0x1   | Rising and Falling
+ *
+ * Field Access Macros:
+ *
+ */
+/*
+ * Enumerated value for register field INTERRUPT_BOTH_EDGE_TYPE
+ *
+ * Interrupt generation on rising or falling edge or interrupt generation on rising and falling edge
+ */
+#define ALT_GPIO_CFG_REG1_INTERRUPT_BOTH_EDGE_TYPE_E_RISING_OR_FALLING 0x0
+#define ALT_GPIO_CFG_REG1_INTERRUPT_BOTH_EDGE_TYPE_E_RISING_AND_FALLING 0x1
+
+/* The Least Significant Bit (LSB) position of the INTERRUPT_BOTH_EDGE_TYPE register field. */
+#define ALT_GPIO_CFG_REG1_INTERRUPT_BOTH_EDGE_TYPE_LSB        21
+/* The Most Significant Bit (MSB) position of the INTERRUPT_BOTH_EDGE_TYPE register field. */
+#define ALT_GPIO_CFG_REG1_INTERRUPT_BOTH_EDGE_TYPE_MSB        21
+/* The width in bits of the INTERRUPT_BOTH_EDGE_TYPE register field. */
+#define ALT_GPIO_CFG_REG1_INTERRUPT_BOTH_EDGE_TYPE_WIDTH      1
+/* The mask used to set the INTERRUPT_BOTH_EDGE_TYPE register field value. */
+#define ALT_GPIO_CFG_REG1_INTERRUPT_BOTH_EDGE_TYPE_SET_MSK    0x00200000
+/* The mask used to clear the INTERRUPT_BOTH_EDGE_TYPE register field value. */
+#define ALT_GPIO_CFG_REG1_INTERRUPT_BOTH_EDGE_TYPE_CLR_MSK    0xffdfffff
+/* Extracts the INTERRUPT_BOTH_EDGE_TYPE field value from a register. */
+#define ALT_GPIO_CFG_REG1_INTERRUPT_BOTH_EDGE_TYPE_GET(value) (((value) & 0x00200000) >> 21)
+/* Produces a INTERRUPT_BOTH_EDGE_TYPE register field value suitable for setting the register. */
+#define ALT_GPIO_CFG_REG1_INTERRUPT_BOTH_EDGE_TYPE_SET(value) (((value) << 21) & 0x00200000)
+
 #ifndef __ASSEMBLY__
 /*
  * WARNING: The C register and register group struct declarations are provided for
@@ -1425,7 +1477,20 @@ struct ALT_GPIO_raw_s
 {
     volatile uint32_t  gpio_swporta_dr;     /* ALT_GPIO_SWPORTA_DR */
     volatile uint32_t  gpio_swporta_ddr;    /* ALT_GPIO_SWPORTA_DDR */
+#if 0
     volatile uint32_t  _pad_0x8_0x2f[10];   /* *UNDEFINED* */
+#else
+    volatile uint32_t  gpio_swporta_ctl;    /* ALT_GPIO_SWPORTA_CTL */
+    volatile uint32_t  gpio_swportb_dr;     /* ALT_GPIO_SWPORTB_DR */
+    volatile uint32_t  gpio_swportb_ddr;    /* ALT_GPIO_SWPORTB_DDR */
+    volatile uint32_t  gpio_swportb_ctl;    /* ALT_GPIO_SWPORTB_CTL */
+    volatile uint32_t  gpio_swportc_dr;     /* ALT_GPIO_SWPORTC_DR */
+    volatile uint32_t  gpio_swportc_ddr;    /* ALT_GPIO_SWPORTC_DDR */
+    volatile uint32_t  gpio_swportc_ctl;    /* ALT_GPIO_SWPORTC_CTL */
+    volatile uint32_t  gpio_swportd_dr;     /* ALT_GPIO_SWPORTD_DR */
+    volatile uint32_t  gpio_swportd_ddr;    /* ALT_GPIO_SWPORTD_DDR */
+    volatile uint32_t  gpio_swportd_ctl;    /* ALT_GPIO_SWPORTD_CTL */
+#endif
     volatile uint32_t  gpio_inten;          /* ALT_GPIO_INTEN */
     volatile uint32_t  gpio_intmask;        /* ALT_GPIO_INTMSK */
     volatile uint32_t  gpio_inttype_level;  /* ALT_GPIO_INTTYPE_LEVEL */
@@ -1435,10 +1500,20 @@ struct ALT_GPIO_raw_s
     volatile uint32_t  gpio_debounce;       /* ALT_GPIO_DEBOUNCE */
     volatile uint32_t  gpio_porta_eoi;      /* ALT_GPIO_PORTA_EOI */
     volatile uint32_t  gpio_ext_porta;      /* ALT_GPIO_EXT_PORTA */
+#if 0
     volatile uint32_t  _pad_0x54_0x5f[3];   /* *UNDEFINED* */
+#else
+    volatile uint32_t  gpio_ext_portb;      /* ALT_GPIO_EXT_PORTB */
+    volatile uint32_t  gpio_ext_portc;      /* ALT_GPIO_EXT_PORTC */
+    volatile uint32_t  gpio_ext_portd;      /* ALT_GPIO_EXT_PORTD */
+#endif
     volatile uint32_t  gpio_ls_sync;        /* ALT_GPIO_LS_SYNC */
     volatile uint32_t  gpio_id_code;        /* ALT_GPIO_ID_CODE */
+#if 0
     volatile uint32_t  _pad_0x68_0x6b;      /* *UNDEFINED* */
+#else
+    volatile uint32_t gpio_int_bothedge;    /* ALT_GPIO_INT_BOTHEDGE */
+#endif
     volatile uint32_t  gpio_ver_id_code;    /* ALT_GPIO_VER_ID_CODE */
     volatile uint32_t  gpio_config_reg2;    /* ALT_GPIO_CFG_REG2 */
     volatile uint32_t  gpio_config_reg1;    /* ALT_GPIO_CFG_REG1 */

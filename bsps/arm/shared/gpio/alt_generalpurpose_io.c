@@ -63,7 +63,7 @@
 #define     ALT_GPIO_ALLORNONE(tst)  ((uint32_t) ((tst == 0) ? 0 : ALT_GPIO_BITMASK))
 
 /****************************************************************************************/
-/* alt_gpio_init() initializes the GPIO modules 										*/
+/* alt_gpio_init() initializes the GPIO modules 										                    */
 /****************************************************************************************/
 
 ALT_STATUS_CODE alt_gpio_init(void)
@@ -83,7 +83,7 @@ ALT_STATUS_CODE alt_gpio_init(void)
 
 
 /****************************************************************************************/
-/* alt_gpio_uninit() uninitializes the GPIO modules			     				       	*/
+/* alt_gpio_uninit() uninitializes the GPIO modules			     				       	            */
 /****************************************************************************************/
 
 ALT_STATUS_CODE alt_gpio_uninit(void)
@@ -105,24 +105,6 @@ ALT_STATUS_CODE alt_gpio_uninit(void)
 /* alt_gpio_port_datadir_set() sets the specified GPIO data bits to use the data        */
 /* direction(s) specified. 0 = input (default). 1 = output.                             */
 /****************************************************************************************/
-#if 0
-ALT_STATUS_CODE alt_gpio_port_datadir_set(ALT_GPIO_PORT_t gpio_pid,
-        uint32_t mask, uint32_t config)
-{
-    volatile uint32_t   *addr;
-
-    if ((mask & ~ALT_GPIO_BITMASK) || (config & ~ALT_GPIO_BITMASK))  { return ALT_E_ERROR; }
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_SWPORTA_DDR_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_SWPORTA_DDR_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_SWPORTA_DDR_ADDR; }
-#endif
-    else { return ALT_E_BAD_ARG; }
-
-    alt_replbits_word(addr, mask, config);
-    return ALT_E_SUCCESS;
-}
-#endif
 ALT_STATUS_CODE alt_gpio_port_datadir_set(ALT_GPIO_INSTANCE_t gpio_iid,
         ALT_GPIO_PORT_t gpio_pid,
         uint32_t mask, uint32_t config)
@@ -182,22 +164,6 @@ ALT_STATUS_CODE alt_gpio_port_datadir_set(ALT_GPIO_INSTANCE_t gpio_iid,
 /*  alt_gpio_port_datadir_get() returns the data direction configuration of selected    */
 /* bits of the designated GPIO module.                                                  */
 /****************************************************************************************/
-#if 0
-uint32_t alt_gpio_port_datadir_get(ALT_GPIO_PORT_t gpio_pid,
-        uint32_t mask)
-{
-    volatile uint32_t   *addr;
-
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_SWPORTA_DDR_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_SWPORTA_DDR_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_SWPORTA_DDR_ADDR; }
-#endif
-    else { return 0; }
-
-    return alt_read_word(addr) & mask;
-}
-#endif
 uint32_t alt_gpio_port_datadir_get(ALT_GPIO_INSTANCE_t gpio_iid,
         ALT_GPIO_PORT_t gpio_pid,
         uint32_t mask)
@@ -257,24 +223,6 @@ uint32_t alt_gpio_port_datadir_get(ALT_GPIO_INSTANCE_t gpio_iid,
 /* to a one or zero. Actual outputs are only set if the data direction for that bit(s)  */
 /* has previously been set to configure them as output(s).                              */
 /****************************************************************************************/
-#if 0
-ALT_STATUS_CODE alt_gpio_port_data_write(ALT_GPIO_PORT_t gpio_pid,
-        uint32_t mask, uint32_t val)
-{
-    volatile uint32_t   *addr;
-
-    if ((mask & ~ALT_GPIO_BITMASK) || (val & ~ALT_GPIO_BITMASK))  { return ALT_E_ERROR; }
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_SWPORTA_DR_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_SWPORTA_DR_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_SWPORTA_DR_ADDR; }
-#endif
-    else { return ALT_E_BAD_ARG; }
-
-    alt_replbits_word(addr, mask, val);
-    return ALT_E_SUCCESS;
-}
-#endif
 ALT_STATUS_CODE alt_gpio_port_data_write(ALT_GPIO_INSTANCE_t gpio_iid,
         ALT_GPIO_PORT_t gpio_pid,
         uint32_t mask, uint32_t val)
@@ -339,21 +287,6 @@ ALT_STATUS_CODE alt_gpio_port_data_write(ALT_GPIO_INSTANCE_t gpio_iid,
     /* This is the production code version. For software unit testing, set the      */
     /* ALT_GPIO_DATAREAD_TEST_MODE flag to true in the makefile, which will compile */
     /* the GPIO test software version of alt_gpio_port_data_read() instead.         */
-#if 0
-uint32_t alt_gpio_port_data_read(ALT_GPIO_PORT_t gpio_pid, uint32_t mask)
-{
-    volatile uint32_t   *addr;
-
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_EXT_PORTA_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_EXT_PORTA_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_EXT_PORTA_ADDR; }
-#endif
-    else { return 0; }
-
-    return alt_read_word(addr) & mask;
-}
-#endif
 uint32_t alt_gpio_port_data_read(ALT_GPIO_INSTANCE_t gpio_iid,
     ALT_GPIO_PORT_t gpio_pid, uint32_t mask)
 {
@@ -412,24 +345,6 @@ uint32_t alt_gpio_port_data_read(ALT_GPIO_INSTANCE_t gpio_iid,
 /* alt_gpio_port_int_type_set() sets selected signals of the specified GPIO port to     */
 /* be either level-sensitive ( =0) or edge-triggered ( =1).                             */
 /****************************************************************************************/
-#if 0
-ALT_STATUS_CODE alt_gpio_port_int_type_set(ALT_GPIO_PORT_t gpio_pid,
-        uint32_t mask, uint32_t config)
-{
-    volatile uint32_t   *addr;
-
-    if ((mask & ~ALT_GPIO_BITMASK) || (config & ~ALT_GPIO_BITMASK))  { return ALT_E_ERROR; }
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INTTYPE_LEVEL_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INTTYPE_LEVEL_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INTTYPE_LEVEL_ADDR; }
-#endif
-    else { return ALT_E_BAD_ARG; }
-
-    alt_replbits_word(addr, mask, config);
-    return ALT_E_SUCCESS;
-}
-#endif
 ALT_STATUS_CODE alt_gpio_port_int_type_set(ALT_GPIO_INSTANCE_t gpio_iid,
         uint32_t mask, uint32_t config)
 {
@@ -456,22 +371,6 @@ ALT_STATUS_CODE alt_gpio_port_int_type_set(ALT_GPIO_INSTANCE_t gpio_iid,
 /* alt_gpio_port_int_type_get() returns the interrupt configuration (edge-triggered or  */
 /* level-triggered) for the specified signals of the specified GPIO module.             */
 /****************************************************************************************/
-#if 0
-uint32_t alt_gpio_port_int_type_get(ALT_GPIO_PORT_t gpio_pid,
-        uint32_t mask)
-{
-    volatile uint32_t   *addr;
-
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INTTYPE_LEVEL_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INTTYPE_LEVEL_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INTTYPE_LEVEL_ADDR; }
-#endif
-    else { return 0; }
-
-    return alt_read_word(addr) & mask;
-}
-#endif
 uint32_t alt_gpio_port_int_type_get(ALT_GPIO_INSTANCE_t gpio_iid,
         uint32_t mask)
 {
@@ -497,24 +396,6 @@ uint32_t alt_gpio_port_int_type_get(ALT_GPIO_INSTANCE_t gpio_iid,
 /* specified GPIO register (when used as inputs) to active-high ( =0) or active-low     */
 /* ( =1).                                                                               */
 /****************************************************************************************/
-#if 0
-ALT_STATUS_CODE alt_gpio_port_int_pol_set(ALT_GPIO_PORT_t gpio_pid,
-        uint32_t mask, uint32_t config)
-{
-    volatile uint32_t   *addr;
-
-    if ((mask & ~ALT_GPIO_BITMASK) || (config & ~ALT_GPIO_BITMASK))  { return ALT_E_ERROR; }
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INT_POL_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INT_POL_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INT_POL_ADDR; }
-#endif
-    else { return ALT_E_BAD_ARG; }
-
-    alt_replbits_word(addr, mask, config);
-    return ALT_E_SUCCESS;
-}
-#endif
 ALT_STATUS_CODE alt_gpio_port_int_pol_set(ALT_GPIO_INSTANCE_t gpio_iid,
         uint32_t mask, uint32_t config)
 {
@@ -543,22 +424,6 @@ ALT_STATUS_CODE alt_gpio_port_int_pol_set(ALT_GPIO_INSTANCE_t gpio_iid,
 /* 0 = The interrupt polarity for this bit is set to active-low mode. 1 = The           */
 /* interrupt polarity for this bit is set to active-highmode.                           */
 /****************************************************************************************/
-#if 0
-uint32_t alt_gpio_port_int_pol_get(ALT_GPIO_PORT_t gpio_pid,
-        uint32_t mask)
-{
-    volatile uint32_t   *addr;
-
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INT_POL_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INT_POL_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INT_POL_ADDR; }
-#endif
-    else { return 0; }
-
-    return alt_read_word(addr) & mask;
-}
-#endif
 uint32_t alt_gpio_port_int_pol_get(ALT_GPIO_INSTANCE_t gpio_iid,
         uint32_t mask)
 {
@@ -584,24 +449,6 @@ uint32_t alt_gpio_port_int_pol_get(ALT_GPIO_INSTANCE_t gpio_iid,
 /* the specified GPIO module. 0 - Debounce is not selected for this signal (default).   */
 /* 1 - Debounce is selected for this signal.                                            */
 /****************************************************************************************/
-#if 0
-ALT_STATUS_CODE alt_gpio_port_debounce_set(ALT_GPIO_PORT_t gpio_pid,
-        uint32_t mask, uint32_t config)
-{
-    volatile uint32_t   *addr;
-
-    if ((mask & ~ALT_GPIO_BITMASK) || (config & ~ALT_GPIO_BITMASK))  { return ALT_E_ERROR; }
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_DEBOUNCE_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_DEBOUNCE_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_DEBOUNCE_ADDR; }
-#endif
-    else { return ALT_E_BAD_ARG; }
-
-    alt_replbits_word(addr, mask, config);
-    return ALT_E_SUCCESS;
-}
-#endif
 ALT_STATUS_CODE alt_gpio_port_debounce_set(ALT_GPIO_INSTANCE_t gpio_iid,
         uint32_t mask, uint32_t config)
 {
@@ -628,22 +475,6 @@ ALT_STATUS_CODE alt_gpio_port_debounce_set(ALT_GPIO_INSTANCE_t gpio_iid,
 /* signals of the specified GPIO register. 0 - Debounce is not selected for this        */
 /* signal. 1 - Debounce is selected for this signal.                                    */
 /****************************************************************************************/
-#if 0
-uint32_t alt_gpio_port_debounce_get(ALT_GPIO_PORT_t gpio_pid,
-        uint32_t mask)
-{
-    volatile uint32_t   *addr;
-
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_DEBOUNCE_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_DEBOUNCE_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_DEBOUNCE_ADDR; }
-#endif
-    else { return 0; }
-
-    return alt_read_word(addr) & mask;
-}
-#endif
 uint32_t alt_gpio_port_debounce_get(ALT_GPIO_INSTANCE_t gpio_iid,
         uint32_t mask)
 {
@@ -670,23 +501,6 @@ uint32_t alt_gpio_port_debounce_get(ALT_GPIO_INSTANCE_t gpio_iid,
 /* interrupts to the internal clock signal. This is a port-wide option that controls    */
 /* all level-sensitive interrupt signals of that GPIO port.                             */
 /****************************************************************************************/
-#if 0
-ALT_STATUS_CODE alt_gpio_port_sync_set(ALT_GPIO_PORT_t gpio_pid, uint32_t config)
-{
-    volatile uint32_t   *addr;
-
-    config = (config != 0) ? 1 : 0;
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_LS_SYNC_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_LS_SYNC_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_LS_SYNC_ADDR; }
-#endif
-    else { return ALT_E_BAD_ARG; }
-
-    alt_write_word(addr, config);
-    return ALT_E_SUCCESS;
-}
-#endif
 ALT_STATUS_CODE alt_gpio_port_sync_set(ALT_GPIO_INSTANCE_t gpio_iid, uint32_t config)
 {
     volatile uint32_t   *addr;
@@ -714,21 +528,6 @@ ALT_STATUS_CODE alt_gpio_port_sync_set(ALT_GPIO_INSTANCE_t gpio_iid, uint32_t co
 /* interrupts to the internal clock signal. This is a port-wide option that controls    */
 /* all level-sensitive interrupt signals of that GPIO port.                             */
 /****************************************************************************************/
-#if 0
-ALT_STATUS_CODE alt_gpio_port_sync_get(ALT_GPIO_PORT_t gpio_pid)
-{
-    volatile uint32_t   *addr;
-
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_LS_SYNC_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_LS_SYNC_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_LS_SYNC_ADDR; }
-#endif
-    else { return ALT_E_BAD_ARG; }         // error
-
-    return (alt_read_word(addr) != 0) ? ALT_E_TRUE : ALT_E_FALSE;
-}
-#endif
 ALT_STATUS_CODE alt_gpio_port_sync_get(ALT_GPIO_INSTANCE_t gpio_iid)
 {
     volatile uint32_t   *addr;
@@ -802,23 +601,6 @@ ALT_STATUS_CODE alt_gpio_port_config(ALT_GPIO_INSTANCE_t gpio_iid,
 /****************************************************************************************/
 /* Enables the specified GPIO data register interrupts.                                 */
 /****************************************************************************************/
-#if 0
-ALT_STATUS_CODE alt_gpio_port_int_enable(ALT_GPIO_PORT_t gpio_pid, uint32_t config)
-{
-    volatile uint32_t   *addr;
-
-    if (config & ~ALT_GPIO_BITMASK)      { return ALT_E_ERROR; }
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INTEN_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INTEN_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INTEN_ADDR; }
-#endif
-    else { return ALT_E_BAD_ARG; }
-
-    alt_replbits_word(addr, config, UINT32_MAX);
-    return ALT_E_SUCCESS;
-}
-#endif
 ALT_STATUS_CODE alt_gpio_port_int_enable(ALT_GPIO_INSTANCE_t gpio_iid, uint32_t config)
 {
     volatile uint32_t   *addr;
@@ -843,23 +625,6 @@ ALT_STATUS_CODE alt_gpio_port_int_enable(ALT_GPIO_INSTANCE_t gpio_iid, uint32_t 
 /****************************************************************************************/
 /* Disables the specified GPIO data module interrupts.                                  */
 /****************************************************************************************/
-#if 0
-ALT_STATUS_CODE alt_gpio_port_int_disable(ALT_GPIO_PORT_t gpio_pid, uint32_t config)
-{
-    volatile uint32_t   *addr;
-
-    if (config & ~ALT_GPIO_BITMASK)      { return ALT_E_ERROR; }
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INTEN_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INTEN_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INTEN_ADDR; }
-#endif
-    else { return ALT_E_BAD_ARG; }
-
-    alt_replbits_word(addr, config, 0);
-    return ALT_E_SUCCESS;
-}
-#endif
 ALT_STATUS_CODE alt_gpio_port_int_disable(ALT_GPIO_INSTANCE_t gpio_iid, uint32_t config)
 {
     volatile uint32_t   *addr;
@@ -885,21 +650,6 @@ ALT_STATUS_CODE alt_gpio_port_int_disable(ALT_GPIO_INSTANCE_t gpio_iid, uint32_t
 /****************************************************************************************/
 /* Get the current state of the specified GPIO port interrupts enables.                 */
 /****************************************************************************************/
-#if 0
-uint32_t alt_gpio_port_int_enable_get(ALT_GPIO_PORT_t gpio_pid)
-{
-    volatile uint32_t   *addr;
-
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INTEN_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INTEN_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INTEN_ADDR; }
-#endif
-    else { return 0; }
-
-    return alt_read_word(addr);
-}
-#endif
 uint32_t alt_gpio_port_int_enable_get(ALT_GPIO_INSTANCE_t gpio_iid)
 {
     volatile uint32_t   *addr;
@@ -924,24 +674,6 @@ uint32_t alt_gpio_port_int_enable_get(ALT_GPIO_INSTANCE_t gpio_iid)
 /* specified GPIO module. Uses a second bit mask to determine which signals may be      */
 /* changed by this call.                                                                */
 /****************************************************************************************/
-#if 0
-ALT_STATUS_CODE alt_gpio_port_int_mask_set(ALT_GPIO_PORT_t gpio_pid,
-        uint32_t mask, uint32_t val)
-{
-    volatile uint32_t   *addr;
-
-    if ((mask & ~ALT_GPIO_BITMASK) || (val & ~ALT_GPIO_BITMASK))  { return ALT_E_ERROR; }
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INTMSK_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INTMSK_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INTMSK_ADDR; }
-#endif
-    else { return ALT_E_BAD_ARG; }         // argument error
-
-    alt_replbits_word(addr, mask, val);
-    return ALT_E_SUCCESS;
-}
-#endif
 ALT_STATUS_CODE alt_gpio_port_int_mask_set(ALT_GPIO_INSTANCE_t gpio_iid,
         uint32_t mask, uint32_t val)
 {
@@ -967,21 +699,6 @@ ALT_STATUS_CODE alt_gpio_port_int_mask_set(ALT_GPIO_INSTANCE_t gpio_iid,
 /****************************************************************************************/
 /* Returns the interrupt source mask of the specified GPIO module.                      */
 /****************************************************************************************/
-#if 0
-uint32_t alt_gpio_port_int_mask_get(ALT_GPIO_PORT_t gpio_pid)
-{
-    volatile uint32_t   *addr;
-
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INTMSK_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INTMSK_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INTMSK_ADDR; }
-#endif
-    else { return 0; }         // error
-
-    return alt_read_word(addr);
-}
-#endif
 uint32_t alt_gpio_port_int_mask_get(ALT_GPIO_INSTANCE_t gpio_iid)
 {
     volatile uint32_t   *addr;
@@ -1005,21 +722,6 @@ uint32_t alt_gpio_port_int_mask_get(ALT_GPIO_INSTANCE_t gpio_iid)
 /* alt_gpio_port_int_status_get() returns the interrupt pending status of all signals   */
 /* of the specified GPIO register.                                                      */
 /****************************************************************************************/
-#if 0
-uint32_t alt_gpio_port_int_status_get(ALT_GPIO_PORT_t gpio_pid)
-{
-    volatile uint32_t   *addr;
-
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INTSTAT_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INTSTAT_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INTSTAT_ADDR; }
-#endif
-    else { return 0; }         // error
-
-    return alt_read_word(addr);
-}
-#endif
 uint32_t alt_gpio_port_int_status_get(ALT_GPIO_INSTANCE_t gpio_iid)
 {
     volatile uint32_t   *addr;
@@ -1043,24 +745,6 @@ uint32_t alt_gpio_port_int_status_get(ALT_GPIO_INSTANCE_t gpio_iid)
 /* Clear the interrupt pending status of selected signals of the specified GPIO         */
 /* register.                                                                            */
 /****************************************************************************************/
-#if 0
-ALT_STATUS_CODE alt_gpio_port_int_status_clear(ALT_GPIO_PORT_t gpio_pid,
-        uint32_t clrmask)
-{
-    volatile uint32_t   *addr;
-
-    if (clrmask & ~ALT_GPIO_BITMASK)      { return ALT_E_ERROR; }
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_INTSTAT_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_INTSTAT_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_INTSTAT_ADDR; }
-#endif
-    else { return ALT_E_BAD_ARG; }         // argument error
-
-    alt_write_word(addr, clrmask);
-    return ALT_E_SUCCESS;
-}
-#endif
 ALT_STATUS_CODE alt_gpio_port_int_status_clear(ALT_GPIO_INSTANCE_t gpio_iid,
         uint32_t clrmask)
 {
@@ -1086,21 +770,6 @@ ALT_STATUS_CODE alt_gpio_port_int_status_clear(ALT_GPIO_INSTANCE_t gpio_iid,
 /****************************************************************************************/
 /*  alt_gpio_port_idcode_get() returns the ID code of the specified GPIO module.        */
 /****************************************************************************************/
-#if  0
-uint32_t alt_gpio_port_idcode_get(ALT_GPIO_PORT_t gpio_pid)
-{
-    volatile uint32_t   *addr;
-
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_ID_CODE_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_ID_CODE_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_ID_CODE_ADDR; }
-#endif
-    else { return 0; }
-
-    return alt_read_word(addr);
-}
-#endif
 uint32_t alt_gpio_port_idcode_get(ALT_GPIO_INSTANCE_t gpio_iid)
 {
     volatile uint32_t   *addr;
@@ -1123,21 +792,6 @@ uint32_t alt_gpio_port_idcode_get(ALT_GPIO_INSTANCE_t gpio_iid)
 /****************************************************************************************/
 /* alt_gpio_port_ver_get() returns the version code of the specified GPIO module.       */
 /****************************************************************************************/
-#if 0
-uint32_t alt_gpio_port_ver_get(ALT_GPIO_PORT_t gpio_pid)
-{
-    volatile uint32_t   *addr;
-
-    if (gpio_pid == ALT_GPIO_PORTA)      { addr = ALT_GPIO0_VER_ID_CODE_ADDR; }
-    else if (gpio_pid == ALT_GPIO_PORTB) { addr = ALT_GPIO1_VER_ID_CODE_ADDR; }
-#if 0
-    else if (gpio_pid == ALT_GPIO_PORTC) { addr = ALT_GPIO2_VER_ID_CODE_ADDR; }
-#endif
-    else { return 0; }
-
-    return alt_read_word(addr);
-}
-#endif
 uint32_t alt_gpio_port_ver_get(ALT_GPIO_INSTANCE_t gpio_iid)
 {
     volatile uint32_t   *addr;
@@ -1400,7 +1054,7 @@ uint32_t alt_get_gpio_port_width(ALT_GPIO_INSTANCE_t gpio_iid, ALT_GPIO_PORT_t g
 
 /****************************************************************************************/
 /* A useful utility function. Extracts the GPIO signal (pin) mask from the supplied     */
-/* GPIO Signal Index Number.                                                           */
+/* GPIO Signal Index Number.                                                            */
 /****************************************************************************************/
 ALT_GPIO_PORTBIT_t alt_gpio_bit_to_port_pin(ALT_GPIO_INSTANCE_t gpio_iid,
         ALT_GPIO_1BIT_t pin_num)
@@ -1536,4 +1190,383 @@ ALT_GPIO_PARAM_ENABLE_STATE_t alt_gpio_add_encoded_params_state_get(ALT_GPIO_INS
   }
 
   return ALT_GPIO_CFG_REG1_ADD_ENC_PARAMS_GET(alt_read_word(addr));
+}
+
+/****************************************************************************************/
+/* Extracts and decodes the NUM_PORTS value from the supplied GPIO Instance Number.     */
+/****************************************************************************************/
+
+uint32_t alt_gpio_num_ports_get(ALT_GPIO_INSTANCE_t gpio_iid)
+{
+  volatile uint32_t   *addr;
+
+  if (gpio_iid >= ALT_GPIO_INSTANCE_UNKNOWN)
+    return 0;
+
+  switch (gpio_iid) {
+    case ALT_GPIO_INSTANCE0:
+      addr = ALT_GPIO0_CFG_REG1_ADDR;
+      break;
+    case ALT_GPIO_INSTANCE1:
+      addr = ALT_GPIO1_CFG_REG1_ADDR;
+      break;
+    default:
+      return 0;
+      break;
+  }
+
+  return ALT_GPIO_CFG_REG1_NUM_PORTS_GET(alt_read_word(addr)) + 1;
+}
+
+/****************************************************************************************/
+/* Extracts and decodes the APB_DATA_WIDTH value of the GPIO_CONFIG_REG1 register       */
+/* from the supplied GPIO Instance Number.                                              */
+/****************************************************************************************/
+
+uint32_t alt_gpio_apb_data_width_get(ALT_GPIO_INSTANCE_t gpio_iid)
+{
+  volatile uint32_t   *addr;
+
+  if (gpio_iid >= ALT_GPIO_INSTANCE_UNKNOWN)
+    return 0;
+
+  switch (gpio_iid) {
+    case ALT_GPIO_INSTANCE0:
+      addr = ALT_GPIO0_CFG_REG1_ADDR;
+      break;
+    case ALT_GPIO_INSTANCE1:
+      addr = ALT_GPIO1_CFG_REG1_ADDR;
+      break;
+    default:
+      return 0;
+      break;
+  }
+
+  uint32_t encoded_width;
+  uint32_t decoded_width;
+  encoded_width = ALT_GPIO_CFG_REG1_APB_DATA_WIDTH_GET(alt_read_word(addr));
+  switch (encoded_width) {
+  case 0:
+    decoded_width = 8;
+    break;
+  case 1:
+    decoded_width = 16;
+    break;
+  case 2:
+    decoded_width = 32;
+    break;
+  default:
+    decoded_width = 0;  /* Reserved/Invalid */
+    break;
+  }
+
+  return decoded_width;
+}
+
+/****************************************************************************************/
+/* Extracts and decodes the ENCODED_ID_PWIDTH_X value from the supplied GPIO Instance   */
+/* and Port Number.                                                                     */
+/****************************************************************************************/
+uint32_t alt_gpio_pwidth_get(uint32_t gpio_iid, ALT_GPIO_PORT_t port)
+{
+  volatile uint32_t   *addr;
+
+  if (gpio_iid >= ALT_GPIO_INSTANCE_UNKNOWN)
+    return 0;
+
+  if (port >= ALT_GPIO_PORT_UNKNOWN)
+    return 0;
+
+  switch (gpio_iid) {
+    case ALT_GPIO_INSTANCE0:
+      addr = ALT_GPIO0_CFG_REG1_ADDR;
+      break;
+    case ALT_GPIO_INSTANCE1:
+      addr = ALT_GPIO1_CFG_REG1_ADDR;
+      break;
+    default:
+      return 0;
+      break;
+  }
+
+  uint32_t encoded_width;
+  uint32_t decoded_width;
+
+  switch (port) {
+  case ALT_GPIO_PORTA:
+    encoded_width = ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_A_GET(alt_read_word(addr));
+    break;
+  case ALT_GPIO_PORTB:
+    encoded_width = ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_B_GET(alt_read_word(addr));
+    break;
+  case ALT_GPIO_PORTC:
+    encoded_width = ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_C_GET(alt_read_word(addr));
+    break;
+  case ALT_GPIO_PORTD:
+    encoded_width = ALT_GPIO_CFG_REG2_ENC_ID_PWIDTH_D_GET(alt_read_word(addr));
+    break;
+  default:
+    break;
+  }
+
+  switch (encoded_width) {
+  case 0:
+    decoded_width = 8;
+    break;
+  case 1:
+    decoded_width = 16;
+    break;
+  case 2:
+    decoded_width = 32;
+    break;
+  default:
+    decoded_width = 0;
+    break;
+  }
+
+  return decoded_width;
+}
+
+/****************************************************************************************/
+/* Extracts and decodes the PORTX_SINGLE_CTL value from the supplied GPIO Instance      */
+/* and Port Number.                                                                     */
+/****************************************************************************************/
+ALT_GPIO_PARAM_ENABLE_STATE_t alt_gpio_single_ctl_get(uint32_t gpio_iid, ALT_GPIO_PORT_t port)
+{
+  volatile uint32_t   *addr;
+
+  if (gpio_iid >= ALT_GPIO_INSTANCE_UNKNOWN)
+    return ALT_GPIO_PARAM_DISABLED;
+
+  if (port >= ALT_GPIO_PORT_UNKNOWN)
+    return ALT_GPIO_PARAM_DISABLED;
+
+  switch (gpio_iid) {
+    case ALT_GPIO_INSTANCE0:
+      addr = ALT_GPIO0_CFG_REG1_ADDR;
+      break;
+    case ALT_GPIO_INSTANCE1:
+      addr = ALT_GPIO1_CFG_REG1_ADDR;
+      break;
+    default:
+      return ALT_GPIO_PARAM_DISABLED;
+      break;
+  }
+
+  ALT_GPIO_PARAM_ENABLE_STATE_t encoded_value;
+
+  switch (port) {
+  case ALT_GPIO_PORTA:
+    encoded_value = ALT_GPIO_CFG_REG1_PORTA_SINGLE_CTL_GET(alt_read_word(addr));
+    break;
+  case ALT_GPIO_PORTB:
+    encoded_value = ALT_GPIO_CFG_REG1_PORTB_SINGLE_CTL_GET(alt_read_word(addr));
+    break;
+  case ALT_GPIO_PORTC:
+    encoded_value = ALT_GPIO_CFG_REG1_PORTC_SINGLE_CTL_GET(alt_read_word(addr));
+    break;
+  case ALT_GPIO_PORTD:
+    encoded_value = ALT_GPIO_CFG_REG1_PORTD_SINGLE_CTL_GET(alt_read_word(addr));
+    break;
+  case ALT_GPIO_PORT_UNKNOWN:
+    encoded_value = ALT_GPIO_PARAM_DISABLED;
+    break;
+  }
+
+  return encoded_value;
+}
+
+/****************************************************************************************/
+/* Extracts and decodes the HW_PORTX value from the supplied GPIO Instance              */
+/* and Port Number.                                                                     */
+/****************************************************************************************/
+ALT_GPIO_PARAM_ENABLE_STATE_t alt_gpio_ext_aux_hw_get(uint32_t gpio_iid, ALT_GPIO_PORT_t port)
+{
+  volatile uint32_t   *addr;
+
+  if (gpio_iid >= ALT_GPIO_INSTANCE_UNKNOWN)
+    return ALT_GPIO_PARAM_DISABLED;
+
+  if (port >= ALT_GPIO_PORT_UNKNOWN)
+    return ALT_GPIO_PARAM_DISABLED;
+
+  switch (gpio_iid) {
+    case ALT_GPIO_INSTANCE0:
+      addr = ALT_GPIO0_CFG_REG1_ADDR;
+      break;
+    case ALT_GPIO_INSTANCE1:
+      addr = ALT_GPIO1_CFG_REG1_ADDR;
+      break;
+    default:
+      return ALT_GPIO_PARAM_DISABLED;
+      break;
+  }
+
+  ALT_GPIO_PARAM_ENABLE_STATE_t encoded_value;
+
+  switch (port) {
+  case ALT_GPIO_PORTA:
+    encoded_value = ALT_GPIO_CFG_REG1_HW_PORTA_GET(alt_read_word(addr));
+    break;
+  case ALT_GPIO_PORTB:
+    encoded_value = ALT_GPIO_CFG_REG1_HW_PORTB_GET(alt_read_word(addr));
+    break;
+  case ALT_GPIO_PORTC:
+    encoded_value = ALT_GPIO_CFG_REG1_HW_PORTC_GET(alt_read_word(addr));
+    break;
+  case ALT_GPIO_PORTD:
+    encoded_value = ALT_GPIO_CFG_REG1_HW_PORTD_GET(alt_read_word(addr));
+    break;
+  case ALT_GPIO_PORT_UNKNOWN:
+    encoded_value = ALT_GPIO_PARAM_DISABLED;
+    break;
+  }
+
+  return encoded_value;
+}
+
+/* Extracts and decodes the PORTA_INTR value from the supplied GPIO Instance.
+ *
+ */
+ALT_GPIO_PARAM_ENABLE_STATE_t alt_gpio_porta_intr_get(uint32_t gpio_iid)
+{
+  volatile uint32_t   *addr;
+
+  if (gpio_iid >= ALT_GPIO_INSTANCE_UNKNOWN)
+    return ALT_GPIO_PARAM_DISABLED;
+
+  switch (gpio_iid) {
+    case ALT_GPIO_INSTANCE0:
+      addr = ALT_GPIO0_CFG_REG1_ADDR;
+      break;
+    case ALT_GPIO_INSTANCE1:
+      addr = ALT_GPIO1_CFG_REG1_ADDR;
+      break;
+    default:
+      return ALT_GPIO_PARAM_DISABLED;
+      break;
+  }
+
+  ALT_GPIO_PARAM_ENABLE_STATE_t encoded_value;
+
+  encoded_value = ALT_GPIO_CFG_REG1_PORTA_INTR_GET(alt_read_word(addr));
+
+  return encoded_value;
+}
+
+/* Extracts and decodes the DEBOUNCE value from the GPO Configuration Register 1
+ * of the supplied GPIO Instance.
+ */
+ALT_GPIO_PARAM_ENABLE_STATE_t alt_gpio_debounce_get(uint32_t gpio_iid)
+{
+  volatile uint32_t   *addr;
+
+  if (gpio_iid >= ALT_GPIO_INSTANCE_UNKNOWN)
+    return ALT_GPIO_PARAM_DISABLED;
+
+  switch (gpio_iid) {
+    case ALT_GPIO_INSTANCE0:
+      addr = ALT_GPIO0_CFG_REG1_ADDR;
+      break;
+    case ALT_GPIO_INSTANCE1:
+      addr = ALT_GPIO1_CFG_REG1_ADDR;
+      break;
+    default:
+      return ALT_GPIO_PARAM_DISABLED;
+      break;
+  }
+
+  ALT_GPIO_PARAM_ENABLE_STATE_t encoded_value;
+
+  encoded_value = ALT_GPIO_CFG_REG1_DEBOUNCE_GET(alt_read_word(addr));
+
+  return encoded_value;
+}
+
+/* Extracts and decodes the GPIO_ID value from the GPO Configuration Register 1
+ * of the supplied GPIO Instance.
+ */
+ALT_GPIO_PARAM_ENABLE_STATE_t alt_gpio_id_get(uint32_t gpio_iid)
+{
+  volatile uint32_t   *addr;
+
+  if (gpio_iid >= ALT_GPIO_INSTANCE_UNKNOWN)
+    return ALT_GPIO_PARAM_DISABLED;
+
+  switch (gpio_iid) {
+    case ALT_GPIO_INSTANCE0:
+      addr = ALT_GPIO0_CFG_REG1_ADDR;
+      break;
+    case ALT_GPIO_INSTANCE1:
+      addr = ALT_GPIO1_CFG_REG1_ADDR;
+      break;
+    default:
+      return ALT_GPIO_PARAM_DISABLED;
+      break;
+  }
+
+  ALT_GPIO_PARAM_ENABLE_STATE_t encoded_value;
+
+  encoded_value = ALT_GPIO_CFG_REG1_GPIO_ID_GET(alt_read_word(addr));
+
+  return encoded_value;
+}
+
+
+/****************************************************************************************/
+/* Extracts the ENCODED_ID_WIDTH value from the GPIO Configuration Register 1           */
+/* of the supplied GPIO Instance.                                                       */
+/****************************************************************************************/
+uint32_t alt_gpio_enc_id_width_get(uint32_t gpio_iid)
+{
+  volatile uint32_t   *addr;
+
+  if (gpio_iid >= ALT_GPIO_INSTANCE_UNKNOWN)
+    return 0;
+
+  switch (gpio_iid) {
+    case ALT_GPIO_INSTANCE0:
+      addr = ALT_GPIO0_CFG_REG1_ADDR;
+      break;
+    case ALT_GPIO_INSTANCE1:
+      addr = ALT_GPIO1_CFG_REG1_ADDR;
+      break;
+    default:
+      return 0;
+      break;
+  }
+
+  uint32_t width;
+  width = ALT_GPIO_CFG_REG1_ENC_ID_WIDTH_GET(alt_read_word(addr));
+
+  return width;
+}
+
+/*!
+ * Returns the decoded INTERRUPT_BOTH_EDGE_TYPE value from the GPIO Configuration Register 1
+ * of the specified GPIO module.
+ */
+uint32_t alt_gpio_interrupt_both_edge_type_get(uint32_t gpio_iid)
+{
+  volatile uint32_t   *addr;
+
+  if (gpio_iid >= ALT_GPIO_INSTANCE_UNKNOWN)
+    return 0;
+
+  switch (gpio_iid) {
+    case ALT_GPIO_INSTANCE0:
+      addr = ALT_GPIO0_CFG_REG1_ADDR;
+      break;
+    case ALT_GPIO_INSTANCE1:
+      addr = ALT_GPIO1_CFG_REG1_ADDR;
+      break;
+    default:
+      return 0;
+      break;
+  }
+
+  uint32_t type;
+  type = ALT_GPIO_CFG_REG1_INTERRUPT_BOTH_EDGE_TYPE_GET(alt_read_word(addr));
+
+  return type;
 }

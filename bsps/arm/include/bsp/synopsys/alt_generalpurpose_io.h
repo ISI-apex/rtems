@@ -239,34 +239,6 @@ typedef enum ALT_GPIO_INSTANCE_e
  * This type definition enumerates the GPIO ports that the GPIO manager
  * handles.
  */
-#if 0
-typedef enum ALT_GPIO_PORT_e
-{
-    /*!
-     * \b Port \b A - 29-bit GPIO port A.
-     */
-    ALT_GPIO_PORTA,
-
-    /*!
-     * \b Port \b B - 29-bit GPIO port B.
-     */
-    ALT_GPIO_PORTB,
-
-    /*!
-     * \b Port \b C - 29-bit GPIO port C. \n 13 bits are used for GPIO signals,
-     *                14 bits are used for GPI-only signals that are shared
-     *                with the DDR interface, 2 bits are not used. Some signals
-     *                may not be connected on some versions. See the relevant
-     *                pin mux data.
-     */
-    ALT_GPIO_PORTC,
-
-    /*!
-     * \b Unknown \b Port - Used to indicate an error.
-     */
-    ALT_GPIO_PORT_UNKNOWN
-} ALT_GPIO_PORT_t;
-#endif
 typedef enum ALT_GPIO_PORT_e
 {
     /*!
@@ -367,13 +339,6 @@ typedef enum ALT_GPIO_PORTBIT_e
     ALT_GPIO_BIT27 = ALT_TWO_TO_POW27,
     /*! # */
     ALT_GPIO_BIT28 = ALT_TWO_TO_POW28,
-#if 0
-    ALT_GPIO_BIT29 = ALT_TWO_TO_POW29,              /* Not currently used */
-    ALT_GPIO_BIT30 = ALT_TWO_TO_POW30,              /* Not currently used */
-    ALT_GPIO_BIT31 = (int32_t) (1UL<<31),           /* Not currently used */
-
-    ALT_GPIO_BITNUM_MAX = (28),
-#endif
     ALT_GPIO_BIT29 = ALT_TWO_TO_POW29,
     ALT_GPIO_BIT30 = ALT_TWO_TO_POW30,
     ALT_GPIO_BIT31 = (int32_t) (1UL<<31),
@@ -468,11 +433,6 @@ uint32_t alt_gpio_port_datadir_get(uint32_t gpio_iid,
  *              The group of bits (mask bits equal one) to apply this
  *              operation to. Other bits (mask bits equal zero) are
  *              not changed.
- * #if 0
- * \param       val
- *              The 32-bit word to write to the GPIO outputs. Only the 29 LSBs
- *              are used. Setting the three MSBs causes an error.
- * #endif
  * \param       val
  *              The 32-bit word to write to the GPIO outputs.
  *
@@ -1036,60 +996,6 @@ typedef enum ALT_GPIO_1BIT_e
     ALT_GPIO_1BIT_65,
     /*! # */
     ALT_GPIO_1BIT_66,
-#if 0
-    /*! # */
-    ALT_GPIO_1BIT_67,        /* Not bonded out on some versions */
-    /*! # */
-    ALT_GPIO_1BIT_68,        /* Not bonded out on some versions */
-    /*! # */
-    ALT_GPIO_1BIT_69,        /* Not bonded out on some versions */
-
-    /*! The last of the input/output bits */
-    ALT_GPIO_1BIT_70,        /* Not bonded out on some versions */
-
-
-    /*! This and the following signals are not present on all SoCs. \n
-     * If present, the selection between their use as 14 General-purpose inputs or
-     * use as 14 DDR interface signals is made in the IOCSR (IO Configuration Shift
-     * Register) and software to make this selection is in the IO Manager API. If
-     * they are present, they are restricted to using the same power supply voltage
-     * as the SDRAM module.*/
-    ALT_HLGPI_0,        /* Not bonded out on some versions */
-    /*! # */
-    ALT_HLGPI_1,        /* Not bonded out on some versions */
-    /*! # */
-    ALT_HLGPI_2,        /* Not bonded out on some versions */
-    /*! # */
-    ALT_HLGPI_3,        /* Not bonded out on some versions */
-    /*! # */
-    ALT_HLGPI_4,        /* Not bonded out on some versions */
-    /*! # */
-    ALT_HLGPI_5,        /* Not bonded out on some versions */
-    /*! # */
-    ALT_HLGPI_6,        /* Not bonded out on some versions */
-    /*! # */
-    ALT_HLGPI_7,        /* Not bonded out on some versions */
-    /*! # */
-    ALT_HLGPI_8,        /* Not bonded out on some versions */
-    /*! # */
-    ALT_HLGPI_9,        /* Not bonded out on some versions */
-    /*! # */
-    ALT_HLGPI_10,       /* Not bonded out on some versions */
-    /*! # */
-    ALT_HLGPI_11,       /* Not bonded out on some versions */
-    /*! # */
-    ALT_HLGPI_12,       /* Not bonded out on some versions */
-    /*! # */
-    ALT_HLGPI_13,       /* Not bonded out on some versions */
-
-    ALT_HLGPI_14,       /* Not bonded out */
-
-    ALT_HLGPI_15,       /* Not bonded out */
-
-    ALT_GPIO_INVALID,
-    ALT_END_OF_GPIO_SIGNALS = -1,
-    ALT_LAST_VALID_GPIO_BIT = ALT_HLGPI_15
-#endif
     /*! # */
     ALT_GPIO_1BIT_67,
     ALT_GPIO_1BIT_68,
@@ -1446,7 +1352,124 @@ ALT_GPIO_1BIT_t alt_gpio_port_pin_to_bit(uint32_t gpio_iid,
  *
  * \retval      ALT_GPIO_PARAM_ENABLE_STATE_t    The Add Encoded Params value of the module, ADD_ENCODED_PARAMS.
  */
+
 ALT_GPIO_PARAM_ENABLE_STATE_t alt_gpio_add_encoded_params_state_get(uint32_t gpio_iid);
+
+/*!
+ * Returns the decoded NUM_PORTS value of the specified GPIO module.
+ *
+ * \param       gpio_iid
+ *              The GPIO instance id.
+ *
+ *
+ * \retval      uint32_t    The NUM_PORTS value of the module, GPIO_NUM_PORT.
+ */
+uint32_t alt_gpio_num_ports_get(uint32_t gpio_iid);
+
+/*!
+ * Returns the decoded APB_DATA_WIDTH value from the GPIO_CONFIG_REG1 register
+ * of the specified GPIO module.
+ *
+ * \param       gpio_iid
+ *              The GPIO instance id.
+ *
+ *
+ * \retval      uint32_t    The APB_DATA_WIDTH value of the module.
+ */
+uint32_t alt_gpio_apb_data_width_get(uint32_t gpio_iid);
+
+/*!
+ * Returns the decoded ENCODED_ID_PWIDTH_X value of the specified GPIO module and port.
+ *
+ * \param       gpio_iid
+ *              The GPIO instance id.
+ * \param       port
+ *              The GPIO port X = A, B, C, or D
+ *
+ *
+ * \retval      uint32_t    The decoded value of the module, ENCODED_ID_PWIDTH_X.
+ */
+uint32_t alt_gpio_pwidth_get(uint32_t gpio_iid, ALT_GPIO_PORT_t port);
+
+/*!
+ * Returns the decoded PORTX_SINGLE_CTL value of the specified GPIO module and port.
+ *
+ * \param       gpio_iid
+ *              The GPIO instance id.
+ * \param       port
+ *              The GPIO port X = A, B, C, or D
+ *
+ *
+ * \retval      ALT_GPIO_PARAM_ENABLE_STATE_t The decoded value of the module, PORTX_SINGLE_CTL.
+ */
+ALT_GPIO_PARAM_ENABLE_STATE_t alt_gpio_single_ctl_get(uint32_t gpio_iid, ALT_GPIO_PORT_t port);
+
+/*!
+ * Returns the decoded HW_PORTX value of the specified GPIO module and port.
+ *
+ * \param       gpio_iid
+ *              The GPIO instance id.
+ * \param       port
+ *              The GPIO port X = A, B, C, or D
+ *
+ *
+ * \retval      ALT_GPIO_PARAM_ENABLE_STATE_t The decoded value of the module, HW_PORTX.
+ */
+ALT_GPIO_PARAM_ENABLE_STATE_t alt_gpio_ext_aux_hw_get(uint32_t gpio_iid, ALT_GPIO_PORT_t port);
+
+/*!
+ * Returns the decoded PORTA_INTR value of the specified GPIO module.
+ *
+ * \param       gpio_iid
+ *              The GPIO instance id.
+ *
+ * \retval      ALT_GPIO_PARAM_ENABLE_STATE_t The decoded value of the module, PORTA_INTR.
+ */
+ALT_GPIO_PARAM_ENABLE_STATE_t alt_gpio_porta_intr_get(uint32_t gpio_iid);
+
+/*!
+ * Returns the decoded DEBOUNCE value from the GPO Configuration Register 1
+ * of the specified GPIO module.
+ *
+ * \param       gpio_iid
+ *              The GPIO instance id.
+ *
+ * \retval      ALT_GPIO_PARAM_ENABLE_STATE_t The decoded value of the module, DEBOUNCE.
+ */
+ALT_GPIO_PARAM_ENABLE_STATE_t alt_gpio_debounce_get(uint32_t gpio_iid);
+
+/*!
+ * Returns the decoded GPIO_ID value from the GPIO Configuration Register 1
+ * of the specified GPIO module.
+ *
+ * \param       gpio_iid
+ *              The GPIO instance id.
+ *
+ * \retval      ALT_GPIO_PARAM_ENABLE_STATE_t The decoded value of the module, GPIO_ID.
+ */
+ALT_GPIO_PARAM_ENABLE_STATE_t alt_gpio_id_get(uint32_t gpio_iid);
+
+/*!
+ * Returns the decoded ENCODED_ID_WIDTH value from the GPIO Configuration Register 1
+ * of the specified GPIO module.
+ *
+ * \param       gpio_iid
+ *              The GPIO instance id.
+ *
+ * \retval      uint32_t    The value of the module, ENCODED_ID_WIDTH.
+ */
+uint32_t alt_gpio_enc_id_width_get(uint32_t gpio_iid);
+
+/*!
+ * Returns the decoded INTERRUPT_BOTH_EDGE_TYPE value from the GPIO Configuration Register 1
+ * of the specified GPIO module.
+ *
+ * \param       gpio_iid
+ *              The GPIO instance id.
+ *
+ * \retval      uint32_t    The value of the module, INTERRUPT_BOTH_EDGE_TYPE.
+ */
+uint32_t alt_gpio_interrupt_both_edge_type_get(uint32_t gpio_iid);
 
 /*! @} */
 /*! @} */
