@@ -44,7 +44,7 @@ const char rtems_test_name[] = "HPSC WDT Poke";
 #define WDT_FREQ_HZ WDT_MIN_FREQ_HZ
 
 #define WDT_CYCLES_TO_US(c) (1000000 * (c) / WDT_FREQ_HZ)
-#define WDT_IRQ   ( GIC_NR_SGIS + PPI_IRQ__WDT )
+#define WDT_IRQ   ( TRCH_IRQ__WDT_TRCH_ST1 )
 
 static struct HPSC_WDT_Config wdt;
 
@@ -67,7 +67,7 @@ rtems_task Init(
 
   TEST_BEGIN();
 
-  wdt_init_target(&wdt, "RTPS0", WDT_RTPS_R52_0_RTPS_BASE, WDT_IRQ);
+  wdt_init_target(&wdt, "TRCHST1", WDT_TRCH_BASE, WDT_IRQ);
 
   status = wdt_handler_install(&wdt, WDT_isr, NULL);
   directive_failed(status, "WDT 0 Install ISR");
