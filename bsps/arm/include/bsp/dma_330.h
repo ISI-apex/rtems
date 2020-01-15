@@ -32,7 +32,7 @@
 extern "C" {
 #endif /* __cplusplus */
 
-#include <bsp/altera/alt_dma.h>
+#include <bsp/synopsys/alt_dma.h>
 #define DMA_Config_t		ALT_DMA_CFG_t
 #define BSP_DMA_CHANNEL_PVT	ALT_DMA_PROGRAM_t
 

@@ -35,8 +35,8 @@
  ******************************************************************************/
 
 #include <bsp.h>
-#include <bsp/altera/alt_adapter.h>
-#include <bsp/altera/alt_dma_program.h>
+#include <bsp/synopsys/alt_adapter.h>
+#include <bsp/synopsys/alt_dma_program.h>
 #if 0
 #include <bsp/alt_cache.h>
 #include <stdio.h>
