@@ -76,14 +76,14 @@ support_includes = -I$(top_srcdir)/../support/include
 #	$(support_includes)
 #endif
 
-#if TEST_mmu_map
-#hpsctests += mmu_map
-#hpsc_screens += mmu_map/mmu_map.scn
-#hpsc_docs += mmu_map/mmu_map.doc
-#mmu_map_SOURCES = mmu_map/init.c mmu_map/system.h
-#mmu_map_CPPFLAGS = $(AM_CPPFLAGS) $(TEST_FLAGS_mmu_map) \
-#	$(support_includes)
-#endif
+if TEST_mmu_map
+hpsctests += mmu_map
+hpsc_screens += mmu_map/mmu_map.scn
+hpsc_docs += mmu_map/mmu_map.doc
+mmu_map_SOURCES = mmu_map/init.c mmu_map/system.h
+mmu_map_CPPFLAGS = $(AM_CPPFLAGS) $(TEST_FLAGS_mmu_map) \
+	$(support_includes)
+endif
 
 #if TEST_wdt_poke
 #hpsctests += wdt_poke
