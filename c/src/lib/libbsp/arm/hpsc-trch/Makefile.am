@@ -65,6 +65,14 @@ librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/hpsc-trch/console/console-co
 # Clock
 librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/shared/clock/clock-armv7m.c
 
+# DMA
+librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/shared/dma/dma_330.c
+librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/shared/dma/alt_dma.c
+librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/shared/dma/alt_dma_program.c
+
+# MMU
+librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/shared/mmu/mmu_500.c
+
 # GPIO
 librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/shared/gpio/alt_generalpurpose_io.c
 

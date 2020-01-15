@@ -10,6 +10,14 @@ include_bsp_HEADERS += ../../../../../../bsps/arm/hpsc-trch/include/bsp/hpsc-bus
 include_bsp_HEADERS += ../../../../../../bsps/arm/hpsc-trch/include/bsp/hpsc-irqs.dtsh
 include_bsp_HEADERS += ../../../../../../bsps/arm/hpsc-trch/include/bsp/hwinfo.h
 include_bsp_HEADERS += ../../../../../../bsps/arm/hpsc-trch/include/bsp/hpsc-arch.h
+include_bsp_HEADERS += ../../../../../../bsps/arm/hpsc-trch/include/bsp/mpu.h
+include_bsp_HEADERS += ../../../../../../bsps/include/bsp/dma.h
+include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/dma_330.h
+include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/synopsys/alt_adapter.h
+include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/synopsys/alt_dma.h
+include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/synopsys/alt_dma_common.h
+include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/synopsys/alt_dma_program.h
+include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/mmu_500.h
 
 include_synopsys_bspdir = $(include_bspdir)/synopsys
 include_synopsys_bsp_HEADERS =
