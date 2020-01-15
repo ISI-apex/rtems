@@ -10,6 +10,7 @@ include_bsp_HEADERS += ../../../../../../bsps/arm/hpsc-trch/include/bsp/hpsc-bus
 include_bsp_HEADERS += ../../../../../../bsps/arm/hpsc-trch/include/bsp/hpsc-irqs.dtsh
 include_bsp_HEADERS += ../../../../../../bsps/arm/hpsc-trch/include/bsp/hwinfo.h
 include_bsp_HEADERS += ../../../../../../bsps/arm/hpsc-trch/include/bsp/hpsc-arch.h
+include_bsp_HEADERS += ../../../../../../bsps/arm/hpsc-trch/include/bsp/hpsc-wdt.h
 include_bsp_HEADERS += ../../../../../../bsps/arm/hpsc-trch/include/bsp/mpu.h
 include_bsp_HEADERS += ../../../../../../bsps/include/bsp/dma.h
 include_bsp_HEADERS += ../../../../../../bsps/arm/include/bsp/dma_330.h

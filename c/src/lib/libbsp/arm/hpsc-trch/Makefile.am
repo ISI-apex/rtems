@@ -73,6 +73,9 @@ librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/shared/dma/alt_dma_program.c
 # MMU
 librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/shared/mmu/mmu_500.c
 
+# WDT
+librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/hpsc-trch/wdt/hpsc-wdt.c
+
 # GPIO
 librtemsbsp_a_SOURCES += ../../../../../../bsps/arm/shared/gpio/alt_generalpurpose_io.c
 
