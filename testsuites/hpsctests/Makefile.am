@@ -103,41 +103,41 @@ wdt_stage_0_expire_CPPFLAGS = $(AM_CPPFLAGS) $(TEST_FLAGS_wdt_stage_0_expire) \
   $(support_includes)
 endif
 
-#if TEST_smc_sram_load
-#hpsctests += smc_sram_load
-#hpsc_screens += smc_sram_load/smc_sram_load.scn
-#hpsc_docs += smc_sram_load/smc_sram_load.doc
-#smc_sram_load_SOURCES = smc_sram_load/init.c smc_sram_load/system.h
-#smc_sram_load_CPPFLAGS = $(AM_CPPFLAGS) $(TEST_FLAGS_smc_sram_load) \
-#	$(support_includes)
-#endif
+if TEST_smc_sram_load
+hpsctests += smc_sram_load
+hpsc_screens += smc_sram_load/smc_sram_load.scn
+hpsc_docs += smc_sram_load/smc_sram_load.doc
+smc_sram_load_SOURCES = smc_sram_load/init.c smc_sram_load/system.h
+smc_sram_load_CPPFLAGS = $(AM_CPPFLAGS) $(TEST_FLAGS_smc_sram_load) \
+  $(support_includes)
+endif
 
-#if TEST_smc_sram_load_dma
-#hpsctests += smc_sram_load_dma
-#hpsc_screens += smc_sram_load_dma/smc_sram_load_dma.scn
-#hpsc_docs += smc_sram_load_dma/smc_sram_load_dma.doc
-#smc_sram_load_dma_SOURCES = smc_sram_load_dma/init.c smc_sram_load_dma/system.h
-#smc_sram_load_dma_CPPFLAGS = $(AM_CPPFLAGS) $(TEST_FLAGS_smc_sram_load_dma) \
-#	$(support_includes)
-#endif
+if TEST_smc_sram_load_dma
+hpsctests += smc_sram_load_dma
+hpsc_screens += smc_sram_load_dma/smc_sram_load_dma.scn
+hpsc_docs += smc_sram_load_dma/smc_sram_load_dma.doc
+smc_sram_load_dma_SOURCES = smc_sram_load_dma/init.c smc_sram_load_dma/system.h
+smc_sram_load_dma_CPPFLAGS = $(AM_CPPFLAGS) $(TEST_FLAGS_smc_sram_load_dma) \
+  $(support_includes)
+endif
 
-#if TEST_smc_nand_write
-#hpsctests += smc_nand_write
-#hpsc_screens += smc_nand_write/smc_nand_write.scn
-#hpsc_docs += smc_nand_write/smc_nand_write.doc
-#smc_nand_write_SOURCES = smc_nand_write/init.c smc_nand_write/system.h
-#smc_nand_write_CPPFLAGS = $(AM_CPPFLAGS) $(TEST_FLAGS_smc_nand_write) \
-#	$(support_includes)
-#endif
+if TEST_smc_nand_write
+hpsctests += smc_nand_write
+hpsc_screens += smc_nand_write/smc_nand_write.scn
+hpsc_docs += smc_nand_write/smc_nand_write.doc
+smc_nand_write_SOURCES = smc_nand_write/init.c smc_nand_write/system.h
+smc_nand_write_CPPFLAGS = $(AM_CPPFLAGS) $(TEST_FLAGS_smc_nand_write) \
+  $(support_includes)
+endif
 
-#if TEST_smc_nand_block
-#hpsctests += smc_nand_block
-#hpsc_screens += smc_nand_block/smc_nand_block.scn
-#hpsc_docs += smc_nand_block/smc_nand_block.doc
-#smc_nand_block_SOURCES = smc_nand_block/init.c smc_nand_block/system.h
-#smc_nand_block_CPPFLAGS = $(AM_CPPFLAGS) $(TEST_FLAGS_smc_nand_block) \
-#	$(support_includes)
-#endif
+if TEST_smc_nand_block
+hpsctests += smc_nand_block
+hpsc_screens += smc_nand_block/smc_nand_block.scn
+hpsc_docs += smc_nand_block/smc_nand_block.doc
+smc_nand_block_SOURCES = smc_nand_block/init.c smc_nand_block/system.h
+smc_nand_block_CPPFLAGS = $(AM_CPPFLAGS) $(TEST_FLAGS_smc_nand_block) \
+  $(support_includes)
+endif
 
 #if TEST_smc_nand_jffs2
 #hpsctests += smc_nand_jffs2
