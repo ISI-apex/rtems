@@ -43,12 +43,15 @@ const char rtems_test_name[] = "HPSC WDT Stage 0 Expire";
 /* this has to match choice in TRCH */
 #define WDT_FREQ_HZ WDT_MIN_FREQ_HZ
 
+#define MS_TO_WDT_CYCLES(ms) ((ms) * (WDT_FREQ_HZ / 1000))
 #define WDT_CYCLES_TO_US(c) (1000000 * (c) / WDT_FREQ_HZ)
 #define WDT_IRQ   ( TRCH_IRQ__WDT_TRCH_ST1 )
+#define NUM_STAGES 2
 
 static struct HPSC_WDT_Config wdt;
-
+uint64_t timeouts[NUM_STAGES] = { 1000, 1000 }; /* timeouts ms */
 volatile bool expired = false;
+
 static void WDT_isr(void *arg)
 {
   /* Clear the timeout condition in the watchdog timer */
@@ -65,15 +68,23 @@ rtems_task Init(
 
   TEST_BEGIN();
 
-  wdt_init_target(&wdt, "TRCHST1", WDT_TRCH_BASE, WDT_IRQ);
+  /* only the monitor can configure the timer */
+  wdt_init_monitor(&wdt, "TRCHST1", WDT_TRCH_BASE, WDT_IRQ, WDT_CLK_FREQ_HZ, WDT_MAX_DIVIDER);
+
+
+  uint64_t timeouts_cycles[NUM_STAGES];
+  for (int i = 0; i < NUM_STAGES; ++i) {
+    timeouts_cycles[i] = MS_TO_WDT_CYCLES(timeouts[i]);
+  }
+  status = wdt_configure(&wdt, WDT_FREQ_HZ, NUM_STAGES, timeouts_cycles);
+  directive_failed(status, "WDT 0 Configure");
 
   status = wdt_handler_install(&wdt, WDT_isr, NULL);
   directive_failed(status, "WDT 0 Install ISR");
 
   wdt_enable(&wdt);
 
-  uint64_t timeout0 = wdt_timeout(&wdt, 0);
-  uint64_t interval_us = WDT_CYCLES_TO_US(timeout0);
+  volatile uint64_t interval_us = WDT_CYCLES_TO_US(timeouts_cycles[0]);
   printf("wdt test: interval %llu us\r\n", interval_us);
 
   /* Wait for stage to expire and trigger the interrupt */
@@ -85,8 +96,8 @@ rtems_task Init(
 
   status = wdt_handler_remove(&wdt, WDT_isr, NULL);
   directive_failed(status, "WDT 0 Remove ISR");
+  wdt_disable(&wdt);
   wdt_uninit(&wdt);
-  /* NOTE: timer is still running! target subsystem not allowed to disable it */
 
   TEST_END();
   rtems_test_exit( 0 );

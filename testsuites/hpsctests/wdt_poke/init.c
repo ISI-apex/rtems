@@ -28,7 +28,6 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-
 #define CONFIGURE_INIT
 #include "system.h"
 #include "tmacros.h"
@@ -43,12 +42,15 @@ const char rtems_test_name[] = "HPSC WDT Poke";
 /* this has to match choice in TRCH */
 #define WDT_FREQ_HZ WDT_MIN_FREQ_HZ
 
+#define MS_TO_WDT_CYCLES(ms) ((ms) * (WDT_FREQ_HZ / 1000))
 #define WDT_CYCLES_TO_US(c) (1000000 * (c) / WDT_FREQ_HZ)
 #define WDT_IRQ   ( TRCH_IRQ__WDT_TRCH_ST1 )
+#define NUM_STAGES 2
 
 static struct HPSC_WDT_Config wdt;
-
+uint64_t timeouts[NUM_STAGES] = { 1000, 1000 }; /* timeouts ms */
 volatile bool expired = false;
+
 static void WDT_isr(void *arg)
 {
   /* Clear the timeout condition in the watchdog timer */
@@ -67,22 +69,29 @@ rtems_task Init(
 
   TEST_BEGIN();
 
-  wdt_init_target(&wdt, "TRCHST1", WDT_TRCH_BASE, WDT_IRQ);
+  /* only the monitor can configure the timer */
+  wdt_init_monitor(&wdt, "TRCHST1", WDT_TRCH_BASE, WDT_IRQ, WDT_CLK_FREQ_HZ, WDT_MAX_DIVIDER);
+
+  uint64_t timeouts_cycles[NUM_STAGES];
+  for (int i = 0; i < NUM_STAGES; ++i) {
+    timeouts_cycles[i] = MS_TO_WDT_CYCLES(timeouts[i]);
+  }
+  status = wdt_configure(&wdt, WDT_FREQ_HZ, NUM_STAGES, timeouts_cycles);
+  directive_failed(status, "WDT 0 Configure");
 
   status = wdt_handler_install(&wdt, WDT_isr, NULL);
   directive_failed(status, "WDT 0 Install ISR");
 
   wdt_enable(&wdt);
 
-  uint64_t timeouts[] = { wdt_timeout(&wdt, 0), wdt_timeout(&wdt, 1) };
-  uint64_t interval_us = WDT_CYCLES_TO_US(timeouts[0]);
+  volatile uint64_t interval_us = WDT_CYCLES_TO_US(timeouts_cycles[0]);
   printf("wdt test: interval %llu us\r\n", interval_us);
 
   /* Kick the watchdog so it won't fire the interrupt */
   wdt_kick(&wdt);
   expired = false;
 
-  uint64_t total_timeout_us = WDT_CYCLES_TO_US(timeouts[0]) + WDT_CYCLES_TO_US(timeouts[1]);
+  uint64_t total_timeout_us = WDT_CYCLES_TO_US(timeouts_cycles[0]) + WDT_CYCLES_TO_US(timeouts_cycles[1]);
   uint64_t kick_interval_us = interval_us / 2;
   uint64_t runtime_us = 0;
   /* Kick the watchdog often enough to prevent firing out to the longer of the timeouts */
@@ -96,8 +105,8 @@ rtems_task Init(
 
   status = wdt_handler_remove(&wdt, WDT_isr, NULL);
   directive_failed(status, "WDT 0 Remove ISR");
+  wdt_disable(&wdt);
   wdt_uninit(&wdt);
-  /* NOTE: timer is still running! target subsystem not allowed to disable it */
 
   TEST_END();
   rtems_test_exit( 0 );
