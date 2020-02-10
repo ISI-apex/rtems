@@ -1,0 +1,29 @@
+image: $CI_REGISTRY_IMAGE-rsb:$CI_COMMIT_REF_SLUG
+stages:
+  - build
+
+build_rtems:
+  stage: build
+  script:
+    - export PATH=/opt/rtems/5/bin:$PATH
+    - /RSB/source-builder/sb-bootstrap
+    - mkdir b-trch
+    - cd b-trch
+    - ../configure  --target=arm-rtems5 --prefix="$(pwd)/../trch_bsp" --disable-networking --enable-rtemsbsp=hpsc_trch_qemu --enable-tests
+    - make
+    - make install
+    - cd ..
+    - wget -q http://devel.oarcorp.com:1180/hpsc-bsp-20200219-with-patches-debian.tar.gz -O hpsc-bsp.tar.gz
+    - tar xzf hpsc-bsp.tar.gz
+    - cd hpsc-bsp
+    - bash -c "timeout 60 ./run-qemu.sh; exit 0;"
+    - cd ..
+    - git clone -b $CI_COMMIT_REF_NAME $(echo $CI_REPOSITORY_URL|sed -e 's/\/[^\/]*$//')/hpsc-tools.git
+    - echo -e "[hpsc_trch_qemu]\nbsp_qemu_hpsc_release_path = $(pwd)/hpsc-bsp" > user_config.ini
+    - cat user_config.ini
+    - cd b-trch
+    - ../hpsc-tools/tester/rtems-test --log=$(pwd)/../log_trch --rtems-bsp=hpsc_trch_qemu --rtems-tools="/opt/rtems/5" --user-config="$(pwd)/../user_config.ini" arm-rtems5/c/hpsc_trch_qemu/testsuites/*/*.exe --report-path="$(pwd)/../report" --report-format=json
+  artifacts:
+    paths:
+    - log_trch
+    - report.json
