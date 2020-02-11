@@ -23,7 +23,18 @@
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 #  POSSIBILITY OF SUCH DAMAGE.
 
-This test implements MMU API usage with a remapping of a few regions such that
-the DMA controller can perform a copy. This is necessary because there is no
-TBU attached to the RTPS CPUs. The only available TBUs are setup for the DMA
-controller and the PCIe subsystem.
+This test exercises the MMU API using the RTPS/TRCH-to-HPPS MMU with its
+page table located in HPPS DRAM. Three subtests test different mappings of the
+MMU.
+
+One subtest maps a 32-bit virtual address in HPPS DDR-Low region to a different 32-bit physical address in the same region. The test then writes a 32-bit value to the virtual address, disables the MMU, then reads a 32-bit value from the physical address. The values should be the same.
+
+Another subtest writes a 32-bit value to a 32-bit physical address then maps a
+32-bit virtual address in HPPS DDR-Low region to a different 32-bit physical
+address in the same region. The test then reads a 32-bit value from the virtual address. The values should be the same.
+
+The third subtest creates a mapping from a virtual write address to a physical
+address, writes data to the virtual write address then destroys the mapping.
+The subtest then maps a virtual read address to a physical address and reads
+the virtual read address, checking if the data is the same.
+
