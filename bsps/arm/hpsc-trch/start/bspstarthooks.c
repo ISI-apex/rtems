@@ -127,6 +127,7 @@ void set_uart_params(void)
   }
   uart_0_address = fdt32_to_cpu(uart_0_reg[0]);
   hpsc_trch_uart_context_0.port = uart_0_address;
+  hpsc_trch_uart_context_0.port = 0x30000000;
 
   uart_0_interrupt_map = (fdt32_t *) fdt_getprop(fdt, lsio_uart_0, "interrupt-map", &len);
   if (!uart_0_interrupt_map || len != 20) {
