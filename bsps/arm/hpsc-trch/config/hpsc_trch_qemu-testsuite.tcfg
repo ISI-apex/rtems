@@ -4,6 +4,44 @@
 # Format is one line per test that is _NOT_ built.
 #
 
+# can't fit in 1MB SRAM
 include: testdata/disable-iconv-tests.tcfg
 exclude: fsdosfsname01
+
+# requires more workspace than TRCH has available
 exclude: psxtmmqrcvblock02
+
+# known to fail intermittently or constantly on qemu on multiple BSPs
+exclude: debugger01
+exclude: jffs2_fsscandir01
+exclude: psx12
+exclude: psxtimes01
+exclude: spconfig02
+exclude: psxintrcritical01
+exclude: spintrcritical01
+exclude: spintrcritical02
+exclude: spintrcritical03
+exclude: spintrcritical04
+exclude: spintrcritical05
+exclude: spintrcritical06
+exclude: spintrcritical07
+exclude: spintrcritical08
+exclude: spintrcritical10
+exclude: spintrcritical11
+exclude: spintrcritical12
+exclude: spintrcritical13
+exclude: spintrcritical14
+exclude: spintrcritical15
+exclude: spintrcritical16
+exclude: spintrcritical18
+exclude: spintrcritical20
+exclude: spintrcritical21
+exclude: spintrcritical22
+exclude: spintrcritical24
+exclude: sp68
+exclude: sp69
+exclude: sp71
+exclude: sptimecounter02
+exclude: rtmonuse
+exclude: block06
+exclude: tmonetoone
