@@ -75,6 +75,7 @@ rtems_status_code bsp_register_spi(void);
  * These should be defined in hpsc-irqs.dtsh
  */
 
+#if 0 /* these are memmap v16 */
 #define RTPS_IRQ__I2C                            60
 #define RTPS_IRQ__LSIO_I2C_0                     61
 #define RTPS_IRQ__LSIO_I2C_1                     62
@@ -92,8 +93,9 @@ rtems_status_code bsp_register_spi(void);
 #define LSIO_SPI1_BASE         0x2600e000
 #define LSIO_SPI1_ECC_CSR_BASE 0x2600f000
 #define RTPS_SPI0_BASE         0x3420c000
+#endif
 
-
+#define TRCH_NAND_BASE 0x2c000000
 
 #ifdef __cplusplus
 }
