@@ -19,9 +19,9 @@
 
 #define LSIO_UART0_BASE 0x30000000
 #define LSIO_UART1_BASE 0x30001000
+#define HPPS_UART_BASE  0xf92c0000
 
 #define UART_CLOCK      100000000
-#define UART_BAUDRATE      125000
 
 #define ETIMER__BASE                    0x2100a000
 #define RTI_TIMER_TRCH__BASE            0x21009000
@@ -64,10 +64,17 @@
 #define HSIO_BASE               0xe3000000
 #define HSIO_SIZE               0x15000000
 
-#define SMC_LSIO_BASE               0x30006000
-#define SMC_LSIO_SRAM_BASE          0x28000000
-#define SMC_LSIO_SRAM_SIZE          0x8000000
-#define SMC_LSIO_SRAM_BL_FS_START	0x28300000
+#define SMC_LSIO_CSR_BASE           0x30006000
+#define SMC_LSIO_SRAM_BASE0         0x28000000
+#define SMC_LSIO_SRAM_SIZE0         0x01000000
+#define SMC_LSIO_SRAM_BASE1         0x29000000
+#define SMC_LSIO_SRAM_SIZE1         0x01000000
+#define SMC_LSIO_SRAM_BASE2         0x2a000000
+#define SMC_LSIO_SRAM_SIZE2         0x01000000
+#define SMC_LSIO_SRAM_BASE3         0x2b000000
+#define SMC_LSIO_SRAM_SIZE3         0x01000000
+#define SMC_LSIO_NAND_BASE0         0x2c000000
+#define SMC_LSIO_NAND_SIZE0         0x04000000
 
 // See props in Qemu device tree node (or real HW characteristics)
 #define ETIMER_NOMINAL_FREQ_HZ 1000000000
