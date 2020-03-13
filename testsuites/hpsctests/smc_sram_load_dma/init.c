@@ -54,7 +54,7 @@ rtems_task Init(
 
   /* Initialize SMC controller */
   SRAMFS_Config_t sramfs_config;
-  status = sramfs_init(&sramfs_config, SMC_LSIO_SRAM_BASE, &dma_config);
+  status = sramfs_init(&sramfs_config, SMC_LSIO_SRAM_BASE0, &dma_config);
 
   /* Load syscfg */
   uint32_t *load_addr = (uint32_t *)__rtps_ddr_low_0_start__;
