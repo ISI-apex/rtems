@@ -314,6 +314,8 @@ void set_uart_params(void)
   gen_r52_uart_context_0.irq = (uart_1_int_ppi ? GIC_NR_SGIS : GIC_INTERNAL) + uart_1_int_offset;
 }
 
+extern char __window_start__[];
+extern char __window_end__[];
 extern char __tcm_a_start__[];
 extern char __tcm_a_end__[];
 extern char __tcm_b_start__[];
@@ -338,6 +340,7 @@ static void setup_mpu( void )
   /* Will cause a prefetch abort if changed to read-only */
   MPU_REGION_03(__rtps_ddr_low_1_start__, __rtps_ddr_low_1_end__, ATTR_RW_Access);
   MPU_REGION_04(__hpps_ddr_low_start__, __hpps_ddr_low_end__,     ATTR_RW_Access | ATTR_Execute_Never);
+  MPU_REGION_05(__window_start__, __window_end__,                 ATTR_RW_Access | ATTR_Execute_Never);
   MPU_REGION_07(__hsio_start__, __hsio_end__,                     ATTR_RW_Access | ATTR_Execute_Never);
   MPU_REGION_08(__hpps_mbox_start__, __hpps_mbox_end__,           ATTR_RW_Access | ATTR_Execute_Never);
   MPU_REGION_09(__tcm_a_start__, __tcm_a_end__,                   ATTR_RW_Access);
