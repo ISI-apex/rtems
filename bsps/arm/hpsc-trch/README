@@ -6,6 +6,8 @@ The binaries produced by this BSP can be run on a customzied Qemu if hardware is
 The build environment used to produce the required Qemu distribution is available on GitHub:
 * https://github.com/ISI-apex/hpsc-bsp
 
+This branch of the TRCH BSP for RTEMS is designed to run on the Qemu 4.x branch of the hpsc-bsp.
+
 The following devices are supported:
 * NVIC
 * SysTick
