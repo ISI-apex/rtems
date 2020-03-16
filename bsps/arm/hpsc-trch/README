@@ -1,3 +1,19 @@
 Overview
 --------
 This BSP describes support for the Cortex-M4 CPU acting as the system controller for the HPSC chiplet.
+
+The binaries produced by this BSP can be run on a customzied Qemu if hardware is not available.
+The build environment used to produce the required Qemu distribution is available on GitHub:
+* https://github.com/ISI-apex/hpsc-bsp
+
+The following devices are supported:
+* NVIC
+* SysTick
+* DMA-330
+* Watchdog Timer
+* UART
+* SMC-353
+* NAND
+* SPI (correct device not present in Qemu)
+* I2C (correct device not present in Qemu)
+* GPIO (correct device not present in Qemu)
