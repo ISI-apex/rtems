@@ -1,3 +1,19 @@
 Overview
 --------
 This BSP describes support for a generic Cortex-R52 CPU which includes an ARM GICv3-compatible GIC.
+
+The binaries produced by this BSP can be run on a customzied Qemu if hardware is not available.
+The build environment used to produce the required Qemu distribution is available on GitHub:
+* https://github.com/ISI-apex/hpsc-bsp
+
+The following devices are supported:
+* GICv3
+* GPT
+* TCM
+* DMA-330
+* MMU-500
+* Watchdog Timer
+* UART
+* SMC-353
+* NAND
+* SRAM
